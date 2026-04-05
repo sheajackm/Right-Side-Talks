@@ -1089,39 +1089,12 @@ async function buildNewsTickerItems() {
 
 // YOUTUBE
 async function fetchYTByHandle() {
-  const CHANNEL_ID = 'UCpbgusSKZhNJphR0HOHPJ0Q';
-  const RSS_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + CHANNEL_ID;
-
-  function parseXML(xml) {
-    if(!xml || !xml.includes('<entry>')) return [];
-    const entries = [];
-    const itemRegex = /<entry>([\s\S]*?)<\/entry>/g;
-    let m;
-    while((m = itemRegex.exec(xml)) !== null && entries.length < 10) {
-      const e = m[1];
-      const t = e.match(/<title>([\s\S]*?)<\/title>/);
-      const l = e.match(/<link[^>]+href="([^"]+)"/);
-      const p = e.match(/<published>([\s\S]*?)<\/published>/);
-      const v = e.match(/<yt:videoId>([\s\S]*?)<\/yt:videoId>/);
-      if(t && l) entries.push({
-        title: t[1].replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").trim(),
-        link: l[1],
-        pubDate: p ? p[1] : new Date().toISOString(),
-        videoId: v ? v[1] : null
-      });
-    }
-    return entries;
-  }
-
   try {
-    const r = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(RSS_URL), {signal: AbortSignal.timeout(12000)});
-    if(r.ok) {
-      const d = await r.json();
-      const entries = parseXML(d.contents || '');
-      if(entries.length) return entries;
-    }
-  } catch(e) {}
-  return [];
+    const r = await fetch('/api/youtube', {signal: AbortSignal.timeout(10000)});
+    if(!r.ok) return [];
+    const d = await r.json();
+    return d.items || [];
+  } catch(e) { return []; }
 }
 
 async function fetchYouTubeVideos() {
