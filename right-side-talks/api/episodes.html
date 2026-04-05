@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Episode Archive — Right Side Talks</title>
+<meta name="description" content="Browse every episode from Right Side Talks, The Brief, and Campus Front. Conservative commentary, news analysis, and campus coverage from the next generation." />
+<link rel="canonical" href="https://www.rightsidetalksmedia.com/episodes" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --red: #D91E3C; --red-dark: #A8152D; --blue: #001F5B; --blue-mid: #0A3080;
+  --white: #FFFFFF; --off-white: #F4F6FB; --gold: #D4A843;
+  --text-dark: #080F20; --text-muted: #4A5570; --border: rgba(0,31,91,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-cond: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+  --grad-red: linear-gradient(135deg, #E8253F 0%, #A8152D 100%);
+  --grad-blue: linear-gradient(135deg, #0A3080 0%, #001040 100%);
+  --grad-dark: linear-gradient(160deg, #0D1B40 0%, #060E26 100%);
+  --grad-card: linear-gradient(160deg, #ffffff 0%, #f2f5ff 100%);
+  --shadow-sm: 0 2px 12px rgba(0,20,80,0.08);
+  --shadow-md: 0 8px 32px rgba(0,20,80,0.13);
+  --shadow-lg: 0 20px 60px rgba(0,20,80,0.2);
+  --shadow-blue: 0 8px 28px rgba(0,31,91,0.28);
+  --shadow-red: 0 8px 28px rgba(217,30,60,0.32);
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--text-dark); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg, #001040 0%, #001F5B 60%, #0A2870 100%); border-bottom: 2px solid var(--red); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 68px; box-shadow: 0 4px 28px rgba(0,8,40,0.55); }
+.nav-logo { font-family: var(--font-cond); font-size: 23px; font-weight: 800; color: var(--white); letter-spacing: 0.05em; text-decoration: none; text-transform: uppercase; }
+.nav-logo span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-back { font-family: var(--font-cond); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+.nav-back:hover { color: var(--white); }
+
+/* HERO */
+.page-hero { background: var(--grad-dark); padding: 120px 2rem 5rem; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(10,48,128,0.55) 0%, transparent 70%); }
+.hero-stars { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none; }
+.page-hero-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+.page-hero p.label { font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.page-hero h1 { font-family: var(--font-display); font-size: clamp(42px, 6vw, 72px); font-weight: 900; color: var(--white); line-height: 1.1; margin-bottom: 1rem; }
+.page-hero h1 span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.page-hero p.desc { font-size: 18px; color: rgba(255,255,255,0.6); max-width: 520px; line-height: 1.7; }
+
+/* FILTERS */
+.filters-bar { background: var(--white); border-bottom: 1px solid rgba(0,31,91,0.08); padding: 1.25rem 2rem; position: sticky; top: 68px; z-index: 100; box-shadow: var(--shadow-sm); }
+.filters-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.filter-label { font-family: var(--font-cond); font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-right: 0.5rem; }
+.filter-btn { font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 20px; border-radius: 4px; border: 1.5px solid rgba(0,31,91,0.12); background: var(--white); color: var(--text-muted); cursor: pointer; transition: all 0.18s; box-shadow: var(--shadow-sm); }
+.filter-btn.active, .filter-btn:hover { background: var(--grad-blue); color: var(--white); border-color: transparent; box-shadow: var(--shadow-blue); }
+.filter-count { margin-left: auto; font-family: var(--font-cond); font-size: 13px; color: var(--text-muted); letter-spacing: 0.05em; }
+
+/* GRID */
+.episodes-section { padding: 3rem 2rem 6rem; background: linear-gradient(160deg, #F4F6FB 0%, #EBF0FF 100%); min-height: 60vh; }
+.episodes-inner { max-width: 1100px; margin: 0 auto; }
+.archive-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem; }
+.archive-card { background: var(--grad-card); border: 1px solid rgba(0,31,91,0.07); border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; box-shadow: var(--shadow-sm); transition: box-shadow 0.22s, transform 0.18s; display: flex; flex-direction: column; }
+.archive-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.archive-thumb { position: relative; padding-top: 56.25%; background: #0a0f20; overflow: hidden; }
+.archive-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+.archive-card:hover .archive-thumb img { transform: scale(1.05); }
+.archive-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); transition: background 0.2s; }
+.archive-card:hover .archive-play { background: rgba(217,30,60,0.4); }
+.archive-play-btn { width: 48px; height: 48px; border-radius: 50%; background: var(--grad-red); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(217,30,60,0.5); }
+.archive-play-btn svg { width: 18px; height: 18px; fill: white; margin-left: 3px; }
+.archive-show-tag { position: absolute; top: 10px; left: 10px; font-family: var(--font-cond); font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; }
+.archive-show-tag.rst { background: linear-gradient(135deg,#E8253F,#A8152D); color: white; }
+.archive-show-tag.brief { background: linear-gradient(135deg,#0A3080,#000E35); color: white; }
+.archive-show-tag.campus { background: linear-gradient(135deg,#1A2744,#060E26); color: white; }
+.archive-info { padding: 1rem 1.25rem 1.25rem; flex: 1; }
+.archive-info h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-dark); line-height: 1.35; margin-bottom: 0.35rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.archive-meta { font-family: var(--font-cond); font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; }
+.archive-loading { text-align: center; padding: 4rem; color: var(--text-muted); font-family: var(--font-cond); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; grid-column: 1/-1; }
+.load-more-wrap { text-align: center; margin-top: 2.5rem; }
+.btn-primary { background: var(--grad-red); color: var(--white); font-family: var(--font-cond); font-size: 15px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 15px 36px; border-radius: 5px; text-decoration: none; border: none; cursor: pointer; box-shadow: var(--shadow-red); transition: box-shadow 0.2s, transform 0.15s; display: inline-block; }
+.btn-primary:hover { box-shadow: 0 14px 40px rgba(217,30,60,0.48); transform: translateY(-2px); }
+
+/* FOOTER */
+footer { background: linear-gradient(135deg,#040A18 0%,#070F22 100%); padding: 2.5rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); }
+.footer-logo { font-family: var(--font-cond); font-size: 21px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); margin-bottom: 0.5rem; }
+.footer-logo span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
+
+/* HAMBURGER */
+.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 6px; }
+.hamburger span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 2px; }
+@media (max-width: 900px) { .nav-back { display: none; } .hamburger { display: flex; } }
+@media (max-width: 800px) { .archive-grid { grid-template-columns: 1fr; } .filters-inner { gap: 0.5rem; } }
+@media (max-width: 500px) { .archive-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Right <span>Side</span> Talks</a>
+  <a class="nav-back" href="index.html">← Back to Home</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-stars"></div>
+  <div class="page-hero-inner">
+    <p class="label">All Content</p>
+    <h1>Episode <span>Archive</span></h1>
+    <p class="desc">Every episode from Right Side Talks, The Brief, and Campus Front — all in one place. Filter by show and watch on YouTube.</p>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar">
+  <div class="filters-inner">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" onclick="filterArchive('all',this)">All Shows</button>
+    <button class="filter-btn" onclick="filterArchive('rst',this)">Right Side Talks</button>
+    <button class="filter-btn" onclick="filterArchive('brief',this)">The Brief</button>
+    <button class="filter-btn" onclick="filterArchive('campus',this)">Campus Front</button>
+    <span class="filter-count" id="episode-count"></span>
+  </div>
+</div>
+
+<!-- EPISODES GRID -->
+<div class="episodes-section">
+  <div class="episodes-inner">
+    <div class="archive-grid" id="archive-grid">
+      <div class="archive-loading">Loading episodes&hellip;</div>
+    </div>
+    <div class="load-more-wrap">
+      <button class="btn-primary" id="archive-more" style="display:none" onclick="loadMoreArchive()">Load More Episodes</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Right <span>Side</span> Talks</div>
+  <p>Right Side Talks LLC &mdash; A National Youth Conservative Media Organization</p>
+  <p style="margin-top:0.5rem;"><a href="index.html" style="color:rgba(255,255,255,0.4);font-family:'Barlow Condensed',sans-serif;font-size:13px;text-decoration:none;">← Back to Home</a></p>
+</footer>
+
+<script>
+let allArchiveVideos = [];
+let archiveVisible = 9;
+let archiveFilter = 'all';
+
+const SHOW_TAGS = [
+  { key: 'rst',    keywords: ['right side talks','rst','politics','conservative','episode','special','guests','maga','america first'] },
+  { key: 'brief',  keywords: ['brief','news','update','daily'] },
+  { key: 'campus', keywords: ['campus','college','university','student'] },
+];
+
+function detectShow(title) {
+  const t = (title || '').toLowerCase();
+  for(const s of SHOW_TAGS) {
+    if(s.keywords.some(k => t.includes(k))) return s.key;
+  }
+  return 'rst';
+}
+
+function ytVideoId(link) {
+  const m = link.match(/[?&]v=([^&]+)/) || link.match(/youtu\.be\/([^?]+)/);
+  return m ? m[1] : null;
+}
+
+function fmtAgo(dateStr) {
+  const diff = Math.floor((new Date() - new Date(dateStr)) / 86400000);
+  if(diff === 0) return 'Today';
+  if(diff === 1) return 'Yesterday';
+  if(diff < 7) return diff + ' days ago';
+  if(diff < 30) return Math.floor(diff/7) + ' weeks ago';
+  if(diff < 365) return Math.floor(diff/30) + ' months ago';
+  return Math.floor(diff/365) + ' years ago';
+}
+
+function renderArchiveCard(item) {
+  const vid = item.videoId || ytVideoId(item.link);
+  const thumb = vid ? `https://i.ytimg.com/vi/${vid}/hqdefault.jpg` : '';
+  const show = detectShow(item.title);
+  const tagLabels = {rst:'Right Side Talks', brief:'The Brief', campus:'Campus Front'};
+  return `<a class="archive-card" href="${item.link}" target="_blank" rel="noopener" data-show="${show}">
+    <div class="archive-thumb">
+      <img src="${thumb}" alt="${item.title}" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/default/hqdefault.jpg'"/>
+      <div class="archive-play"><div class="archive-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+      <span class="archive-show-tag ${show}">${tagLabels[show]}</span>
+    </div>
+    <div class="archive-info">
+      <h3>${item.title}</h3>
+      <div class="archive-meta">${fmtAgo(item.pubDate)}</div>
+    </div>
+  </a>`;
+}
+
+function renderArchive() {
+  const grid = document.getElementById('archive-grid');
+  const moreBtn = document.getElementById('archive-more');
+  const countEl = document.getElementById('episode-count');
+  const filtered = archiveFilter === 'all' ? allArchiveVideos : allArchiveVideos.filter(v => detectShow(v.title) === archiveFilter);
+  if(!filtered.length) {
+    grid.innerHTML = '<div class="archive-loading">No episodes found.</div>';
+    moreBtn.style.display = 'none';
+    if(countEl) countEl.textContent = '';
+    return;
+  }
+  const visible = filtered.slice(0, archiveVisible);
+  grid.innerHTML = visible.map(renderArchiveCard).join('');
+  moreBtn.style.display = filtered.length > archiveVisible ? 'block' : 'none';
+  if(countEl) countEl.textContent = `${filtered.length} episode${filtered.length !== 1 ? 's' : ''}`;
+}
+
+window.filterArchive = function(filter, btn) {
+  archiveFilter = filter;
+  archiveVisible = 9;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderArchive();
+};
+
+window.loadMoreArchive = function() {
+  archiveVisible += 9;
+  renderArchive();
+};
+
+async function loadArchive() {
+  const grid = document.getElementById('archive-grid');
+  try {
+    const r = await fetch('/api/youtube', {signal: AbortSignal.timeout(10000)});
+    if(!r.ok) throw new Error('API failed');
+    const d = await r.json();
+    if(!d.items || !d.items.length) throw new Error('No items');
+    allArchiveVideos = d.items;
+    renderArchive();
+  } catch(e) {
+    grid.innerHTML = '<div class="archive-loading">Episodes temporarily unavailable. <a href="https://m.youtube.com/@RightSideTalks" target="_blank" style="color:var(--red)">Visit our channel →</a></div>';
+  }
+}
+
+loadArchive();
+</script>
+</body>
+</html>
