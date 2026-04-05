@@ -28,29 +28,48 @@ module.exports = async function(req, res) {
     return entries;
   }
 
-  // Try allorigins proxy
-  try {
-    const r1 = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(RSS_URL)}`);
-    if (r1.ok) {
-      const d = await r1.json();
-      const entries = parseXML(d.contents || '');
+  const proxies = [
+    `https://api.allorigins.win/get?url=${encodeURIComponent(RSS_URL)}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(RSS_URL)}`,
+    `https://corsproxy.io/?${encodeURIComponent(RSS_URL)}`,
+    `https://proxy.cors.sh/${RSS_URL}`,
+  ];
+
+  for (const proxy of proxies) {
+    try {
+      const r = await fetch(proxy, {
+        headers: { 'User-Agent': 'Mozilla/5.0', 'x-cors-api-key': 'temp_' },
+        signal: AbortSignal.timeout(8000)
+      });
+      if (!r.ok) continue;
+
+      let xml = '';
+      if (proxy.includes('allorigins.win/get')) {
+        const d = await r.json();
+        xml = d.contents || '';
+      } else {
+        xml = await r.text();
+      }
+
+      const entries = parseXML(xml);
       if (entries.length) {
         res.setHeader('Cache-Control', 'public, max-age=300');
         return res.status(200).json({ channelId: CHANNEL_ID, items: entries });
       }
-    }
-  } catch(e) {}
+    } catch(e) { continue; }
+  }
 
-  // Try direct fetch
+  // Last resort: direct fetch
   try {
-    const r2 = await fetch(RSS_URL, {
+    const r = await fetch(RSS_URL, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)',
-        'Accept': '*/*'
-      }
+        'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+        'Accept': 'application/xml, text/xml, */*',
+      },
+      signal: AbortSignal.timeout(8000)
     });
-    if (r2.ok) {
-      const xml = await r2.text();
+    if (r.ok) {
+      const xml = await r.text();
       const entries = parseXML(xml);
       if (entries.length) {
         res.setHeader('Cache-Control', 'public, max-age=300');
@@ -59,5 +78,5 @@ module.exports = async function(req, res) {
     }
   } catch(e) {}
 
-  return res.status(502).json({ error: 'RSS fetch failed', items: [] });
+  return res.status(502).json({ error: 'All proxies failed', items: [] });
 };
