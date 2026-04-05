@@ -276,9 +276,9 @@ section { padding: 5rem 2rem; }
 .ticker-label { background: var(--grad-red); color: var(--white); font-family: var(--font-cond); font-size: 12px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0 16px; height: 100%; display: flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
 .ticker-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
 .ticker-track-wrap { flex: 1; overflow: hidden; height: 100%; display: flex; align-items: center; }
-.ticker-track { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 180s linear infinite; }
+.ticker-track { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 320s linear infinite; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .ticker-track:hover { animation-play-state: paused; }
-@keyframes tickerScroll { 0%{transform:translateX(0)}100%{transform:translateX(-50%)} }
+@keyframes tickerScroll { 0%{transform:translateX(0) translateZ(0)}100%{transform:translateX(-50%) translateZ(0)} }
 .ticker-item { display: inline-flex; align-items: center; gap: 6px; padding: 0 20px; border-right: 1px solid rgba(255,255,255,0.07); font-family: var(--font-cond); font-size: 13px; font-weight: 700; color: var(--white); }
 .ticker-sym { color: rgba(255,255,255,0.44); font-size: 11px; }
 .ticker-change.up { color: #2ECC71; }
@@ -377,19 +377,18 @@ section { padding: 5rem 2rem; }
 .poll-share-btn { display: inline-block; background: var(--grad-red); color: white; font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 9px 20px; border-radius: 4px; text-decoration: none; box-shadow: var(--shadow-red); }
 
 /* INSTAGRAM */
-#instagram { background: linear-gradient(135deg, #833AB4 0%, #C13584 40%, #E1306C 70%, #FD1D1D 100%); padding: 5rem 2rem; text-align: center; position: relative; overflow: hidden; }
-#instagram::before { content:''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 80% at 50% 0%,rgba(255,255,255,0.08) 0%,transparent 70%); }
+#instagram { background: var(--grad-dark); padding: 5rem 2rem; position: relative; overflow: hidden; }
+#instagram::before { content:''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 80% at 50% 0%,rgba(10,48,128,0.5) 0%,transparent 70%); }
 #instagram .section-inner { position: relative; }
-.ig-label { font-family: var(--font-cond); font-size: 12px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 0.75rem; }
-.ig-title { font-family: var(--font-display); font-size: clamp(30px,4vw,52px); font-weight: 700; color: var(--white); margin-bottom: 0.75rem; text-shadow: 0 4px 20px rgba(0,0,0,0.2); }
-.ig-sub { font-size: 17px; color: rgba(255,255,255,0.75); margin-bottom: 2.5rem; max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.7; }
-.ig-handle { font-family: var(--font-cond); font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: 0.05em; margin-bottom: 2rem; display: block; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-.ig-preview { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.5rem; max-width: 600px; margin: 0 auto 2.5rem; }
-.ig-tile { aspect-ratio: 1; border-radius: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); overflow: hidden; transition: transform 0.2s; }
-.ig-tile:hover { transform: scale(1.05); }
-.ig-tile-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 28px; }
-.ig-cta { display: inline-flex; align-items: center; gap: 10px; background: var(--white); color: #C13584; font-family: var(--font-cond); font-size: 16px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 15px 36px; border-radius: 5px; text-decoration: none; box-shadow: 0 8px 28px rgba(0,0,0,0.2); transition: transform 0.15s, box-shadow 0.2s; }
-.ig-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(0,0,0,0.28); }
+.social-platforms-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 2.5rem; }
+.social-platform-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.75rem 1.5rem; text-decoration: none; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.75rem; transition: background 0.2s, transform 0.2s, border-color 0.2s; }
+.social-platform-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); transform: translateY(-4px); }
+.social-platform-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+.social-platform-name { font-family: var(--font-cond); font-size: 15px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); }
+.social-platform-handle { font-family: var(--font-cond); font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; }
+.social-platform-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.5; }
+@media (max-width: 800px) { .social-platforms-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 500px) { .social-platforms-grid { grid-template-columns: 1fr; } }
 
 /* RESPONSIVE additions */
 @media (max-width: 800px) {
@@ -630,21 +629,6 @@ document.addEventListener('click', function(e) {
       </div>
     </div>
 
-    <!-- LATEST VIDEOS -->
-    <div style="margin-top:4rem;padding-top:3rem;border-top:1px solid rgba(0,31,91,0.08);">
-      <p class="section-label">Latest Episodes</p>
-      <h3 style="font-family:var(--font-display);font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--text-dark);margin-bottom:0.75rem;">Watch <span class="blue">Recent Videos</span></h3>
-      <p style="font-size:16px;color:var(--text-muted);max-width:520px;line-height:1.7;margin-bottom:2rem;">Fresh from our YouTube channel — new content added regularly.</p>
-      <div id="yt-featured" class="yt-featured" style="--yt-bg:#0a0f20;"></div>
-      <div id="yt-grid" class="yt-grid"></div>
-      <div class="yt-sub-bar">
-        <span class="yt-sub-text" style="color:var(--text-muted);">Subscribe to <strong style="color:var(--text-dark);">@RightSideTalks</strong> for new videos every week</span>
-        <a href="https://m.youtube.com/@RightSideTalks" target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="#001F5B"/></svg>
-          Subscribe on YouTube
-        </a>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -676,10 +660,11 @@ document.addEventListener('click', function(e) {
     <div id="latest-videos-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
       <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-muted);font-family:var(--font-cond);font-size:14px;letter-spacing:0.1em;text-transform:uppercase;">Loading latest videos&hellip;</div>
     </div>
-    <div style="text-align:center;margin-top:2.5rem;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid rgba(0,31,91,0.08);flex-wrap:wrap;gap:1rem;">
+      <span style="font-family:var(--font-cond);font-size:15px;color:var(--text-muted);">Subscribe to <strong style="color:var(--text-dark);">@RightSideTalks</strong> for new videos every week</span>
       <a href="https://m.youtube.com/@RightSideTalks" target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8z"/><polygon points="9.75,15.02 15.5,12 9.75,8.98 9.75,15.02" fill="#001F5B"/></svg>
-        See All Videos on YouTube
+        Subscribe on YouTube
       </a>
     </div>
   </div>
@@ -794,20 +779,47 @@ document.addEventListener('click', function(e) {
 <!-- INSTAGRAM -->
 <section id="instagram">
   <div class="section-inner">
-    <p class="ig-label">Follow Along</p>
-    <h2 class="ig-title">We're on Instagram</h2>
-    <p class="ig-sub">Behind-the-scenes, clips, breaking takes, and more. Join our community of young conservatives standing up for America.</p>
-    <span class="ig-handle">@rightside_talks</span>
-    <div class="ig-preview">
-      <div class="ig-tile"><div class="ig-tile-inner">🇺🇸</div></div>
-      <div class="ig-tile"><div class="ig-tile-inner">🎙️</div></div>
-      <div class="ig-tile"><div class="ig-tile-inner">📣</div></div>
-      <div class="ig-tile"><div class="ig-tile-inner">🦅</div></div>
+    <p class="section-label" style="color:var(--gold);-webkit-text-fill-color:var(--gold);background:none;">Find Us Everywhere</p>
+    <h2 class="section-title" style="color:var(--white);">Follow Right Side <span style="background:var(--grad-red);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Talks</span></h2>
+    <p style="font-size:17px;color:rgba(255,255,255,0.6);max-width:560px;line-height:1.7;margin-top:0.5rem;">We're creating bold conservative content across every major platform. Follow us wherever you watch, listen, and scroll.</p>
+    <div class="social-platforms-grid">
+      <a href="https://m.youtube.com/@RightSideTalks" target="_blank" class="social-platform-card">
+        <div class="social-platform-icon" style="background:linear-gradient(135deg,#FF0000,#cc0000);">▶</div>
+        <div class="social-platform-name">YouTube</div>
+        <div class="social-platform-handle">@RightSideTalks</div>
+        <div class="social-platform-desc">Full episodes, clips, and live coverage</div>
+      </a>
+      <a href="https://x.com/rightsidetalks?s=11" target="_blank" class="social-platform-card">
+        <div class="social-platform-icon" style="background:linear-gradient(135deg,#000,#333);font-size:22px;font-family:var(--font-cond);font-weight:900;color:white;">𝕏</div>
+        <div class="social-platform-name">X / Twitter</div>
+        <div class="social-platform-handle">@rightsidetalks</div>
+        <div class="social-platform-desc">Breaking takes and real-time commentary</div>
+      </a>
+      <a href="https://www.instagram.com/rightside_talks/" target="_blank" class="social-platform-card">
+        <div class="social-platform-icon" style="background:linear-gradient(135deg,#833AB4,#E1306C,#FD1D1D);">📷</div>
+        <div class="social-platform-name">Instagram</div>
+        <div class="social-platform-handle">@rightside_talks</div>
+        <div class="social-platform-desc">Behind-the-scenes and highlight clips</div>
+      </a>
+      <a href="https://www.tiktok.com/@right.side.talks" target="_blank" class="social-platform-card">
+        <div class="social-platform-icon" style="background:linear-gradient(135deg,#010101,#333);">🎵</div>
+        <div class="social-platform-name">TikTok</div>
+        <div class="social-platform-handle">@right.side.talks</div>
+        <div class="social-platform-desc">Short-form conservative content</div>
+      </a>
+      <a href="https://www.facebook.com/p/Right-Side-Talks-61583993844581/" target="_blank" class="social-platform-card">
+        <div class="social-platform-icon" style="background:linear-gradient(135deg,#1877F2,#0d5fc9);">👤</div>
+        <div class="social-platform-name">Facebook</div>
+        <div class="social-platform-handle">Right Side Talks</div>
+        <div class="social-platform-desc">Community updates and episode shares</div>
+      </a>
+      <a href="https://open.spotify.com/user/31bl5td6k4w7qjtyrtrt5owxdgai" target="_blank" class="social-platform-card">
+        <div class="social-platform-icon" style="background:linear-gradient(135deg,#1DB954,#158a3e);">🎙️</div>
+        <div class="social-platform-name">Spotify</div>
+        <div class="social-platform-handle">Right Side Talks</div>
+        <div class="social-platform-desc">Listen to our podcast episodes</div>
+      </a>
     </div>
-    <a href="https://www.instagram.com/rightside_talks/" target="_blank" class="ig-cta">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-      Follow on Instagram
-    </a>
   </div>
 </section>
 
@@ -878,7 +890,7 @@ document.addEventListener('click', function(e) {
         <p>Whether you want to contribute, partner with us, book a guest appearance, or just say hello&mdash;we'd love to hear from you. Right Side Talks is always growing and we want you to be part of it.</p>
         <div class="contact-item">
           <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <span class="contact-item-text">rightsidetalks [at] gmail [dot] com</span>
+          <span class="contact-item-text"><a href="mailto:Rightsidetalks@gmail.com" style="color:var(--text-dark);text-decoration:none;border-bottom:1px solid rgba(0,31,91,0.2);">Rightsidetalks@gmail.com</a></span>
         </div>
         <div class="contact-item">
           <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
@@ -1076,12 +1088,39 @@ async function buildNewsTickerItems() {
 
 // YOUTUBE
 async function fetchYTByHandle() {
+  const CHANNEL_ID = 'UCpbgusSKZhNJphR0HOHPJ0Q';
+  const RSS_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + CHANNEL_ID;
+
+  function parseXML(xml) {
+    if(!xml || !xml.includes('<entry>')) return [];
+    const entries = [];
+    const itemRegex = /<entry>([\s\S]*?)<\/entry>/g;
+    let m;
+    while((m = itemRegex.exec(xml)) !== null && entries.length < 10) {
+      const e = m[1];
+      const t = e.match(/<title>([\s\S]*?)<\/title>/);
+      const l = e.match(/<link[^>]+href="([^"]+)"/);
+      const p = e.match(/<published>([\s\S]*?)<\/published>/);
+      const v = e.match(/<yt:videoId>([\s\S]*?)<\/yt:videoId>/);
+      if(t && l) entries.push({
+        title: t[1].replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").trim(),
+        link: l[1],
+        pubDate: p ? p[1] : new Date().toISOString(),
+        videoId: v ? v[1] : null
+      });
+    }
+    return entries;
+  }
+
   try {
-    const r = await fetch('/api/youtube', {signal: AbortSignal.timeout(12000)});
-    if(!r.ok) return [];
-    const d = await r.json();
-    return d.items || [];
-  } catch(e) { return []; }
+    const r = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(RSS_URL), {signal: AbortSignal.timeout(12000)});
+    if(r.ok) {
+      const d = await r.json();
+      const entries = parseXML(d.contents || '');
+      if(entries.length) return entries;
+    }
+  } catch(e) {}
+  return [];
 }
 
 async function fetchYouTubeVideos() {
@@ -1428,7 +1467,6 @@ function closePrivacy() {
 
   // Load YouTube content
   await Promise.all([
-    loadYouTubeVideos(),
     loadArchive(),
     loadLatestVideos()
   ]);
