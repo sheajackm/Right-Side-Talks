@@ -3,6 +3,7 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1.js" },
     { "src": "/support", "dest": "/support.html" },
+    { "src": "/episodes", "dest": "/episodes.html" },
     { "src": "/", "dest": "/index.html" }
   ]
 }
