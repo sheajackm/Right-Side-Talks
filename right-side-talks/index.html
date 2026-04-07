@@ -1503,7 +1503,10 @@ function closePrivacy() {
     (async () => {
       allArticles = await fetchAllNews();
       renderNews('all');
-      retur  const combined = marketItems + '<span class="ticker-sep">★</span>' + newsItems;
+      return buildNewsTickerItems();
+    })()
+  ]);
+  const combined = marketItems + '<span class="ticker-sep">★</span>' + newsItems;
   tickerTrack.innerHTML = combined + combined;
 
   await Promise.all([
