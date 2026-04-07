@@ -1,17 +1,10 @@
 {
   "version": 2,
-  "builds": [
-    { "src": "index.html", "use": "@vercel/static" },
-    { "src": "app.js", "use": "@vercel/static" },
-    { "src": "support.html", "use": "@vercel/static" },
-    { "src": "episodes.html", "use": "@vercel/static" },
-    { "src": "api/*.js", "use": "@vercel/node" }
-  ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1.js" },
-    { "src": "/app.js", "dest": "/app.js" },
     { "src": "/support", "dest": "/support.html" },
     { "src": "/episodes", "dest": "/episodes.html" },
+    { "src": "/(.*\\.(js|css|ico|png|jpg|svg))", "dest": "/$1" },
     { "src": "/", "dest": "/index.html" }
   ]
 }
