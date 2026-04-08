@@ -102,8 +102,9 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: line
 .blog-modal-body p { margin-bottom: 1.2rem; }
 
 /* TICKER */
-#ticker-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg,#050D20 0%,#0A1535 100%); border-top: 2px solid var(--red); height: 52px; display: flex; align-items: center; overflow: hidden; }
+#ticker-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg,#050D20 0%,#0A1535 100%); border-top: 2px solid var(--red); height: 52px; display: flex; align-items: center; overflow: hidden; box-shadow: 0 -4px 24px rgba(0,5,20,0.55); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .ticker-label { background: var(--grad-red); color: var(--white); font-family: var(--font-cond); font-size: 14px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0 20px; height: 100%; display: flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
+.ticker-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
 .ticker-track-wrap { flex: 1; overflow: hidden; height: 100%; display: flex; align-items: center; }
 .ticker-track { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 320s linear infinite; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 @keyframes tickerScroll { 0%{transform:translateX(0)}100%{transform:translateX(-50%)} }
@@ -246,6 +247,7 @@ function closeMenu() {
 <!-- TICKER -->
 <div id="ticker-bar">
   <div class="ticker-label">Markets &amp; News</div>
+  <div class="ticker-divider"></div>
   <div class="ticker-track-wrap">
     <div class="ticker-track" id="ticker-track">
       <span class="ticker-item"><span class="ticker-sym">Loading...</span></span>
