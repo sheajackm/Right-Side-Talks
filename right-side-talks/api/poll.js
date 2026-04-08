@@ -55,7 +55,7 @@ const POLLS = [
   {
     id: 'poll_009',
     question: 'Was the US-Israel war on Iran the right call?',
-    options: ['Yes — it was necessary', 'No — diplomacy first', 'Too early to tell'],
+    options: ['Yes — it was necessary', 'No — Stay Out', 'Too early to tell'],
     start: '2026-04-08',
     breaking: true
   },
