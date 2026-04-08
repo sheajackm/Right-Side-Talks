@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Right Side Takes — Opinion & Commentary | Right Side Talks</title>
+<meta name="description" content="Bold opinion pieces and commentary from the Right Side Talks team. Conservative perspectives on politics, culture, campus life, and more." />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red: #D91E3C; --red-dark: #A8152D; --red-light: #FDF0F2;
+  --blue: #001F5B; --blue-mid: #0A3080; --blue-light: #E6ECF9;
+  --white: #FFFFFF; --off-white: #F4F6FB; --gold: #D4A843;
+  --text-dark: #080F20; --text-muted: #4A5570; --border: rgba(0,31,91,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-cond: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+  --grad-red: linear-gradient(135deg, #E8253F 0%, #A8152D 100%);
+  --grad-blue: linear-gradient(135deg, #0A3080 0%, #001040 100%);
+  --grad-card: linear-gradient(160deg, #ffffff 0%, #f2f5ff 100%);
+  --grad-dark: linear-gradient(160deg, #0D1B40 0%, #060E26 100%);
+  --shadow-sm: 0 2px 12px rgba(0,20,80,0.08);
+  --shadow-md: 0 8px 32px rgba(0,20,80,0.13);
+  --shadow-lg: 0 20px 60px rgba(0,20,80,0.2);
+  --shadow-red: 0 8px 28px rgba(217,30,60,0.32);
+  --shadow-blue: 0 8px 28px rgba(0,31,91,0.28);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--text-dark); background: var(--white); line-height: 1.6; padding-bottom: 52px; -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg, #001040 0%, #001F5B 60%, #0A2870 100%); border-bottom: 2px solid var(--red); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 68px; box-shadow: 0 4px 28px rgba(0,8,40,0.55); }
+.nav-logo { font-family: var(--font-cond); font-size: 23px; font-weight: 800; color: var(--white); letter-spacing: 0.05em; text-decoration: none; text-transform: uppercase; }
+.nav-logo span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+.nav-links a { font-family: var(--font-cond); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px; background: var(--grad-red); transform: scaleX(0); transition: transform 0.2s; border-radius: 2px; }
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta { background: var(--grad-red) !important; color: var(--white) !important; padding: 9px 22px !important; border-radius: 4px !important; box-shadow: var(--shadow-red) !important; }
+.nav-cta::after { display: none !important; }
+.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 6px; border-radius: 4px; }
+.hamburger span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { position: fixed; top: 68px; left: 0; right: 0; background: linear-gradient(160deg, #001040 0%, #001F5B 100%); z-index: 190; padding: 1.5rem 2rem 2rem; box-shadow: 0 20px 48px rgba(0,8,40,0.65); border-bottom: 2px solid rgba(217,30,60,0.5); pointer-events: none; opacity: 0; transform: translateY(-12px); transition: opacity 0.3s ease, transform 0.3s ease; }
+.mobile-menu.open { pointer-events: all; opacity: 1; transform: translateY(0); }
+.mobile-menu ul { list-style: none; }
+.mobile-menu ul li { border-bottom: 1px solid rgba(255,255,255,0.07); }
+.mobile-menu ul li a { display: block; font-family: var(--font-cond); font-size: 19px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 0; }
+.mobile-menu-cta { display: block; margin-top: 1.5rem; background: var(--grad-red); color: var(--white) !important; font-family: var(--font-cond); font-size: 16px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; padding: 14px; border-radius: 6px; text-decoration: none; }
+
+/* HERO */
+.takes-hero { background: var(--grad-dark); padding: 110px 2rem 4rem; text-align: center; position: relative; overflow: hidden; margin-top: 68px; }
+.takes-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(10,48,128,0.55) 0%, transparent 70%); }
+.hero-stars { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none; }
+.hero-stripe { position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--red) 0%, #FF4D6D 50%, var(--red) 100%); }
+.hero-eyebrow { font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; position: relative; }
+.hero-title { font-family: var(--font-display); font-size: clamp(40px, 6vw, 70px); font-weight: 900; color: var(--white); line-height: 1.06; margin-bottom: 1rem; position: relative; }
+.hero-title .accent { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: 17px; color: rgba(255,255,255,0.6); max-width: 520px; margin: 0 auto; line-height: 1.75; position: relative; }
+
+/* MAIN */
+.takes-main { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+
+/* FILTERS */
+.takes-filters { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+.takes-filter { font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 20px; border-radius: 4px; border: 1.5px solid rgba(0,31,91,0.12); background: var(--white); color: var(--text-muted); cursor: pointer; transition: all 0.18s; box-shadow: var(--shadow-sm); }
+.takes-filter.active, .takes-filter:hover { background: var(--grad-blue); color: var(--white); border-color: transparent; box-shadow: var(--shadow-blue); }
+
+/* ARTICLES GRID */
+.takes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.takes-card { background: var(--grad-card); border: 1px solid rgba(0,31,91,0.08); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); transition: box-shadow 0.25s, transform 0.2s; cursor: pointer; display: flex; flex-direction: column; }
+.takes-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.takes-card-banner { background: var(--grad-blue); height: 90px; display: flex; align-items: flex-end; padding: 1rem 1.25rem; position: relative; overflow: hidden; }
+.takes-card-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 100% at 0% 50%, rgba(10,48,128,0.6) 0%, transparent 70%); }
+.takes-card-cat { font-family: var(--font-cond); font-size: 11px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; background: var(--grad-red); color: white; padding: 3px 10px; border-radius: 3px; position: relative; box-shadow: var(--shadow-red); }
+.takes-card-body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.takes-card-body h3 { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--text-dark); line-height: 1.3; margin-bottom: 0.6rem; }
+.takes-card-body p { font-size: 14px; color: var(--text-muted); line-height: 1.65; flex: 1; margin-bottom: 1rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.takes-card-meta { font-family: var(--font-cond); font-size: 12px; color: var(--text-muted); letter-spacing: 0.04em; display: flex; align-items: center; justify-content: space-between; }
+.takes-read-more { font-family: var(--font-cond); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* LOADING / EMPTY */
+.takes-loading { text-align: center; padding: 5rem 2rem; color: var(--text-muted); font-family: var(--font-cond); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; grid-column: 1/-1; }
+
+/* MODAL */
+.blog-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,8,40,0.75); z-index: 500; align-items: center; justify-content: center; padding: 2rem; }
+.blog-modal-overlay.open { display: flex; }
+.blog-modal { background: var(--white); border-radius: 14px; max-width: 700px; width: 100%; max-height: 85vh; overflow-y: auto; box-shadow: 0 40px 100px rgba(0,8,40,0.4); }
+.blog-modal-header { background: var(--grad-blue); padding: 2rem 2rem 1.5rem; position: relative; }
+.blog-modal-cat { font-family: var(--font-cond); font-size: 11px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; background: var(--grad-red); color: white; padding: 3px 10px; border-radius: 3px; display: inline-block; margin-bottom: 0.75rem; }
+.blog-modal-header h2 { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--white); line-height: 1.25; }
+.blog-modal-meta { font-family: var(--font-cond); font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 0.5rem; }
+.blog-modal-close { position: absolute; top: 1rem; right: 1rem; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); border: none; cursor: pointer; color: white; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.blog-modal-close:hover { background: rgba(255,255,255,0.2); }
+.blog-modal-body { padding: 2rem; font-size: 16px; color: var(--text-dark); line-height: 1.8; }
+.blog-modal-body p { margin-bottom: 1.2rem; }
+
+/* TICKER */
+#ticker-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg,#050D20 0%,#0A1535 100%); border-top: 2px solid var(--red); height: 52px; display: flex; align-items: center; overflow: hidden; }
+.ticker-label { background: var(--grad-red); color: var(--white); font-family: var(--font-cond); font-size: 14px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0 20px; height: 100%; display: flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
+.ticker-track-wrap { flex: 1; overflow: hidden; height: 100%; display: flex; align-items: center; }
+.ticker-track { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 240s linear infinite; }
+@keyframes tickerScroll { 0%{transform:translateX(0)}100%{transform:translateX(-50%)} }
+.ticker-item { display: inline-flex; align-items: center; gap: 8px; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1); font-family: var(--font-cond); font-size: 14px; font-weight: 700; color: #FFFFFF; }
+.ticker-sym { font-size: 14px; font-weight: 900; letter-spacing: 0.08em; }
+.ticker-change.up { color: #2ECC71; }
+.ticker-change.down { color: #FF4D6D; }
+
+/* FOOTER */
+footer { background: linear-gradient(135deg,#040A18 0%,#070F22 100%); padding: 2.5rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); }
+.footer-logo { font-family: var(--font-cond); font-size: 21px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); margin-bottom: 0.5rem; }
+.footer-logo span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
+
+@media (max-width: 900px) { .nav-links { display: none; } .hamburger { display: flex; } }
+@media (max-width: 700px) { .takes-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1000px) { .takes-grid { grid-template-columns: repeat(2,1fr); } }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
+.hero-eyebrow { animation: fadeUp 0.6s ease both; }
+.hero-title { animation: fadeUp 0.6s 0.1s ease both; }
+.hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
+</style>
+</head>
+<body>
+
+<script>
+function toggleMenu() {
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+}
+function closeMenu() {
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.classList.remove('open');
+  menu.classList.remove('open');
+}
+</script>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Right <span>Side</span> Talks</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#shows">Shows</a></li>
+    <li><a href="episodes.html">Episodes</a></li>
+    <li><a href="takes.html">Right Side Takes</a></li>
+    <li><a href="index.html#news">News</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="support.html" class="nav-cta">Support Us</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+    <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+    <li><a href="index.html#about" onclick="closeMenu()">About</a></li>
+    <li><a href="index.html#shows" onclick="closeMenu()">Shows</a></li>
+    <li><a href="episodes.html" onclick="closeMenu()">Episodes</a></li>
+    <li><a href="takes.html" onclick="closeMenu()">Right Side Takes</a></li>
+    <li><a href="index.html#news" onclick="closeMenu()">News</a></li>
+    <li><a href="index.html#contact" onclick="closeMenu()">Contact</a></li>
+  </ul>
+  <a href="support.html" class="mobile-menu-cta">Support Us</a>
+</div>
+
+<!-- HERO -->
+<div class="takes-hero">
+  <div class="hero-stars"></div>
+  <p class="hero-eyebrow">Opinion &amp; Commentary</p>
+  <h1 class="hero-title">Right Side <span class="accent">Takes</span></h1>
+  <p class="hero-sub">Bold, unapologetic conservative commentary from our columnists and contributors. Every perspective you need — from the right side of history.</p>
+  <div class="hero-stripe"></div>
+</div>
+
+<!-- MAIN -->
+<div class="takes-main">
+
+  <!-- FILTERS -->
+  <div class="takes-filters">
+    <button class="takes-filter active" onclick="filterTakes('all',this)">All Authors</button>
+    <button class="takes-filter" onclick="filterTakes('Jack Shea',this)">Jack Shea</button>
+    <button class="takes-filter" onclick="filterTakes('Nick Cribbet',this)">Nick Cribbet</button>
+    <button class="takes-filter" onclick="filterTakes('Cecelia Brown',this)">Cecelia Brown</button>
+    <button class="takes-filter" onclick="filterTakes('Caleb Grubb',this)">Caleb Grubb</button>
+    <button class="takes-filter" onclick="filterTakes('Ryan McCombs',this)">Ryan McCombs</button>
+    <button class="takes-filter" onclick="filterTakes('Gavin Krauciunas',this)">Gavin Krauciunas</button>
+    <button class="takes-filter" onclick="filterTakes('John DePerno',this)">John DePerno</button>
+  </div>
+
+  <!-- GRID -->
+  <div class="takes-grid" id="takes-grid">
+    <div class="takes-loading">Loading articles&hellip;</div>
+  </div>
+
+</div>
+
+<!-- MODAL -->
+<div class="blog-modal-overlay" id="blog-modal" onclick="closeBlogIfOverlay(event)">
+  <div class="blog-modal">
+    <div class="blog-modal-header">
+      <span class="blog-modal-cat" id="modal-cat">Opinion</span>
+      <h2 id="modal-title">Article Title</h2>
+      <div class="blog-modal-meta" id="modal-meta"></div>
+      <button class="blog-modal-close" onclick="closeBlog()">&#x2715;</button>
+    </div>
+    <div class="blog-modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Right <span>Side</span> Talks</div>
+  <p style="font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;opacity:0.8;">On the Right Side of History</p>
+  <p>Right Side Talks LLC &mdash; A National Youth Conservative Media Organization</p>
+  <div style="margin-top:1rem;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;">
+    <a href="index.html" style="color:rgba(255,255,255,0.35);font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">Home</a>
+    <a href="index.html#about" style="color:rgba(255,255,255,0.35);font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">About</a>
+    <a href="index.html#contact" style="color:rgba(255,255,255,0.35);font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">Contact</a>
+    <a href="support.html" style="color:var(--red);font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">Support Us</a>
+  </div>
+  <p style="margin-top:1rem;">&copy; 2026 Right Side Talks LLC. All rights reserved.</p>
+</footer>
+
+<!-- TICKER -->
+<div id="ticker-bar">
+  <div class="ticker-label">Markets</div>
+  <div class="ticker-track-wrap">
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-item"><span class="ticker-sym">Loading...</span></span>
+    </div>
+  </div>
+</div>
+
+<script>
+var allArticles = [];
+var currentFilter = 'all';
+
+function fmtDate(dateStr) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+function readTime(body) {
+  if (!body) return '3 min read';
+  return Math.max(1, Math.round(body.trim().split(' ').length / 200)) + ' min read';
+}
+
+function renderGrid(articles) {
+  var grid = document.getElementById('takes-grid');
+  var filtered = currentFilter === 'all' ? articles : articles.filter(function(a) { return a.author === currentFilter; });
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="takes-loading">No articles in this category yet. Check back soon!</div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(function(a, i) {
+    return '<div class="takes-card" onclick="openArticle(' + i + ')">' +
+      '<div class="takes-card-banner"><span class="takes-card-cat">' + (a.category || 'Opinion') + '</span></div>' +
+      '<div class="takes-card-body">' +
+      '<h3>' + a.title + '</h3>' +
+      '<p>' + (a.excerpt || '') + '</p>' +
+      '<div class="takes-card-meta"><span>' + (a.author || 'RST Contributor') + ' &bull; ' + fmtDate(a.publishedAt) + '</span><span class="takes-read-more">Read →</span></div>' +
+      '</div></div>';
+  }).join('');
+  // Store filtered for modal indexing
+  window._filteredArticles = filtered;
+}
+
+window.filterTakes = function(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.takes-filter').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderGrid(allArticles);
+};
+
+window.openArticle = function(idx) {
+  var articles = window._filteredArticles || allArticles;
+  var a = articles[idx];
+  if (!a) return;
+  document.getElementById('modal-cat').textContent = a.category || 'Opinion';
+  document.getElementById('modal-title').textContent = a.title;
+  document.getElementById('modal-meta').innerHTML = (a.author || 'RST Contributor') + ' &bull; ' + readTime(a.body) + ' &bull; ' + fmtDate(a.publishedAt);
+  var bodyHTML = (a.body || 'Full article coming soon.').split('\n').filter(function(p) { return p.trim(); }).map(function(p) { return '<p>' + p + '</p>'; }).join('');
+  document.getElementById('modal-body').innerHTML = bodyHTML;
+  document.getElementById('blog-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
+
+window.closeBlog = function() {
+  document.getElementById('blog-modal').classList.remove('open');
+  document.body.style.overflow = '';
+};
+
+window.closeBlogIfOverlay = function(e) {
+  if (e.target === document.getElementById('blog-modal')) closeBlog();
+};
+
+// Load articles from Sanity
+async function loadArticles() {
+  try {
+    var r = await fetch('/api/articles', { signal: AbortSignal.timeout(8000) });
+    if (!r.ok) throw new Error('API error');
+    var d = await r.json();
+    allArticles = d.items || [];
+    renderGrid(allArticles);
+  } catch(e) {
+    document.getElementById('takes-grid').innerHTML = '<div class="takes-loading">Articles coming soon!</div>';
+  }
+}
+
+// Load ticker
+async function loadTicker() {
+  try {
+    var symbols = [
+      {sym:'S&P 500',id:'%5EGSPC'},{sym:'DOW',id:'%5EDJI'},{sym:'NASDAQ',id:'%5EIXIC'},
+      {sym:'BTC',id:'BTC-USD'},{sym:'AAPL',id:'AAPL'},{sym:'MSFT',id:'MSFT'},{sym:'NVDA',id:'NVDA'}
+    ];
+    var results = await Promise.allSettled(symbols.map(async function(s) {
+      var r = await fetch('/api/markets?symbol=' + s.id, {signal: AbortSignal.timeout(6000)});
+      if (!r.ok) return null;
+      var d = await r.json();
+      return d.price ? {sym: s.sym, price: d.price, pct: d.pct, change: d.change} : null;
+    }));
+    var valid = results.filter(function(r) { return r.status === 'fulfilled' && r.value; }).map(function(r) { return r.value; });
+    if (!valid.length) return;
+    var html = valid.map(function(q) {
+      var up = q.change >= 0;
+      var price = q.price > 10000 ? q.price.toLocaleString('en-US',{maximumFractionDigits:0}) : q.price.toLocaleString('en-US',{maximumFractionDigits:2,minimumFractionDigits:2});
+      return '<span class="ticker-item"><span class="ticker-sym">' + q.sym + '</span>&nbsp;' + price + '&nbsp;<span class="ticker-change ' + (up?'up':'down') + '">' + (up?'&#9650;':'&#9660;') + ' ' + Math.abs(q.pct).toFixed(2) + '%</span></span>';
+    }).join('<span style="padding:0 16px;color:var(--red);opacity:0.6;">&#9733;</span>');
+    var track = document.getElementById('ticker-track');
+    track.innerHTML = html + html;
+  } catch(e) {}
+}
+
+loadArticles();
+loadTicker();
+</script>
+</body>
+</html>
