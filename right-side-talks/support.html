@@ -6,314 +6,245 @@
 <title>Support Right Side Talks — Back the Movement</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --red: #C8102E;
-    --red-dark: #9B0B21;
-    --red-light: #F7E6EA;
-    --blue: #002868;
-    --blue-light: #E8EDF7;
-    --white: #FFFFFF;
-    --off-white: #F9F7F4;
-    --gold: #BF9B30;
-    --text-dark: #0E1A2B;
-    --text-muted: #5A6478;
-    --border: rgba(0,40,104,0.12);
-    --font-display: 'Playfair Display', Georgia, serif;
-    --font-cond: 'Barlow Condensed', sans-serif;
-    --font-body: 'Barlow', sans-serif;
-  }
+:root {
+  --red: #D91E3C;
+  --red-dark: #A8152D;
+  --red-light: #FDF0F2;
+  --blue: #001F5B;
+  --blue-mid: #0A3080;
+  --blue-light: #E6ECF9;
+  --white: #FFFFFF;
+  --off-white: #F4F6FB;
+  --gold: #D4A843;
+  --text-dark: #080F20;
+  --text-muted: #4A5570;
+  --border: rgba(0,31,91,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-cond: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+  --grad-red: linear-gradient(135deg, #E8253F 0%, #A8152D 100%);
+  --grad-blue: linear-gradient(135deg, #0A3080 0%, #001040 100%);
+  --grad-card: linear-gradient(160deg, #ffffff 0%, #f2f5ff 100%);
+  --grad-dark: linear-gradient(160deg, #0D1B40 0%, #060E26 100%);
+  --shadow-sm: 0 2px 12px rgba(0,20,80,0.08);
+  --shadow-md: 0 8px 32px rgba(0,20,80,0.13);
+  --shadow-lg: 0 20px 60px rgba(0,20,80,0.2);
+  --shadow-red: 0 8px 28px rgba(217,30,60,0.32);
+  --shadow-blue: 0 8px 28px rgba(0,31,91,0.28);
+}
 
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--font-body); color: var(--text-dark); background: var(--off-white); line-height: 1.6; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--text-dark); background: var(--white); line-height: 1.6; padding-bottom: 52px; -webkit-font-smoothing: antialiased; }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: var(--blue); border-bottom: 3px solid var(--red);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 2rem; height: 64px;
-  }
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg, #001040 0%, #001F5B 60%, #0A2870 100%); border-bottom: 2px solid var(--red); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 68px; box-shadow: 0 4px 28px rgba(0,8,40,0.55); }
+.nav-logo { font-family: var(--font-cond); font-size: 23px; font-weight: 800; color: var(--white); letter-spacing: 0.05em; text-decoration: none; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+.nav-logo span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+.nav-links a { font-family: var(--font-cond); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px; background: var(--grad-red); transform: scaleX(0); transition: transform 0.2s; border-radius: 2px; }
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta { background: var(--grad-red) !important; color: var(--white) !important; padding: 9px 22px !important; border-radius: 4px !important; box-shadow: var(--shadow-red) !important; }
+.nav-cta::after { display: none !important; }
+.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 6px; border-radius: 4px; }
+.hamburger span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { position: fixed; top: 68px; left: 0; right: 0; background: linear-gradient(160deg, #001040 0%, #001F5B 100%); z-index: 190; padding: 1.5rem 2rem 2rem; box-shadow: 0 20px 48px rgba(0,8,40,0.65); border-bottom: 2px solid rgba(217,30,60,0.5); pointer-events: none; opacity: 0; transform: translateY(-12px); transition: opacity 0.3s ease, transform 0.3s ease; }
+.mobile-menu.open { pointer-events: all; opacity: 1; transform: translateY(0); }
+.mobile-menu ul { list-style: none; }
+.mobile-menu ul li { border-bottom: 1px solid rgba(255,255,255,0.07); }
+.mobile-menu ul li a { display: block; font-family: var(--font-cond); font-size: 19px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 0; }
+.mobile-menu-cta { display: block; margin-top: 1.5rem; background: var(--grad-red); color: var(--white) !important; font-family: var(--font-cond); font-size: 16px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; padding: 14px; border-radius: 6px; text-decoration: none; }
 
-  .nav-logo {
-    font-family: var(--font-cond); font-size: 22px; font-weight: 800;
-    color: var(--white); letter-spacing: 0.04em; text-decoration: none; text-transform: uppercase;
-  }
-  .nav-logo span { color: var(--red); }
+/* HERO */
+.support-hero { background: var(--grad-dark); padding: 120px 2rem 5rem; text-align: center; position: relative; overflow: hidden; margin-top: 68px; }
+.support-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(10,48,128,0.55) 0%, transparent 70%); }
+.hero-stars { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none; }
+.hero-stripe { position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--red) 0%, #FF4D6D 50%, var(--red) 100%); box-shadow: 0 -2px 18px rgba(217,30,60,0.4); }
+.hero-eyebrow { font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; position: relative; }
+.hero-title { font-family: var(--font-display); font-size: clamp(44px, 7vw, 80px); font-weight: 900; color: var(--white); line-height: 1.06; margin-bottom: 1rem; text-shadow: 0 4px 30px rgba(0,0,0,0.5); position: relative; }
+.hero-title .accent { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: 18px; color: rgba(255,255,255,0.64); max-width: 560px; margin: 0 auto; line-height: 1.75; position: relative; }
 
-  .nav-back {
-    font-family: var(--font-cond); font-size: 14px; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.65);
-    text-decoration: none; display: flex; align-items: center; gap: 6px;
-    transition: color 0.2s;
-  }
-  .nav-back:hover { color: var(--white); }
+/* SECTIONS */
+section, .support-main { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; }
+.section-label { font-family: var(--font-cond); font-size: 12px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.75rem; display: inline-block; }
+.section-title { font-family: var(--font-display); font-size: clamp(32px, 4vw, 52px); font-weight: 700; color: var(--text-dark); line-height: 1.15; margin-bottom: 1rem; }
+.section-title .blue { color: var(--blue-mid); }
 
-  /* HERO */
-  .support-hero {
-    background: var(--blue);
-    padding: 120px 2rem 5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
+/* WHY CARDS */
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
+.why-card { background: var(--grad-card); border: 1px solid rgba(0,31,91,0.08); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; box-shadow: var(--shadow-sm); transition: box-shadow 0.25s, transform 0.25s; }
+.why-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.why-icon { width: 60px; height: 60px; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 26px; }
+.why-card h3 { font-family: var(--font-cond); font-size: 16px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 0.5rem; }
+.why-card p { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
 
-  .support-hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-  }
+/* DONATE CARD */
+.donate-wrap { background: var(--grad-card); border: 1px solid rgba(0,31,91,0.08); border-radius: 14px; overflow: hidden; margin-bottom: 3rem; box-shadow: var(--shadow-md); }
+.donate-header { background: var(--grad-blue); padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.donate-header h2 { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white); }
+.donate-header p { font-size: 15px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+.venmo-badge { background: #3D95CE; color: var(--white); font-family: var(--font-cond); font-size: 15px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 24px; border-radius: 6px; display: flex; align-items: center; gap: 8px; white-space: nowrap; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+.donate-body { padding: 2.5rem; }
 
-  .support-hero::after {
-    content: '';
-    position: absolute; bottom: 0; left: 0; right: 0; height: 5px;
-    background: linear-gradient(90deg, var(--red) 33%, var(--white) 33%, var(--white) 66%, var(--red) 66%);
-  }
+/* AMOUNT BUTTONS */
+.amount-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1.25rem; }
+.amount-btn { border: 2px solid rgba(0,31,91,0.12); border-radius: 8px; background: var(--off-white); font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-dark); padding: 1.1rem 0.5rem; cursor: pointer; transition: all 0.15s; text-align: center; }
+.amount-btn:hover { border-color: var(--red); background: var(--red-light); color: var(--red); box-shadow: var(--shadow-red); }
+.amount-btn.active { border-color: var(--red); background: var(--red-light); color: var(--red); box-shadow: var(--shadow-red); }
+.amount-label { font-family: var(--font-cond); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-top: 4px; }
+.amount-btn.active .amount-label { color: var(--red-dark); }
 
-  .hero-eyebrow {
-    font-family: var(--font-cond); font-size: 12px; font-weight: 700;
-    letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
-  }
+/* CUSTOM AMOUNT */
+.custom-amount-wrap { margin-bottom: 1.5rem; }
+.custom-amount-label { font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 0.6rem; }
+.custom-input-row { display: flex; align-items: center; gap: 0.5rem; border: 2px solid rgba(0,31,91,0.12); border-radius: 8px; padding: 0.9rem 1rem; background: var(--off-white); transition: border-color 0.2s, box-shadow 0.2s; }
+.custom-input-row:focus-within { border-color: var(--blue-mid); box-shadow: 0 0 0 3px rgba(10,48,128,0.12); background: var(--white); }
+.custom-dollar { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-muted); }
+.custom-input { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--text-dark); border: none; outline: none; background: transparent; width: 100%; }
+.custom-input::placeholder { color: rgba(0,31,91,0.2); }
 
-  .hero-title {
-    font-family: var(--font-display); font-size: clamp(40px, 6vw, 72px);
-    font-weight: 900; color: var(--white); line-height: 1.08; margin-bottom: 1rem;
-  }
-  .hero-title .accent { color: var(--red); }
+.donate-divider { border: none; border-top: 1px solid rgba(0,31,91,0.08); margin: 1.5rem 0; }
 
-  .hero-sub {
-    font-size: 18px; color: rgba(255,255,255,0.65); max-width: 560px;
-    margin: 0 auto 2.5rem; line-height: 1.7;
-  }
+/* STEPS */
+.venmo-steps { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+.venmo-step { display: flex; align-items: flex-start; gap: 1rem; }
+.step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--grad-blue); color: var(--white); font-family: var(--font-cond); font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: var(--shadow-blue); }
+.step-text h4 { font-family: var(--font-cond); font-size: 15px; font-weight: 700; letter-spacing: 0.05em; color: var(--text-dark); margin-bottom: 2px; }
+.step-text p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+.step-text code { background: var(--blue-light); color: var(--blue-mid); font-size: 13px; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-weight: 700; }
 
-  /* MAIN CONTENT */
-  .support-main {
-    max-width: 1000px; margin: 0 auto; padding: 5rem 2rem 8rem;
-  }
+/* VENMO BUTTON */
+.venmo-cta { display: block; width: 100%; background: var(--grad-red); color: var(--white); font-family: var(--font-cond); font-size: 17px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; padding: 16px; border-radius: 8px; text-decoration: none; border: none; cursor: pointer; transition: box-shadow 0.2s, transform 0.15s; box-shadow: var(--shadow-red); }
+.venmo-cta:hover { box-shadow: 0 14px 40px rgba(217,30,60,0.48); transform: translateY(-2px); }
+.venmo-note { text-align: center; font-size: 13px; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.5; }
 
-  /* WHY SUPPORT */
-  .why-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 4rem;
-  }
+/* IMPACT */
+.impact-section { margin-bottom: 4rem; }
+.impact-section > p { font-size: 17px; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.7; }
+.impact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+.impact-card { background: var(--grad-card); border: 1px solid rgba(0,31,91,0.07); border-left: 4px solid var(--red); border-radius: 0 10px 10px 0; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; box-shadow: var(--shadow-sm); transition: box-shadow 0.2s, transform 0.2s; }
+.impact-card:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
+.impact-amount { font-family: var(--font-display); font-size: 30px; font-weight: 900; background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; flex-shrink: 0; min-width: 65px; }
+.impact-desc h4 { font-family: var(--font-cond); font-size: 15px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 4px; }
+.impact-desc p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
-  .why-card {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 10px; padding: 1.75rem 1.5rem; text-align: center;
-  }
+/* SHARE BANNER */
+.share-section { background: var(--grad-red); border-radius: 12px; padding: 3rem 2.5rem; text-align: center; margin-bottom: 3rem; position: relative; overflow: hidden; box-shadow: var(--shadow-red); }
+.share-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 100% at 50% 0%, rgba(255,255,255,0.08) 0%, transparent 70%); }
+.share-section h2 { font-family: var(--font-display); font-size: clamp(24px, 3vw, 36px); font-weight: 900; color: var(--white); margin-bottom: 0.5rem; position: relative; }
+.share-section p { color: rgba(255,255,255,0.85); font-size: 16px; margin-bottom: 1.75rem; position: relative; }
+.share-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; position: relative; }
+.share-btn { background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.3); color: var(--white); font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 22px; border-radius: 4px; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+.share-btn:hover { background: rgba(255,255,255,0.22); transform: translateY(-2px); }
 
-  .why-icon {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: var(--blue-light); display: flex; align-items: center;
-    justify-content: center; margin: 0 auto 1rem; font-size: 24px;
-  }
+/* FOOTER */
+footer { background: linear-gradient(135deg, #040A18 0%, #070F22 100%); padding: 2.5rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); }
+.footer-logo { font-family: var(--font-cond); font-size: 21px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); margin-bottom: 0.5rem; }
+.footer-logo span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
 
-  .why-card h3 {
-    font-family: var(--font-cond); font-size: 16px; font-weight: 700;
-    letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue);
-    margin-bottom: 0.5rem;
-  }
+/* TICKER */
+#ticker-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg,#050D20 0%,#0A1535 100%); border-top: 2px solid var(--red); height: 52px; display: flex; align-items: center; overflow: hidden; box-shadow: 0 -4px 24px rgba(0,5,20,0.55); }
+.ticker-label { background: var(--grad-red); color: var(--white); font-family: var(--font-cond); font-size: 14px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0 20px; height: 100%; display: flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
+.ticker-track-wrap { flex: 1; overflow: hidden; height: 100%; display: flex; align-items: center; }
+.ticker-track { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 240s linear infinite; }
+.ticker-track:hover { animation-play-state: paused; }
+@keyframes tickerScroll { 0%{transform:translateX(0)}100%{transform:translateX(-50%)} }
+.ticker-item { display: inline-flex; align-items: center; gap: 8px; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1); font-family: var(--font-cond); font-size: 14px; font-weight: 700; color: #FFFFFF; }
+.ticker-sym { font-size: 14px; font-weight: 900; letter-spacing: 0.08em; }
+.ticker-change.up { color: #2ECC71; }
+.ticker-change.down { color: #FF4D6D; }
 
-  .why-card p { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
-
-  /* DONATE SECTION */
-  .donate-wrap {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 14px; overflow: hidden; margin-bottom: 3rem;
-  }
-
-  .donate-header {
-    background: var(--blue); padding: 2rem 2.5rem;
-    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
-  }
-
-  .donate-header h2 {
-    font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--white);
-  }
-
-  .donate-header p { font-size: 15px; color: rgba(255,255,255,0.6); margin-top: 4px; }
-
-  .venmo-badge {
-    background: #3D95CE; color: var(--white);
-    font-family: var(--font-cond); font-size: 15px; font-weight: 800;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 10px 24px; border-radius: 6px;
-    display: flex; align-items: center; gap: 8px; white-space: nowrap;
-  }
-
-  .donate-body { padding: 2.5rem; }
-
-  .amount-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1.5rem;
-  }
-
-  .amount-btn {
-    border: 2px solid var(--border); border-radius: 8px; background: var(--off-white);
-    font-family: var(--font-display); font-size: 22px; font-weight: 700;
-    color: var(--text-dark); padding: 1.1rem 0.5rem; cursor: pointer;
-    transition: all 0.15s; text-align: center;
-  }
-
-  .amount-btn:hover, .amount-btn.active {
-    border-color: var(--red); background: var(--red-light); color: var(--red);
-  }
-
-  .amount-label {
-    font-family: var(--font-cond); font-size: 11px; font-weight: 700;
-    letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);
-    display: block; margin-top: 4px;
-  }
-
-  .donate-divider {
-    border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;
-  }
-
-  .venmo-steps { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
-
-  .venmo-step {
-    display: flex; align-items: flex-start; gap: 1rem;
-  }
-
-  .step-num {
-    width: 32px; height: 32px; border-radius: 50%; background: var(--blue);
-    color: var(--white); font-family: var(--font-cond); font-size: 15px;
-    font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-
-  .step-text h4 {
-    font-family: var(--font-cond); font-size: 15px; font-weight: 700;
-    letter-spacing: 0.05em; color: var(--text-dark); margin-bottom: 2px;
-  }
-
-  .step-text p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
-
-  .step-text code {
-    background: var(--blue-light); color: var(--blue); font-size: 13px;
-    padding: 2px 8px; border-radius: 4px; font-family: monospace; font-weight: 700;
-  }
-
-  .venmo-cta {
-    display: block; width: 100%; background: #3D95CE; color: var(--white);
-    font-family: var(--font-cond); font-size: 17px; font-weight: 800;
-    letter-spacing: 0.08em; text-transform: uppercase; text-align: center;
-    padding: 16px; border-radius: 8px; text-decoration: none; border: none;
-    cursor: pointer; transition: background 0.2s, transform 0.1s;
-  }
-
-  .venmo-cta:hover { background: #2980B9; transform: translateY(-1px); }
-
-  .venmo-note {
-    text-align: center; font-size: 13px; color: var(--text-muted);
-    margin-top: 0.75rem; line-height: 1.5;
-  }
-
-  /* IMPACT SECTION */
-  .impact-section { margin-bottom: 4rem; }
-
-  .impact-section h2 {
-    font-family: var(--font-display); font-size: clamp(28px, 3vw, 40px);
-    font-weight: 700; color: var(--text-dark); margin-bottom: 0.5rem;
-  }
-
-  .impact-section h2 span { color: var(--blue); }
-
-  .impact-section > p { font-size: 17px; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.7; }
-
-  .impact-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;
-  }
-
-  .impact-card {
-    background: var(--white); border: 1px solid var(--border);
-    border-left: 4px solid var(--red); border-radius: 0 8px 8px 0;
-    padding: 1.25rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start;
-  }
-
-  .impact-amount {
-    font-family: var(--font-display); font-size: 28px; font-weight: 900;
-    color: var(--red); line-height: 1; flex-shrink: 0; min-width: 60px;
-  }
-
-  .impact-desc h4 {
-    font-family: var(--font-cond); font-size: 15px; font-weight: 700;
-    letter-spacing: 0.05em; text-transform: uppercase; color: var(--blue); margin-bottom: 4px;
-  }
-
-  .impact-desc p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
-
-  /* SHARE SECTION */
-  .share-section {
-    background: var(--red); border-radius: 12px; padding: 2.5rem;
-    text-align: center; margin-bottom: 3rem;
-  }
-
-  .share-section h2 {
-    font-family: var(--font-display); font-size: 28px; font-weight: 900;
-    color: var(--white); margin-bottom: 0.5rem;
-  }
-
-  .share-section p { color: rgba(255,255,255,0.75); font-size: 16px; margin-bottom: 1.5rem; }
-
-  .share-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-
-  .share-btn {
-    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
-    color: var(--white); font-family: var(--font-cond); font-size: 13px; font-weight: 700;
-    letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 20px;
-    border-radius: 4px; text-decoration: none; transition: background 0.2s;
-  }
-
-  .share-btn:hover { background: rgba(255,255,255,0.25); }
-
-  /* FOOTER */
-  footer {
-    background: #07101F; padding: 2rem; text-align: center;
-  }
-
-  .footer-logo {
-    font-family: var(--font-cond); font-size: 20px; font-weight: 800;
-    letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); margin-bottom: 0.5rem;
-  }
-  .footer-logo span { color: var(--red); }
-  footer p { font-size: 13px; color: rgba(255,255,255,0.3); }
-
-  @media (max-width: 700px) {
-    .why-grid { grid-template-columns: 1fr; }
-    .amount-grid { grid-template-columns: repeat(2, 1fr); }
-    .impact-grid { grid-template-columns: 1fr; }
-    .donate-header { flex-direction: column; }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .hero-eyebrow { animation: fadeUp 0.5s ease both; }
-  .hero-title { animation: fadeUp 0.5s 0.1s ease both; }
-  .hero-sub { animation: fadeUp 0.5s 0.2s ease both; }
+/* RESPONSIVE */
+@media (max-width: 900px) { .nav-links { display: none; } .hamburger { display: flex; } }
+@media (max-width: 700px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .amount-grid { grid-template-columns: repeat(2, 1fr); }
+  .impact-grid { grid-template-columns: 1fr; }
+  .donate-header { flex-direction: column; }
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
+.hero-eyebrow { animation: fadeUp 0.6s ease both; }
+.hero-title { animation: fadeUp 0.6s 0.1s ease both; }
+.hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
 </style>
 </head>
 <body>
 
+<script>
+function toggleMenu() {
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+}
+function closeMenu() {
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.classList.remove('open');
+  menu.classList.remove('open');
+}
+</script>
+
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="index.html">Right <span>Side</span> Talks</a>
-  <a class="nav-back" href="index.html">← Back to Main Site</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#shows">Shows</a></li>
+    <li><a href="episodes.html">Episodes</a></li>
+    <li><a href="index.html#blog">Right Side Takes</a></li>
+    <li><a href="index.html#news">News</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="support.html" class="nav-cta">Support Us</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+    <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+    <li><a href="index.html#about" onclick="closeMenu()">About</a></li>
+    <li><a href="index.html#shows" onclick="closeMenu()">Shows</a></li>
+    <li><a href="episodes.html" onclick="closeMenu()">Episodes</a></li>
+    <li><a href="index.html#blog" onclick="closeMenu()">Right Side Takes</a></li>
+    <li><a href="index.html#news" onclick="closeMenu()">News</a></li>
+    <li><a href="index.html#contact" onclick="closeMenu()">Contact</a></li>
+  </ul>
+  <a href="support.html" class="mobile-menu-cta">Support Us</a>
+</div>
 
 <!-- HERO -->
 <div class="support-hero">
+  <div class="hero-stars"></div>
   <p class="hero-eyebrow">Back the Movement</p>
   <h1 class="hero-title">Support <span class="accent">Right Side</span> Talks</h1>
   <p class="hero-sub">Every dollar goes directly toward producing bold conservative content, growing our platform, and amplifying the voices of young Americans across the country.</p>
+  <div class="hero-stripe"></div>
 </div>
 
 <!-- MAIN -->
 <div class="support-main">
 
   <!-- WHY SUPPORT -->
+  <div style="margin-bottom:1rem;">
+    <p class="section-label">Why It Matters</p>
+    <h2 class="section-title">Fuel the <span class="blue">Conservative</span> Voice</h2>
+    <p style="font-size:17px;color:var(--text-muted);max-width:560px;line-height:1.7;margin-bottom:2.5rem;">Independent conservative media runs on the support of patriots like you. Here's exactly what your contribution makes possible.</p>
+  </div>
   <div class="why-grid">
     <div class="why-card">
       <div class="why-icon">🎙️</div>
@@ -347,17 +278,17 @@
     <div class="donate-body">
       <p style="font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:1rem;">Select an amount</p>
       <div class="amount-grid">
-        <div class="amount-btn" onclick="selectAmount(this,'$5')">
-          $5<span class="amount-label">Coffee Fund</span>
-        </div>
-        <div class="amount-btn active" onclick="selectAmount(this,'$10')">
-          $10<span class="amount-label">Supporter</span>
-        </div>
-        <div class="amount-btn" onclick="selectAmount(this,'$25')">
-          $25<span class="amount-label">Patriot</span>
-        </div>
-        <div class="amount-btn" onclick="selectAmount(this,'$50')">
-          $50<span class="amount-label">Champion</span>
+        <button class="amount-btn" onclick="selectAmount(this,5)">$5<span class="amount-label">Coffee Fund</span></button>
+        <button class="amount-btn active" onclick="selectAmount(this,10)">$10<span class="amount-label">Supporter</span></button>
+        <button class="amount-btn" onclick="selectAmount(this,25)">$25<span class="amount-label">Patriot</span></button>
+        <button class="amount-btn" onclick="selectAmount(this,50)">$50<span class="amount-label">Champion</span></button>
+      </div>
+
+      <div class="custom-amount-wrap">
+        <span class="custom-amount-label">Or enter a custom amount</span>
+        <div class="custom-input-row">
+          <span class="custom-dollar">$</span>
+          <input class="custom-input" type="number" id="custom-amount" min="1" step="1" placeholder="Enter your amount" oninput="setCustomAmount(this.value)" onfocus="clearPresets()" />
         </div>
       </div>
 
@@ -367,68 +298,56 @@
         <div class="venmo-step">
           <div class="step-num">1</div>
           <div class="step-text">
-            <h4>Open Venmo</h4>
-            <p>Tap the button below or open the Venmo app on your phone.</p>
+            <h4>Choose your amount above</h4>
+            <p>Pick a preset amount or type in your own custom amount.</p>
           </div>
         </div>
         <div class="venmo-step">
           <div class="step-num">2</div>
           <div class="step-text">
-            <h4>Search for our handle</h4>
-            <p>Find us at <code>@rightsidetalks</code> in the Venmo app.</p>
+            <h4>Click the button below</h4>
+            <p>You'll be taken to Venmo to complete your donation to <code>@rightsidetalks</code>.</p>
           </div>
         </div>
         <div class="venmo-step">
           <div class="step-num">3</div>
           <div class="step-text">
-            <h4>Enter your amount &amp; send</h4>
-            <p>Add a note like <code>Supporting RST 🇺🇸</code> and hit pay. That's it — thank you!</p>
+            <h4>Confirm &amp; send</h4>
+            <p>Add a note like <code>Supporting RST</code> and hit pay. Thank you!</p>
           </div>
         </div>
       </div>
 
-      <a id="venmo-btn" href="https://venmo.com/rightsidetalks?txn=pay&amount=10&note=Supporting%20RST%20%F0%9F%87%BA%F0%9F%87%B8" target="_blank" rel="noopener" class="venmo-cta">
+      <a id="venmo-btn" href="https://venmo.com/rightsidetalks?txn=pay&amount=10&note=Supporting%20RST" target="_blank" rel="noopener" class="venmo-cta">
         Send $10 via Venmo
       </a>
       <p class="venmo-note">
-        Don't have Venmo? <a href="/cdn-cgi/l/email-protection#e6b48f818e92958f828392878a8d95a6818b878f8ac885898b" style="color:var(--blue);">Email us</a> for other ways to support.
+        Don't have Venmo? Email us at <a href="mailto:Rightsidetalks@gmail.com" style="color:var(--blue-mid);">Rightsidetalks@gmail.com</a> for other ways to support.
       </p>
     </div>
   </div>
 
   <!-- IMPACT -->
   <div class="impact-section">
-    <p style="font-family:var(--font-cond);font-size:12px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--red);margin-bottom:0.75rem;">Where Your Money Goes</p>
-    <h2>Your <span>Impact</span></h2>
+    <p class="section-label">Where Your Money Goes</p>
+    <h2 class="section-title">Your <span class="blue">Impact</span></h2>
     <p>Every contribution — big or small — goes directly toward building the Right Side Talks platform. Here's what your support makes possible:</p>
     <div class="impact-grid">
       <div class="impact-card">
         <div class="impact-amount">$5</div>
-        <div class="impact-desc">
-          <h4>Keeps the Mic On</h4>
-          <p>Covers one episode's hosting and streaming costs to keep our content live and accessible.</p>
-        </div>
+        <div class="impact-desc"><h4>Keeps the Mic On</h4><p>Covers one episode's hosting and streaming costs to keep our content live and accessible.</p></div>
       </div>
       <div class="impact-card">
         <div class="impact-amount">$10</div>
-        <div class="impact-desc">
-          <h4>Content Creation</h4>
-          <p>Helps fund editing, graphics, and production tools that make our shows look and sound professional.</p>
-        </div>
+        <div class="impact-desc"><h4>Content Creation</h4><p>Helps fund editing, graphics, and production tools that make our shows look and sound professional.</p></div>
       </div>
       <div class="impact-card">
         <div class="impact-amount">$25</div>
-        <div class="impact-desc">
-          <h4>Campus Outreach</h4>
-          <p>Supports on-the-ground reporting and outreach to conservative students at colleges nationwide.</p>
-        </div>
+        <div class="impact-desc"><h4>Campus Outreach</h4><p>Supports on-the-ground reporting and outreach to conservative students at colleges nationwide.</p></div>
       </div>
       <div class="impact-card">
         <div class="impact-amount">$50</div>
-        <div class="impact-desc">
-          <h4>Growth &amp; Expansion</h4>
-          <p>Funds advertising, new equipment, and platform growth to reach more Americans with our message.</p>
-        </div>
+        <div class="impact-desc"><h4>Growth &amp; Expansion</h4><p>Funds advertising, new equipment, and platform growth to reach more Americans with our message.</p></div>
       </div>
     </div>
   </div>
@@ -438,7 +357,7 @@
     <h2>Can't Donate? Share Instead.</h2>
     <p>The best thing you can do is spread the word. Share Right Side Talks with a fellow conservative today.</p>
     <div class="share-btns">
-      <a href="https://x.com/intent/tweet?text=Check%20out%20%40rightsidetalks%20%E2%80%94%20youth%20conservative%20media%20that%20doesn%27t%20back%20down%20%F0%9F%87%BA%F0%9F%87%B8" target="_blank" class="share-btn">Share on X</a>
+      <a href="https://x.com/intent/tweet?text=Check%20out%20%40rightsidetalks%20%E2%80%94%20youth%20conservative%20media%20that%20doesn%27t%20back%20down" target="_blank" class="share-btn">Share on X</a>
       <a href="https://www.facebook.com/sharer/sharer.php?u=https://rightsidetalksmedia.com" target="_blank" class="share-btn">Share on Facebook</a>
       <a href="https://m.youtube.com/@RightSideTalks" target="_blank" class="share-btn">Subscribe on YouTube</a>
     </div>
@@ -449,14 +368,83 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Right <span>Side</span> Talks</div>
+  <p style="font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;opacity:0.8;">On the Right Side of History</p>
   <p>Right Side Talks LLC &mdash; A National Youth Conservative Media Organization</p>
-  <p style="margin-top:0.5rem;">&copy; 2025 Right Side Talks LLC. All rights reserved.</p>
+  <div style="margin-top:1rem;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;">
+    <a href="index.html" style="color:rgba(255,255,255,0.35);font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">Home</a>
+    <a href="index.html#about" style="color:rgba(255,255,255,0.35);font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">About</a>
+    <a href="index.html#contact" style="color:rgba(255,255,255,0.35);font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">Contact</a>
+  </div>
+  <p style="margin-top:1rem;">&copy; 2026 Right Side Talks LLC. All rights reserved.</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<!-- TICKER -->
+<div id="ticker-bar">
+  <div class="ticker-label">Markets</div>
+  <div class="ticker-track-wrap">
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-item"><span class="ticker-sym">Loading...</span></span>
+    </div>
+  </div>
+</div>
+
+<script>
+  var selectedAmount = 10;
+
   function selectAmount(el, amount) {
-    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.amount-btn').forEach(function(b) { b.classList.remove('active'); });
     el.classList.add('active');
-    const num = amount.replace('$','');
-    document.getElementById('venmo-btn').textContent = `Send ${amount} via Venmo`;
-    document.getElementById('
+    selectedAmount = amount;
+    document.getElementById('custom-amount').value = '';
+    updateVenmoBtn(amount);
+  }
+
+  function clearPresets() {
+    document.querySelectorAll('.amount-btn').forEach(function(b) { b.classList.remove('active'); });
+  }
+
+  function setCustomAmount(val) {
+    var num = parseFloat(val);
+    if (!num || num < 1) return;
+    selectedAmount = num;
+    updateVenmoBtn(num);
+  }
+
+  function updateVenmoBtn(amount) {
+    var note = encodeURIComponent('Supporting RST');
+    var url = 'https://venmo.com/rightsidetalks?txn=pay&amount=' + amount + '&note=' + note;
+    var btn = document.getElementById('venmo-btn');
+    btn.href = url;
+    btn.textContent = 'Send $' + amount + ' via Venmo';
+  }
+
+  // Load ticker
+  async function loadTicker() {
+    try {
+      const symbols = [
+        {sym:'S&P 500',id:'%5EGSPC'},{sym:'DOW',id:'%5EDJI'},{sym:'NASDAQ',id:'%5EIXIC'},
+        {sym:'BTC',id:'BTC-USD'},{sym:'ETH',id:'ETH-USD'},
+        {sym:'AAPL',id:'AAPL'},{sym:'MSFT',id:'MSFT'},{sym:'NVDA',id:'NVDA'}
+      ];
+      const results = await Promise.allSettled(symbols.map(async s => {
+        const r = await fetch('/api/markets?symbol=' + s.id, {signal: AbortSignal.timeout(6000)});
+        if (!r.ok) return null;
+        const d = await r.json();
+        return d.price ? {sym: s.sym, price: d.price, pct: d.pct, change: d.change} : null;
+      }));
+      const valid = results.filter(r => r.status === 'fulfilled' && r.value).map(r => r.value);
+      if (!valid.length) return;
+      const html = valid.map(q => {
+        const up = q.change >= 0;
+        const price = q.price > 10000 ? q.price.toLocaleString('en-US', {maximumFractionDigits:0}) : q.price.toLocaleString('en-US', {maximumFractionDigits:2, minimumFractionDigits:2});
+        return '<span class="ticker-item"><span class="ticker-sym">' + q.sym + '</span>&nbsp;' + price + '&nbsp;<span class="ticker-change ' + (up?'up':'down') + '">' + (up?'&#9650;':'&#9660;') + ' ' + Math.abs(q.pct).toFixed(2) + '%</span></span>';
+      }).join('<span style="padding:0 16px;color:var(--red);opacity:0.6;">&#9733;</span>');
+      const track = document.getElementById('ticker-track');
+      track.innerHTML = html + html;
+    } catch(e) {}
+  }
+  loadTicker();
+  updateVenmoBtn(10);
+</script>
+</body>
+</html>
