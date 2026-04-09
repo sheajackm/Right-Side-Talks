@@ -151,13 +151,13 @@ footer { background: linear-gradient(135deg, #040A18 0%, #070F22 100%); padding:
 footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
 
 /* TICKER */
-#ticker-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg,#050D20 0%,#0A1535 100%); border-top: 2px solid var(--red); height: 52px; display: flex; align-items: center; overflow: hidden; box-shadow: 0 -4px 24px rgba(0,5,20,0.55); }
+#ticker-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg,#050D20 0%,#0A1535 100%); border-top: 2px solid var(--red); height: 52px; display: flex; align-items: center; overflow: hidden; box-shadow: 0 -4px 24px rgba(0,5,20,0.55); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .ticker-label { background: var(--grad-red); color: var(--white); font-family: var(--font-cond); font-size: 14px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0 20px; height: 100%; display: flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
 .ticker-track-wrap { flex: 1; overflow: hidden; height: 100%; display: flex; align-items: center; }
-.ticker-track { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 240s linear infinite; }
+.ticker-track { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 320s linear infinite; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .ticker-track:hover { animation-play-state: paused; }
 @keyframes tickerScroll { 0%{transform:translateX(0)}100%{transform:translateX(-50%)} }
-.ticker-item { display: inline-flex; align-items: center; gap: 8px; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1); font-family: var(--font-cond); font-size: 14px; font-weight: 700; color: #FFFFFF; }
+.ticker-item { display: inline-flex; align-items: center; gap: 8px; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1); font-family: var(--font-cond); font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.03em; }
 .ticker-sym { font-size: 14px; font-weight: 900; letter-spacing: 0.08em; }
 .ticker-change.up { color: #2ECC71; }
 .ticker-change.down { color: #FF4D6D; }
@@ -322,7 +322,7 @@ function closeMenu() {
         Send $10 via Venmo
       </a>
       <p class="venmo-note">
-        Don't have Venmo? Email us at Rightsidetalks@gmail.com for other ways to support.
+        Don't have Venmo? Email us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f2d1618170b0c161b1a0b1e13140c3f18121e1613511c1012">[email&#160;protected]</a> for other ways to support.
       </p>
     </div>
   </div>
@@ -381,6 +381,7 @@ function closeMenu() {
 <!-- TICKER -->
 <div id="ticker-bar">
   <div class="ticker-label">Markets &amp; News</div>
+  <div class="ticker-divider"></div>
   <div class="ticker-track-wrap">
     <div class="ticker-track" id="ticker-track">
       <span class="ticker-item"><span class="ticker-sym">Loading...</span></span>
@@ -388,7 +389,7 @@ function closeMenu() {
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   var selectedAmount = 10;
 
   function selectAmount(el, amount) {
@@ -424,7 +425,12 @@ function closeMenu() {
       const symbols = [
         {sym:'S&P 500',id:'%5EGSPC'},{sym:'DOW',id:'%5EDJI'},{sym:'NASDAQ',id:'%5EIXIC'},
         {sym:'BTC',id:'BTC-USD'},{sym:'ETH',id:'ETH-USD'},
-        {sym:'AAPL',id:'AAPL'},{sym:'MSFT',id:'MSFT'},{sym:'NVDA',id:'NVDA'}
+        {sym:'AAPL',id:'AAPL'},{sym:'MSFT',id:'MSFT'},{sym:'NVDA',id:'NVDA'},
+        {sym:'AMZN',id:'AMZN'},{sym:'GOOGL',id:'GOOGL'},{sym:'META',id:'META'},
+        {sym:'TSLA',id:'TSLA'},{sym:'JPM',id:'JPM'},{sym:'LLY',id:'LLY'},
+        {sym:'V',id:'V'},{sym:'UNH',id:'UNH'},{sym:'XOM',id:'XOM'},
+        {sym:'MA',id:'MA'},{sym:'JNJ',id:'JNJ'},{sym:'PG',id:'PG'},
+        {sym:'HD',id:'HD'},{sym:'AVGO',id:'AVGO'},{sym:'COST',id:'COST'},{sym:'MRK',id:'MRK'}
       ];
       const results = await Promise.allSettled(symbols.map(async s => {
         const r = await fetch('/api/markets?symbol=' + s.id, {signal: AbortSignal.timeout(6000)});
@@ -438,13 +444,4 @@ function closeMenu() {
         const up = q.change >= 0;
         const price = q.price > 10000 ? q.price.toLocaleString('en-US', {maximumFractionDigits:0}) : q.price.toLocaleString('en-US', {maximumFractionDigits:2, minimumFractionDigits:2});
         return '<span class="ticker-item"><span class="ticker-sym">' + q.sym + '</span>&nbsp;' + price + '&nbsp;<span class="ticker-change ' + (up?'up':'down') + '">' + (up?'&#9650;':'&#9660;') + ' ' + Math.abs(q.pct).toFixed(2) + '%</span></span>';
-      }).join('<span style="display:inline-block;padding:0 16px;color:var(--red);opacity:0.6;">|</span>');
-      const track = document.getElementById('ticker-track');
-      track.innerHTML = html + html;
-    } catch(e) {}
-  }
-  loadTicker();
-  updateVenmoBtn(10);
-</script>
-</body>
-</html>
+      }).join('<span style="display:inline-block;paddin
