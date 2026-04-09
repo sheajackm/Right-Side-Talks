@@ -162,6 +162,7 @@ footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
 .ticker-change.up { color: #2ECC71; }
 .ticker-change.down { color: #FF4D6D; }
 .ticker-sep { display: inline-block; padding: 0 16px; color: var(--red); font-size: 14px; opacity: 0.6; }
+.ticker-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
 
 /* RESPONSIVE */
 @media (max-width: 900px) { .nav-links { display: none; } .hamburger { display: flex; } }
@@ -444,5 +445,5 @@ function closeMenu() {
       const html = valid.map(q => {
         const up = q.change >= 0;
         const price = q.price > 10000 ? q.price.toLocaleString('en-US', {maximumFractionDigits:0}) : q.price.toLocaleString('en-US', {maximumFractionDigits:2, minimumFractionDigits:2});
-        return '<span class="ticker-item"><span class="ticker-sym">' + q.sym + '</span>&nbsp;' + price + '&nbsp;<span class="ticker-change ' + (up?'up':'down') + '">' + (up?'&#9650;':'&#9660;') + ' ' + Math.abs(q.pct).toFixed(2) + '%</span></span>';
-      }).join('<span style="display:inline-block;paddin
+        return `<span class="ticker-item"><span class="ticker-sym">${q.sym}</span>&nbsp;<span>${price}</span>&nbsp;<span class="ticker-change ${up?'up':'down'}">${up?'▲':'▼'} ${Math.abs(q.pct).toFixed(2)}%</span></span>`;
+      }).join('');
