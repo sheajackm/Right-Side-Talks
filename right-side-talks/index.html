@@ -282,6 +282,7 @@ section { padding: 5rem 2rem; }
 .ticker-track { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 320s linear infinite; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .ticker-track:hover { animation-play-state: paused; }
 @keyframes tickerScroll { 0%{transform:translateX(0) translateZ(0)}100%{transform:translateX(-50%) translateZ(0)} }
+@media (max-width: 700px) { .ticker-track { animation-duration: 120s !important; } }
 .ticker-item { display: inline-flex; align-items: center; gap: 8px; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1); font-family: var(--font-cond); font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.03em; }
 .ticker-sym { color: #FFFFFF; font-size: 15px; font-weight: 900; letter-spacing: 0.1em; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
 .ticker-change.up { color: #2ECC71; }
@@ -984,7 +985,7 @@ document.addEventListener('click', function(e) {
   <div class="ticker-divider"></div>
   <div class="ticker-track-wrap">
     <div class="ticker-track" id="ticker-track">
-      <span class="ticker-item"><span class="ticker-sym">LOADING</span>&nbsp;...</span>
+      <span class="ticker-item"><span class="ticker-sym">S&amp;P 500</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">DOW</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">NASDAQ</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">BTC</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">ETH</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">AAPL</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">MSFT</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">NVDA</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">AMZN</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">GOOGL</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">TSLA</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">S&amp;P 500</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">DOW</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">NASDAQ</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">BTC</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">ETH</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">AAPL</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">MSFT</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">NVDA</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">AMZN</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">GOOGL</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span><span class="ticker-item"><span class="ticker-sym">TSLA</span>&nbsp;<span style="color:rgba(255,255,255,0.4)">Loading...</span></span>
     </div>
   </div>
 </div>
@@ -1485,14 +1486,8 @@ function closePrivacy() {
 
   initPoll();
 
-  // Show static fallback ticker immediately so mobile sees something
+  // Load real ticker data
   const tickerTrack = document.getElementById('ticker-track');
-  const fallback = ['S&P 500','DOW','NASDAQ','BTC','ETH','AAPL','MSFT','NVDA','AMZN','GOOGL','TSLA'].map(s =>
-    `<span class="ticker-item"><span class="ticker-sym">${s}</span>&nbsp;<span style="color:rgba(255,255,255,0.4);">Loading...</span></span>`
-  ).join('');
-  tickerTrack.innerHTML = fallback + fallback;
-
-  // Load real data in background
   const [marketItems, newsItems] = await Promise.all([
     buildMarketItems(),
     (async () => {
@@ -1503,6 +1498,9 @@ function closePrivacy() {
   ]);
   const combined = marketItems + '<span class="ticker-sep">★</span>' + newsItems;
   tickerTrack.innerHTML = combined + combined;
+  tickerTrack.style.animation = 'none';
+  tickerTrack.offsetHeight;
+  tickerTrack.style.animation = '';
 
   await Promise.all([
     loadLatestVideos(),
