@@ -146,10 +146,10 @@ footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
 .ticker-label { background: var(--grad-red); color: var(--white); font-family: var(--font-cond); font-size: 14px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0 20px; height: 100%; display: flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
 .ticker-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
 .ticker-track-wrap { flex: 1; overflow: hidden; height: 100%; display: flex; align-items: center; }
-.ticker-track { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 320s linear infinite; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+.ticker-track { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 240s linear infinite; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .ticker-track:hover { animation-play-state: paused; }
 @keyframes tickerScroll { 0%{transform:translateX(0) translateZ(0)}100%{transform:translateX(-50%) translateZ(0)} }
-@media (max-width: 700px) { .ticker-track { animation-duration: 120s !important; } }
+@media (max-width: 700px) { .ticker-track { animation-duration: 160s !important; } }
 .ticker-item { display: inline-flex; align-items: center; gap: 8px; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1); font-family: var(--font-cond); font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.03em; }
 .ticker-sym { color: #FFFFFF; font-size: 15px; font-weight: 900; letter-spacing: 0.1em; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
 .ticker-change.up { color: #2ECC71; }
