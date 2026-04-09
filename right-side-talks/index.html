@@ -658,12 +658,12 @@ document.addEventListener('click', function(e) {
           <p>Everything you need to know, nothing you don't. The Brief delivers sharp, fast-paced conservative takes on the day's top headlines — cutting through mainstream media spin so you can stay informed and stay sharp.</p>
         </div>
       </div>
-      <div class="show-card">
-        <div class="show-card-banner dark"><div class="show-banner-text">Campus Front</div><div class="show-icon">🎓</div></div>
+      <div class="show-card" style="opacity:0.7;">
+        <div class="show-card-banner dark" style="background:linear-gradient(135deg,#2a2a3a 0%,#1a1a2a 100%);"><div class="show-banner-text" style="color:rgba(255,255,255,0.4);">Coming Soon</div><div class="show-icon">🔒</div></div>
         <div class="show-card-body">
-          <span class="show-tag">Campus Culture</span>
-          <h3>Campus Front</h3>
-          <p>The battle for free thought is being fought on college campuses every day. Campus Front goes inside America's universities to expose liberal bias, amplify conservative students, and document the fight for intellectual freedom in higher education.</p>
+          <span class="show-tag" style="background:rgba(0,31,91,0.1);color:var(--text-muted);">New Show</span>
+          <h3 style="color:var(--text-muted);">Coming Soon</h3>
+          <p>A brand new show is in development. Stay tuned to Right Side Talks for the announcement.</p>
         </div>
       </div>
     </div>
@@ -1485,8 +1485,14 @@ function closePrivacy() {
 
   initPoll();
 
-  // Build ticker
+  // Show static fallback ticker immediately so mobile sees something
   const tickerTrack = document.getElementById('ticker-track');
+  const fallback = ['S&P 500','DOW','NASDAQ','BTC','ETH','AAPL','MSFT','NVDA','AMZN','GOOGL','TSLA'].map(s =>
+    `<span class="ticker-item"><span class="ticker-sym">${s}</span>&nbsp;<span style="color:rgba(255,255,255,0.4);">Loading...</span></span>`
+  ).join('');
+  tickerTrack.innerHTML = fallback + fallback;
+
+  // Load real data in background
   const [marketItems, newsItems] = await Promise.all([
     buildMarketItems(),
     (async () => {
