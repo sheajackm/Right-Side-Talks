@@ -3,9 +3,16 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Right Side Talks</title>
-<meta name="description" content="Read the latest opinion and commentary from Right Side Talks." />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
+<title id="page-title">Loading Article... — Right Side Talks</title>
+<meta name="description" id="page-desc" content="Read the latest conservative opinion and commentary from Right Side Talks." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Right Side Talks" />
+<meta property="og:title" id="og-title" content="Right Side Talks" />
+<meta property="og:description" id="og-desc" content="Read the latest conservative opinion and commentary from Right Side Talks." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@rightsidetalks" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzAwMUY1QiIvPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIzMiIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0iI0Q5MUUzQyIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyNCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5SPC90ZXh0Pgo8L3N2Zz4=" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CVRNNMZY53"></script>
 <script>
@@ -18,10 +25,16 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --red: #D91E3C; --red-dark: #A8152D; --red-light: #FDF0F2;
-  --blue: #001F5B; --blue-mid: #0A3080; --blue-light: #E6ECF9;
-  --white: #FFFFFF; --off-white: #F4F6FB; --gold: #D4A843;
-  --text-dark: #080F20; --text-muted: #4A5570; --border: rgba(0,31,91,0.1);
+  --red: #D91E3C;
+  --red-dark: #A8152D;
+  --blue: #001F5B;
+  --blue-mid: #0A3080;
+  --white: #FFFFFF;
+  --off-white: #F4F6FB;
+  --gold: #D4A843;
+  --text-dark: #080F20;
+  --text-muted: #4A5570;
+  --border: rgba(0,31,91,0.1);
   --font-display: 'Playfair Display', Georgia, serif;
   --font-cond: 'Barlow Condensed', sans-serif;
   --font-body: 'Barlow', sans-serif;
@@ -30,85 +43,366 @@
   --grad-dark: linear-gradient(160deg, #0D1B40 0%, #060E26 100%);
   --shadow-sm: 0 2px 12px rgba(0,20,80,0.08);
   --shadow-md: 0 8px 32px rgba(0,20,80,0.13);
+  --shadow-lg: 0 20px 60px rgba(0,20,80,0.2);
   --shadow-red: 0 8px 28px rgba(217,30,60,0.32);
   --shadow-blue: 0 8px 28px rgba(0,31,91,0.28);
 }
 
 html { scroll-behavior: smooth; }
-body { font-family: var(--font-body); color: var(--text-dark); background: var(--off-white); line-height: 1.6;  -webkit-font-smoothing: antialiased; }
+body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 52px;
+}
 
 /* NAV */
-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg, #001040 0%, #001F5B 60%, #0A2870 100%); border-bottom: 2px solid var(--red); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 68px; box-shadow: 0 4px 28px rgba(0,8,40,0.55); }
-.nav-logo { font-family: var(--font-cond); font-size: 23px; font-weight: 800; color: var(--white); letter-spacing: 0.05em; text-decoration: none; text-transform: uppercase; }
-.nav-logo span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
-.nav-links a { font-family: var(--font-cond); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; position: relative; }
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: linear-gradient(90deg, #001040 0%, #001F5B 60%, #0A2870 100%);
+  border-bottom: 2px solid var(--red);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 68px;
+  box-shadow: 0 4px 28px rgba(0,8,40,0.55);
+}
+.nav-logo {
+  font-family: var(--font-cond); font-size: 23px; font-weight: 800;
+  color: var(--white); letter-spacing: 0.05em; text-decoration: none;
+  text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+.nav-logo span {
+  background: var(--grad-red); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+}
+.nav-links { display: flex; gap: 1.6rem; list-style: none; align-items: center; }
+.nav-links a {
+  font-family: var(--font-cond); font-size: 14px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7);
+  text-decoration: none; transition: color 0.2s; position: relative;
+}
 .nav-links a:hover { color: var(--white); }
-.nav-cta { background: var(--grad-red) !important; color: var(--white) !important; padding: 9px 22px !important; border-radius: 4px !important; }
-.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 6px; }
-.hamburger span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 2px; background: var(--grad-red); transform: scaleX(0);
+  transition: transform 0.2s; border-radius: 2px;
+}
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  background: var(--grad-red) !important; color: var(--white) !important;
+  padding: 9px 22px !important; border-radius: 4px !important;
+  box-shadow: var(--shadow-red) !important;
+}
+.nav-cta::after { display: none !important; }
+.hamburger {
+  display: none; flex-direction: column; justify-content: center;
+  gap: 5px; width: 40px; height: 40px; cursor: pointer;
+  background: none; border: none; padding: 6px; border-radius: 4px;
+}
+.hamburger span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-.mobile-menu { position: fixed; top: 68px; left: 0; right: 0; background: linear-gradient(160deg, #001040 0%, #001F5B 100%); z-index: 190; padding: 1.5rem 2rem 2rem; box-shadow: 0 20px 48px rgba(0,8,40,0.65); border-bottom: 2px solid rgba(217,30,60,0.5); pointer-events: none; opacity: 0; transform: translateY(-12px); transition: opacity 0.3s ease, transform 0.3s ease; }
+.mobile-menu {
+  position: fixed; top: 68px; left: 0; right: 0;
+  background: linear-gradient(160deg, #001040 0%, #001F5B 100%);
+  z-index: 190; padding: 1.5rem 2rem 2rem;
+  box-shadow: 0 20px 48px rgba(0,8,40,0.65);
+  border-bottom: 2px solid rgba(217,30,60,0.5);
+  pointer-events: none; opacity: 0; transform: translateY(-12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
 .mobile-menu.open { pointer-events: all; opacity: 1; transform: translateY(0); }
 .mobile-menu ul { list-style: none; }
 .mobile-menu ul li { border-bottom: 1px solid rgba(255,255,255,0.07); }
-.mobile-menu ul li a { display: block; font-family: var(--font-cond); font-size: 19px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 0; }
-.mobile-menu-cta { display: block; margin-top: 1.5rem; background: var(--grad-red); color: var(--white) !important; font-family: var(--font-cond); font-size: 16px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; padding: 14px; border-radius: 6px; text-decoration: none; }
+.mobile-menu ul li a {
+  display: block; font-family: var(--font-cond); font-size: 19px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8);
+  text-decoration: none; padding: 1rem 0; transition: color 0.2s, padding-left 0.2s;
+}
+.mobile-menu ul li a:hover { color: var(--white); padding-left: 8px; }
+.mobile-menu-cta {
+  display: block; margin-top: 1.5rem; background: var(--grad-red);
+  color: var(--white) !important; font-family: var(--font-cond);
+  font-size: 16px; font-weight: 800; letter-spacing: 0.12em;
+  text-transform: uppercase; text-align: center; padding: 14px;
+  border-radius: 6px; text-decoration: none; box-shadow: var(--shadow-red);
+}
 
 /* ARTICLE HERO */
-.article-hero { background: var(--grad-dark); padding: 110px 2rem 4rem; position: relative; overflow: hidden; margin-top: 68px; }
-.article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(10,48,128,0.5) 0%, transparent 70%); }
-.hero-stars { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none; }
-.hero-stripe { position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--red) 0%, #FF4D6D 50%, var(--red) 100%); }
-.article-hero-inner { max-width: 800px; margin: 0 auto; position: relative; }
-.article-cat { font-family: var(--font-cond); font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; background: var(--grad-red); color: white; padding: 4px 14px; border-radius: 3px; display: inline-block; margin-bottom: 1.25rem; box-shadow: var(--shadow-red); }
-.article-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 58px); font-weight: 900; color: var(--white); line-height: 1.1; margin-bottom: 1.5rem; }
-.article-meta { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-.article-author { font-family: var(--font-cond); font-size: 15px; font-weight: 700; letter-spacing: 0.05em; color: var(--gold); }
-.article-meta-sep { color: rgba(255,255,255,0.3); }
-.article-date { font-family: var(--font-cond); font-size: 14px; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
-.article-read-time { font-family: var(--font-cond); font-size: 14px; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
+.article-hero {
+  background: var(--grad-dark);
+  padding: 120px 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.article-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(10,48,128,0.55) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 40% at 80% 80%, rgba(217,30,60,0.1) 0%, transparent 60%);
+}
+.hero-stars {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+.hero-stripe { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--red) 0%, #FF4D6D 50%, var(--red) 100%); box-shadow: 0 2px 18px rgba(217,30,60,0.65); }
+
+.article-hero-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.article-breadcrumb {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-cond); font-size: 12px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.4); margin-bottom: 1.5rem;
+}
+.article-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+.article-breadcrumb a:hover { color: var(--gold); }
+.article-breadcrumb span { color: rgba(255,255,255,0.2); }
+
+.article-cat-badge {
+  display: inline-block;
+  font-family: var(--font-cond); font-size: 11px; font-weight: 800;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  background: var(--grad-red); color: white;
+  padding: 5px 14px; border-radius: 3px;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow-red);
+}
+
+.article-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 5vw, 56px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+.article-meta-row {
+  display: flex; align-items: center; gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.article-author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 2px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 18px; font-weight: 700;
+  color: var(--white); flex-shrink: 0; overflow: hidden;
+}
+.article-author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.article-meta-text { display: flex; flex-direction: column; gap: 2px; }
+.article-author-name {
+  font-family: var(--font-cond); font-size: 15px; font-weight: 800;
+  letter-spacing: 0.06em; color: var(--white);
+}
+.article-meta-sub {
+  font-family: var(--font-cond); font-size: 12px;
+  color: rgba(255,255,255,0.45); letter-spacing: 0.05em;
+}
 
 /* ARTICLE BODY */
-.article-wrap { max-width: 800px; margin: 0 auto; padding: 4rem 2rem 6rem; }
-.article-excerpt { font-size: 20px; color: var(--text-muted); line-height: 1.7; margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); font-style: italic; }
-.article-body { font-size: 18px; color: var(--text-dark); line-height: 1.85; }
-.article-body p { margin-bottom: 1.5rem; }
+.article-body-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 5rem;
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 4rem;
+  align-items: start;
+}
+@media (max-width: 820px) {
+  .article-body-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+  .article-sidebar { order: -1; }
+}
 
-/* SHARE BAR */
-.share-bar { display: flex; align-items: center; gap: 1rem; padding: 1.5rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 3rem; flex-wrap: wrap; }
-.share-label { font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
-.share-btn { font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 18px; border-radius: 4px; text-decoration: none; transition: all 0.2s; border: 1.5px solid; cursor: pointer; }
-.share-btn.x { color: var(--text-dark); border-color: rgba(0,31,91,0.15); background: var(--white); }
-.share-btn.x:hover { background: var(--text-dark); color: var(--white); }
-.share-btn.fb { color: #1877F2; border-color: #1877F2; background: var(--white); }
-.share-btn.fb:hover { background: #1877F2; color: var(--white); }
-.share-btn.copy { color: var(--blue-mid); border-color: var(--blue-mid); background: var(--white); }
-.share-btn.copy:hover { background: var(--blue-mid); color: var(--white); }
+.article-content {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.85;
+  color: var(--text-dark);
+}
+.article-content p { margin-bottom: 1.4rem; }
+.article-content p:first-child::first-letter {
+  font-family: var(--font-display);
+  font-size: 4em; font-weight: 900;
+  float: left; line-height: 0.8;
+  margin-right: 0.08em; margin-top: 0.1em;
+  color: var(--blue-mid);
+}
+.article-content h2 {
+  font-family: var(--font-display); font-size: 26px; font-weight: 700;
+  color: var(--text-dark); margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(0,31,91,0.08);
+}
+.article-content h3 {
+  font-family: var(--font-display); font-size: 20px; font-weight: 700;
+  color: var(--text-dark); margin: 2rem 0 0.75rem;
+}
+.article-content blockquote {
+  border-left: 4px solid var(--red);
+  padding: 1rem 1.5rem;
+  margin: 2rem 0;
+  background: linear-gradient(135deg, #fff0f2 0%, #fff 100%);
+  border-radius: 0 8px 8px 0;
+  font-family: var(--font-display); font-size: 20px; font-style: italic;
+  color: var(--blue-mid);
+}
+.article-content strong { font-weight: 600; color: var(--text-dark); }
 
-/* BACK LINK */
-.back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-cond); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; margin-bottom: 2rem; transition: color 0.2s; }
-.back-link:hover { color: var(--red); }
+/* LOADING STATE */
+.article-skeleton { animation: skeletonPulse 1.5s ease-in-out infinite; }
+@keyframes skeletonPulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+.skel-block {
+  background: linear-gradient(90deg, #e8ecf5 25%, #d4dbee 50%, #e8ecf5 75%);
+  background-size: 400% 100%;
+  border-radius: 6px;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+}
+@keyframes skeletonShimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
 
-/* LOADING / ERROR */
-.article-loading { text-align: center; padding: 6rem 2rem; color: var(--text-muted); font-family: var(--font-cond); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; }
+/* ERROR STATE */
+.article-error {
+  text-align: center;
+  padding: 5rem 2rem;
+  max-width: 540px;
+  margin: 0 auto;
+}
+.article-error h2 {
+  font-family: var(--font-display); font-size: 32px; font-weight: 700;
+  color: var(--text-dark); margin-bottom: 1rem;
+}
+.article-error p { color: var(--text-muted); font-size: 17px; line-height: 1.7; margin-bottom: 2rem; }
 
-/* FOOTER */
-footer { background: linear-gradient(135deg, #040A18 0%, #070F22 100%); padding: 2.5rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); }
-.footer-logo { font-family: var(--font-cond); font-size: 21px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); margin-bottom: 0.5rem; }
-.footer-logo span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
+/* SIDEBAR */
+.article-sidebar {}
+.sidebar-card {
+  background: linear-gradient(160deg, #fff 0%, #f4f6fb 100%);
+  border: 1px solid rgba(0,31,91,0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+}
+.sidebar-card-title {
+  font-family: var(--font-cond); font-size: 11px; font-weight: 800;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  background: var(--grad-red); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+  margin-bottom: 1rem; display: block;
+}
 
+/* Author card */
+.author-card-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, #E6ECF9, #C8D5F5);
+  border: 3px solid rgba(10,48,128,0.15);
+  margin: 0 auto 1rem;
+  overflow: hidden; display: block;
+}
+.author-card-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.author-card-name {
+  font-family: var(--font-display); font-size: 17px; font-weight: 700;
+  color: var(--text-dark); text-align: center; margin-bottom: 3px;
+}
+.author-card-role {
+  font-family: var(--font-cond); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--grad-red); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; background-clip: text;
+  display: block; text-align: center; margin-bottom: 0.75rem;
+}
+.author-card-bio {
+  font-size: 13px; color: var(--text-muted); line-height: 1.6; text-align: center;
+}
 
-.ticker-item { display: inline-flex; align-items: center; gap: 8px; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1); font-family: var(--font-cond); font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.03em; }
-.ticker-sym { color: #FFFFFF; font-size: 15px; font-weight: 900; letter-spacing: 0.1em; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+/* Share card */
+.share-buttons { display: flex; flex-direction: column; gap: 0.6rem; }
+.share-btn {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 6px;
+  font-family: var(--font-cond); font-size: 13px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer; border: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.share-btn:hover { transform: translateY(-1px); }
+.share-btn-x { background: #000; color: #fff; }
+.share-btn-fb { background: #1877F2; color: #fff; }
+.share-btn-copy { background: var(--grad-blue); color: #fff; }
+.share-btn-copy.copied { background: linear-gradient(135deg,#2ECC71,#27ae60); }
+
+/* Back to articles */
+.back-bar {
+  background: linear-gradient(160deg, #F4F6FB 0%, #EBF0FF 100%);
+  padding: 2.5rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.back-bar-inner { max-width: 860px; margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.back-link {
+  font-family: var(--font-cond); font-size: 14px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--grad-blue); color: var(--white);
+  padding: 11px 22px; border-radius: 5px;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: var(--shadow-blue); transition: box-shadow 0.2s, transform 0.15s;
+}
+.back-link:hover { box-shadow: 0 12px 36px rgba(0,31,91,0.35); transform: translateY(-1px); }
+
+/* TICKER BAR */
+#ticker-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  background: linear-gradient(90deg, #050D20 0%, #0A1535 100%);
+  border-top: 2px solid var(--red); height: 52px;
+  display: flex; align-items: center; overflow: hidden;
+  box-shadow: 0 -4px 24px rgba(0,5,20,0.55);
+}
+.ticker-label {
+  background: var(--grad-red); color: var(--white);
+  font-family: var(--font-cond); font-size: 14px; font-weight: 800;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0 20px; height: 100%;
+  display: flex; align-items: center; white-space: nowrap; flex-shrink: 0;
+}
+.ticker-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+.ticker-track-wrap { flex: 1; overflow: hidden; height: 100%; display: flex; align-items: center; }
+.ticker-track {
+  display: flex; align-items: center; white-space: nowrap;
+  animation: tickerScroll 200s linear infinite;
+}
+@keyframes tickerScroll { 0%{transform:translateX(0)}100%{transform:translateX(-50%)} }
+.ticker-item {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1);
+  font-family: var(--font-cond); font-size: 15px; font-weight: 700; color: #fff;
+}
+.ticker-sym { font-weight: 900; letter-spacing: 0.08em; }
 .ticker-change.up { color: #2ECC71; }
 .ticker-change.down { color: #FF4D6D; }
-.ticker-sep { display: inline-block; padding: 0 16px; color: var(--red); font-size: 14px; opacity: 0.6; }
 
+/* FOOTER */
+footer {
+  background: linear-gradient(135deg, #040A18 0%, #070F22 100%);
+  padding: 2.5rem 2rem; text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.footer-logo { font-family: var(--font-cond); font-size: 21px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); margin-bottom: 0.5rem; }
+.footer-logo span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+footer p { font-size: 13px; color: rgba(255,255,255,0.25); margin-top: 0.25rem; }
+
+/* RESPONSIVE */
 @media (max-width: 900px) { .nav-links { display: none; } .hamburger { display: flex; } }
+@media (max-width: 600px) { .article-hero { padding: 100px 1.25rem 3rem; } .article-body-wrap { padding: 2rem 1.25rem 4rem; } }
 </style>
 </head>
 <body>
@@ -128,6 +422,11 @@ function closeMenu() {
   btn.classList.remove('open');
   menu.classList.remove('open');
 }
+document.addEventListener('click', function(e) {
+  var menu = document.getElementById('mobile-menu');
+  var btn = document.getElementById('hamburger');
+  if (menu && btn && menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) closeMenu();
+});
 </script>
 
 <!-- NAV -->
@@ -162,139 +461,349 @@ function closeMenu() {
   <a href="support.html" class="mobile-menu-cta">Support Us</a>
 </div>
 
-<!-- HERO (populated by JS) -->
-<div class="article-hero" id="article-hero" style="display:none;">
-  <div class="hero-stars"></div>
-  <div class="article-hero-inner">
-    <span class="article-cat" id="article-cat">Opinion</span>
-    <h1 class="article-title" id="article-title"></h1>
-    <div class="article-meta">
-      <span class="article-author" id="article-author"></span>
-      <span class="article-meta-sep">•</span>
-      <span class="article-read-time" id="article-read-time"></span>
-      <span class="article-meta-sep">•</span>
-      <span class="article-date" id="article-date"></span>
+<!-- ARTICLE HERO (populated by JS) -->
+<div id="article-hero-section">
+  <!-- Loading state -->
+  <div class="article-hero" id="article-hero">
+    <div class="hero-stars"></div>
+    <div class="hero-stripe"></div>
+    <div class="article-hero-inner">
+      <div class="article-breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <a href="takes.html">Right Side Takes</a>
+        <span>›</span>
+        <span id="breadcrumb-cat">Article</span>
+      </div>
+      <div id="hero-loading">
+        <div class="skel-block" style="width:100px;height:22px;margin-bottom:1.25rem;"></div>
+        <div class="skel-block" style="width:85%;height:56px;margin-bottom:0.75rem;"></div>
+        <div class="skel-block" style="width:60%;height:56px;margin-bottom:1.5rem;"></div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="skel-block" style="width:44px;height:44px;border-radius:50%;flex-shrink:0;"></div>
+          <div>
+            <div class="skel-block" style="width:140px;height:15px;margin-bottom:5px;"></div>
+            <div class="skel-block" style="width:200px;height:12px;"></div>
+          </div>
+        </div>
+      </div>
+      <div id="hero-content" style="display:none;">
+        <span class="article-cat-badge" id="article-cat">Opinion</span>
+        <h1 class="article-title" id="article-title"></h1>
+        <div class="article-meta-row">
+          <div class="article-author-avatar" id="author-avatar-hero">
+            <span id="author-initials-hero"></span>
+          </div>
+          <div class="article-meta-text">
+            <div class="article-author-name" id="article-author"></div>
+            <div class="article-meta-sub" id="article-meta-sub"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="hero-stripe"></div>
 </div>
 
-<!-- LOADING -->
-<div class="article-loading" id="article-loading" style="margin-top:68px;">Loading article&hellip;</div>
+<!-- ARTICLE BODY -->
+<div id="article-body-section">
+  <div class="article-body-wrap">
+    <!-- Main content -->
+    <main>
+      <div id="content-loading">
+        <div class="skel-block" style="width:100%;height:22px;margin-bottom:1rem;"></div>
+        <div class="skel-block" style="width:90%;height:22px;margin-bottom:1rem;"></div>
+        <div class="skel-block" style="width:95%;height:22px;margin-bottom:1rem;"></div>
+        <div class="skel-block" style="width:85%;height:22px;margin-bottom:2.5rem;"></div>
+        <div class="skel-block" style="width:100%;height:22px;margin-bottom:1rem;"></div>
+        <div class="skel-block" style="width:92%;height:22px;margin-bottom:1rem;"></div>
+        <div class="skel-block" style="width:88%;height:22px;margin-bottom:1rem;"></div>
+        <div class="skel-block" style="width:95%;height:22px;margin-bottom:2.5rem;"></div>
+        <div class="skel-block" style="width:100%;height:22px;margin-bottom:1rem;"></div>
+        <div class="skel-block" style="width:78%;height:22px;margin-bottom:1rem;"></div>
+      </div>
+      <article class="article-content" id="article-content" style="display:none;"></article>
+      <div id="article-error" style="display:none;" class="article-error">
+        <h2>Article Not Found</h2>
+        <p>This article could not be loaded. It may have been removed or the link may be incorrect.</p>
+        <a href="takes.html" class="back-link">← Back to All Articles</a>
+      </div>
+    </main>
 
-<!-- BODY -->
-<div class="article-wrap" id="article-wrap" style="display:none;">
-  <a class="back-link" href="takes.html">← Back to Right Side Takes</a>
-  <div class="article-excerpt" id="article-excerpt"></div>
-  <div class="article-body" id="article-body"></div>
-  <div class="share-bar">
-    <span class="share-label">Share this article:</span>
-    <a class="share-btn x" id="share-x" href="#" target="_blank" rel="noopener">Share on X</a>
-    <a class="share-btn fb" id="share-fb" href="#" target="_blank" rel="noopener">Share on Facebook</a>
-    <button class="share-btn copy" onclick="copyLink()">Copy Link</button>
+    <!-- Sidebar -->
+    <aside class="article-sidebar" id="article-sidebar" style="display:none;">
+      <!-- Author card -->
+      <div class="sidebar-card" id="author-sidebar-card">
+        <span class="sidebar-card-title">About the Author</span>
+        <div class="author-card-avatar" id="author-avatar-sidebar">
+          <span id="author-initials-sidebar" style="font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--blue-mid);"></span>
+        </div>
+        <div class="author-card-name" id="sidebar-author-name"></div>
+        <span class="author-card-role" id="sidebar-author-role"></span>
+        <p class="author-card-bio" id="sidebar-author-bio"></p>
+      </div>
+
+      <!-- Share card -->
+      <div class="sidebar-card">
+        <span class="sidebar-card-title">Share This Article</span>
+        <div class="share-buttons">
+          <a id="share-x" href="#" target="_blank" rel="noopener" class="share-btn share-btn-x">
+            <span style="font-size:15px;font-weight:900;">𝕏</span> Share on X
+          </a>
+          <a id="share-fb" href="#" target="_blank" rel="noopener" class="share-btn share-btn-fb">
+            <span style="font-size:15px;">👤</span> Share on Facebook
+          </a>
+          <button id="share-copy" class="share-btn share-btn-copy" onclick="copyLink()">
+            <span>🔗</span> Copy Link
+          </button>
+        </div>
+      </div>
+
+      <!-- Back to takes -->
+      <div class="sidebar-card" style="background:var(--grad-blue);border:none;">
+        <span class="sidebar-card-title" style="color:var(--gold);-webkit-text-fill-color:var(--gold);background:none;">Right Side Takes</span>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:1rem;">Bold opinion and commentary from our team of young conservative columnists.</p>
+        <a href="takes.html" style="display:block;background:var(--grad-red);color:white;text-align:center;padding:10px;border-radius:5px;font-family:var(--font-cond);font-size:13px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;">View All Articles →</a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- BACK BAR -->
+<div class="back-bar">
+  <div class="back-bar-inner">
+    <a href="takes.html" class="back-link">← All Articles</a>
+    <a href="index.html" style="font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;">rightsidetalksmedia.com →</a>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Right <span>Side</span> Talks</div>
-  <p style="font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;opacity:0.8;">On the Right Side of History</p>
+  <p style="font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;opacity:0.8;">On the Right Side of History</p>
   <p>Right Side Talks LLC &mdash; A National Youth Conservative Media Organization</p>
-  <p style="margin-top:1rem;">&copy; 2026 Right Side Talks LLC. All rights reserved.</p>
+  <p style="margin-top:0.75rem;">&copy; 2026 Right Side Talks LLC. All rights reserved.</p>
 </footer>
 
-
+<!-- TICKER -->
+<div id="ticker-bar">
+  <div class="ticker-label">RST</div>
+  <div class="ticker-divider"></div>
+  <div class="ticker-track-wrap">
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-item"><span class="ticker-sym">RIGHT SIDE TALKS</span>&nbsp;<span style="color:rgba(255,255,255,0.5)">National Youth Conservative Media</span></span>
+      <span class="ticker-item"><span class="ticker-sym">AMERICA FIRST</span>&nbsp;<span style="color:rgba(255,255,255,0.5)">Bold. Unapologetic. Conservative.</span></span>
+      <span class="ticker-item"><span class="ticker-sym">RIGHT SIDE TALKS</span>&nbsp;<span style="color:rgba(255,255,255,0.5)">National Youth Conservative Media</span></span>
+      <span class="ticker-item"><span class="ticker-sym">AMERICA FIRST</span>&nbsp;<span style="color:rgba(255,255,255,0.5)">Bold. Unapologetic. Conservative.</span></span>
+    </div>
+  </div>
+</div>
 
 <script>
-function fmtDate(dateStr) {
-  if (!dateStr) return '';
-  return new Date(dateStr).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+// TEAM data for author bios in sidebar
+const TEAM = {
+  'Jack Shea': { role: 'Owner & Founder', img: 'images/jack.jpg', bio: 'Jack is a natural-born leader and entrepreneur from Jamestown, NY. A Business Management major at St. Bonaventure University, he serves as President of the SBU College Republicans chapter and Executive Director of the New York State College Republicans, bringing bold conservative leadership to the next generation.' },
+  'Nick Cribbet': { role: 'Vice President of Operations', img: 'images/nick.jpg', bio: 'Nick is a St. Bonaventure University student with strong aspirations of becoming an aerospace engineer. Relatively new to the political space, Nick brings fresh energy and a commitment to building connections across the aisle, focused on moving this nation away from corruption and toward a better future for all Americans.' },
+  'Cecelia Brown': { role: 'Creative Director & Executive Producer', img: 'images/cecelia.jpg', bio: 'Cecelia is an undergraduate student at St. Bonaventure University from Upstate New York, on track to graduate in May 2027 with a degree in Psychology and a minor in Political Science. Always deeply engaged in the political space, Cecelia is driven by one core belief: doing what is in the best interest of American citizens.' },
+  'Caleb Grubb': { role: 'Director of Talent Acquisition', img: 'images/caleb.jpg', bio: 'Caleb is a young Christian conservative from Upstate New York with a passion for bringing restoration to the American political system. A grassroots activist, he serves as President of the TPUSA Broome Tioga Activism Hub and hosts the Caleb Grubb Show.' },
+  'Ryan McCombs': { role: 'Columnist', img: 'images/ryan.jpg', bio: 'Ryan is the Vice President and Former Secretary of the St. Bonaventure College Republicans. A junior Political Science major with an English minor, Ryan is an aspiring public defender and vocal member of the Conservative Movement. His work at Right Side Talks focuses on advocating for criminal justice reform and a strong national defense.' },
+  'Gavin Krauciunas': { role: 'Columnist', img: 'images/gavin.jpg', bio: 'Gavin is from Upstate New York, right outside the Adirondack Park. He graduated from the University at Buffalo in December 2025 with a degree in Criminology and Law, and has strong aspirations of attending law school and becoming an attorney. A lifelong active member of the Republican Party, Gavin has worked closely with a number of public officials and looks forward to contributing to policy and public service efforts in the future.' },
+  'John DePerno': { role: 'Columnist', img: 'images/john.jpg', bio: 'John is from Utica, New York and attends Siena College, where he majors in Political Science and minors in History. A lifelong Republican, he has worked with all three levels of government, state, local, and federal, and plans to attend law school after graduation. He looks forward to continuing his involvement in the party and contributing to the conservative movement.' },
+  'Austin DeLorme': { role: 'Columnist', img: 'images/austin.jpg', bio: 'Austin is a Political Science major and Journalism minor at the University of Rochester. He has served as an opinion columnist for the university\'s Campus Times, covering political polarization, international affairs, and community politics. Austin has also made appearances on Rochester news radio discussing youth political engagement within the Republican Party.' },
+};
+
+function initials(name) {
+  return (name || 'RST').split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+}
+
+function fmtDate(str) {
+  if (!str) return '';
+  const d = new Date(str);
+  return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
 function readTime(body) {
   if (!body) return '3 min read';
-  return Math.max(1, Math.round(body.trim().split(' ').length / 200)) + ' min read';
+  return Math.max(1, Math.round(body.trim().split(/\s+/).length / 200)) + ' min read';
 }
 
-function copyLink() {
-  navigator.clipboard.writeText(window.location.href).then(function() {
-    alert('Link copied!');
+function getSlugFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('slug') || params.get('id');
+}
+
+function setShareLinks(title, url) {
+  const encoded = encodeURIComponent(url);
+  const encodedTitle = encodeURIComponent(title + ' — Right Side Talks');
+  document.getElementById('share-x').href = `https://x.com/intent/tweet?text=${encodedTitle}&url=${encoded}&via=rightsidetalks`;
+  document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${encoded}`;
+}
+
+window.copyLink = function() {
+  const url = window.location.href;
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('share-copy');
+    btn.classList.add('copied');
+    btn.innerHTML = '<span>✅</span> Copied!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = '<span>🔗</span> Copy Link';
+    }, 2500);
+  }).catch(() => {
+    // fallback
+    const inp = document.createElement('input');
+    inp.value = url;
+    document.body.appendChild(inp);
+    inp.select();
+    document.execCommand('copy');
+    document.body.removeChild(inp);
   });
+};
+
+function renderAuthorSidebar(authorName) {
+  const member = TEAM[authorName];
+  const initEl = document.getElementById('author-initials-sidebar');
+  const avatarEl = document.getElementById('author-avatar-sidebar');
+
+  document.getElementById('sidebar-author-name').textContent = authorName || 'RST Staff';
+
+  if (member) {
+    document.getElementById('sidebar-author-role').textContent = member.role;
+    document.getElementById('sidebar-author-bio').textContent = member.bio;
+    if (member.img) {
+      const img = document.createElement('img');
+      img.src = member.img;
+      img.alt = authorName;
+      img.onerror = function() { this.style.display = 'none'; initEl.style.display = 'flex'; };
+      avatarEl.innerHTML = '';
+      avatarEl.appendChild(img);
+    } else {
+      initEl.textContent = initials(authorName);
+    }
+  } else {
+    document.getElementById('sidebar-author-role').textContent = 'Columnist';
+    document.getElementById('sidebar-author-bio').textContent = 'Contributing writer for Right Side Talks, providing bold conservative commentary from the next generation of American voices.';
+    initEl.textContent = initials(authorName);
+  }
+}
+
+function renderHeroAuthor(authorName) {
+  const member = TEAM[authorName];
+  const avatarEl = document.getElementById('author-avatar-hero');
+  const initialsEl = document.getElementById('author-initials-hero');
+
+  if (member && member.img) {
+    const img = document.createElement('img');
+    img.src = member.img;
+    img.alt = authorName;
+    img.onerror = function() { this.style.display = 'none'; initialsEl.style.display = 'block'; initialsEl.textContent = initials(authorName); };
+    avatarEl.innerHTML = '';
+    avatarEl.appendChild(img);
+  } else {
+    initialsEl.textContent = initials(authorName);
+    initialsEl.style.fontFamily = 'var(--font-display)';
+    initialsEl.style.fontSize = '18px';
+    initialsEl.style.fontWeight = '700';
+    initialsEl.style.color = 'white';
+  }
+}
+
+function renderArticle(article) {
+  // Update page metadata
+  document.title = article.title + ' — Right Side Talks';
+  document.getElementById('page-title').textContent = article.title + ' — Right Side Talks';
+  document.getElementById('page-desc').content = article.excerpt || article.title;
+  document.getElementById('og-title').content = article.title;
+  document.getElementById('og-desc').content = article.excerpt || article.title;
+
+  // Breadcrumb category
+  const cat = article.category || 'Opinion';
+  document.getElementById('breadcrumb-cat').textContent = cat;
+
+  // Hero
+  document.getElementById('article-cat').textContent = cat;
+  document.getElementById('article-title').textContent = article.title;
+  document.getElementById('article-author').textContent = article.author || 'RST Contributor';
+  document.getElementById('article-meta-sub').textContent =
+    (article.authorRole || 'Columnist') + '  ·  ' + fmtDate(article.publishedAt) + '  ·  ' + readTime(article.body);
+
+  renderHeroAuthor(article.author);
+
+  // Hide loading, show content in hero
+  document.getElementById('hero-loading').style.display = 'none';
+  document.getElementById('hero-content').style.display = 'block';
+
+  // Article body
+  const bodyText = article.body || 'Full article coming soon.';
+  const paragraphs = bodyText.split('\n').filter(p => p.trim());
+  const bodyHTML = paragraphs.map((p, i) => {
+    // Detect headings (lines that are short and end without period, or start with ##)
+    if (p.startsWith('## ')) return '<h2>' + p.slice(3) + '</h2>';
+    if (p.startsWith('### ')) return '<h3>' + p.slice(4) + '</h3>';
+    if (p.startsWith('> ')) return '<blockquote>' + p.slice(2) + '</blockquote>';
+    return '<p>' + p + '</p>';
+  }).join('');
+
+  document.getElementById('content-loading').style.display = 'none';
+  const articleEl = document.getElementById('article-content');
+  articleEl.innerHTML = bodyHTML;
+  articleEl.style.display = 'block';
+
+  // Sidebar
+  renderAuthorSidebar(article.author);
+  document.getElementById('article-sidebar').style.display = 'block';
+
+  // Share links
+  setShareLinks(article.title, window.location.href);
 }
 
 async function loadArticle() {
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug');
+  const slug = getSlugFromUrl();
 
   if (!slug) {
-    document.getElementById('article-loading').textContent = 'Article not found.';
+    document.getElementById('hero-loading').style.display = 'none';
+    document.getElementById('content-loading').style.display = 'none';
+    document.getElementById('article-error').style.display = 'block';
     return;
   }
 
   try {
-    // Try slug lookup first
-    var isId = slug.length > 20 && !slug.includes('-');
-    var endpoint = isId
-      ? '/api/articles?id=' + encodeURIComponent(slug)
-      : '/api/articles?slug=' + encodeURIComponent(slug);
-    
-    var r = await fetch(endpoint);
-    if (!r.ok) throw new Error();
-    var data = await r.json();
-    var a = data.item;
+    // Try /api/article?slug=... first (single article endpoint)
+    const r = await fetch('/api/article?slug=' + encodeURIComponent(slug), {
+      signal: AbortSignal.timeout(10000)
+    });
 
-    // If not found by slug, try by id as fallback
-    if (!a && !isId) {
-      var r2 = await fetch('/api/articles?id=' + encodeURIComponent(slug));
-      if (r2.ok) {
-        var data2 = await r2.json();
-        a = data2.item;
+    if (r.ok) {
+      const data = await r.json();
+      const article = data.item || data;
+      if (article && article.title) {
+        renderArticle(article);
+        return;
       }
     }
 
-    if (!a) {
-      document.getElementById('article-loading').textContent = 'Article not found.';
-      return;
+    // Fallback: fetch all articles and find matching slug
+    const r2 = await fetch('/api/articles', { signal: AbortSignal.timeout(10000) });
+    if (r2.ok) {
+      const data2 = await r2.json();
+      const items = data2.items || [];
+      // Match by slug, id, or title-based slug
+      const match = items.find(a => {
+        const aSlug = a.slug || a._id || a.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+        return aSlug === slug || a._id === slug;
+      });
+      if (match) {
+        renderArticle(match);
+        return;
+      }
     }
 
-    // Update page title and meta
-    document.title = a.title + ' | Right Side Talks';
-
-    // Populate hero
-    document.getElementById('article-cat').textContent = a.category || 'Opinion';
-    document.getElementById('article-title').textContent = a.title;
-    document.getElementById('article-author').textContent = a.author || 'RST Contributor';
-    document.getElementById('article-read-time').textContent = readTime(a.body);
-    document.getElementById('article-date').textContent = fmtDate(a.publishedAt);
-
-    // Populate body
-    if (a.excerpt) {
-      document.getElementById('article-excerpt').textContent = a.excerpt;
-    } else {
-      document.getElementById('article-excerpt').style.display = 'none';
-    }
-
-    var bodyHTML = (a.body || '').split('\n').filter(function(p) { return p.trim(); }).map(function(p) {
-      return '<p>' + p + '</p>';
-    }).join('');
-    document.getElementById('article-body').innerHTML = bodyHTML;
-
-    // Share links
-    var url = encodeURIComponent(window.location.href);
-    var title = encodeURIComponent(a.title + ' | Right Side Talks');
-    document.getElementById('share-x').href = 'https://x.com/intent/tweet?url=' + url + '&text=' + title;
-    document.getElementById('share-fb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + url;
-
-    // Show content
-    document.getElementById('article-loading').style.display = 'none';
-    document.getElementById('article-hero').style.display = 'block';
-    document.getElementById('article-wrap').style.display = 'block';
-
-  } catch(e) {
-    document.getElementById('article-loading').textContent = 'Could not load article. Please try again.';
+    throw new Error('Article not found');
+  } catch (e) {
+    document.getElementById('hero-loading').style.display = 'none';
+    document.getElementById('content-loading').style.display = 'none';
+    document.getElementById('article-error').style.display = 'block';
   }
 }
-
 
 loadArticle();
 </script>
