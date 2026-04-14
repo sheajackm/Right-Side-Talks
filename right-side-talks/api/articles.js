@@ -9,6 +9,7 @@ module.exports = async function(req, res) {
 
   const query = encodeURIComponent(`*[_type == "article"] | order(publishedAt desc) {
     _id,
+    "slug": slug.current,
     title,
     "author": author->name,
     "authorRole": author->role,
@@ -22,9 +23,7 @@ module.exports = async function(req, res) {
 
   try {
     const r = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${TOKEN}`
-      },
+      headers: { Authorization: `Bearer ${TOKEN}` },
       signal: AbortSignal.timeout(8000)
     });
 
