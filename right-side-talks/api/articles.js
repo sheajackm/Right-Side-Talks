@@ -7,49 +7,52 @@ module.exports = async function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Cache-Control', 'public, max-age=300');
 
-  // If a slug is passed, return single article
   const { slug, id } = req.query;
 
-  let query;
-  if (id) {
-    query = encodeURIComponent(`*[_type == "article" && _id == "${id}"][0] {
+  let groqQuery;
+
+  if (slug) {
+    // Single article by slug
+    groqQuery = `*[_type == "article" && slug.current == "${slug}"][0] {
       _id,
-      title,
       "slug": slug.current,
+      title,
       "author": author->name,
       "authorRole": author->role,
       category,
       publishedAt,
       excerpt,
       "body": pt::text(body)
-    }`);
-  } else if (slug) {
-    query = encodeURIComponent(`*[_type == "article" && slug.current == "${slug}"][0] {
+    }`;
+  } else if (id) {
+    // Single article by id
+    groqQuery = `*[_type == "article" && _id == "${id}"][0] {
       _id,
-      title,
       "slug": slug.current,
+      title,
       "author": author->name,
       "authorRole": author->role,
       category,
       publishedAt,
       excerpt,
       "body": pt::text(body)
-    }`);
+    }`;
   } else {
-    query = encodeURIComponent(`*[_type == "article"] | order(publishedAt desc) {
+    // All articles
+    groqQuery = `*[_type == "article"] | order(publishedAt desc) {
       _id,
-      title,
       "slug": slug.current,
+      title,
       "author": author->name,
       "authorRole": author->role,
       category,
       publishedAt,
       excerpt,
       "body": pt::text(body)
-    }`);
+    }`;
   }
 
-  const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
+  const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${encodeURIComponent(groqQuery)}`;
 
   try {
     const r = await fetch(url, {
@@ -59,7 +62,7 @@ module.exports = async function(req, res) {
 
     if (!r.ok) {
       const err = await r.text();
-      return res.status(502).json({ error: 'Sanity API error', detail: err, items: [] });
+      return res.status(502).json({ error: 'Sanity API error', detail: err, items: [], item: null });
     }
 
     const data = await r.json();
@@ -70,6 +73,6 @@ module.exports = async function(req, res) {
     return res.status(200).json({ items: data.result || [] });
 
   } catch(e) {
-    return res.status(500).json({ error: e.message, items: [] });
+    return res.status(500).json({ error: e.message, items: [], item: null });
   }
 };
