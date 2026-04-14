@@ -1298,6 +1298,10 @@ function readTime(body) {
   return Math.max(1, Math.round(words / 200)) + ' min read';
 }
 
+function articleSlug(a) {
+  return a.slug || a._id || (a.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
 function renderBlogGrid(articles) {
   const grid = document.getElementById('blog-grid');
   const loading = document.getElementById('blog-loading');
@@ -1308,21 +1312,23 @@ function renderBlogGrid(articles) {
   }
   const featured = articles[0];
   const rest = articles.slice(1);
-  const featuredHTML = '<div class="blog-featured" onclick="openBlogArticle(0)">'
+  const featuredSlug = articleSlug(featured);
+  const featuredHTML = '<a class="blog-featured" href="article.html?slug=' + featuredSlug + '" style="text-decoration:none;display:block;color:inherit;">'
     + '<div class="blog-featured-banner"><span class="blog-featured-cat">' + (featured.category || 'Featured') + '</span></div>'
     + '<div class="blog-featured-body">'
     + '<h3>' + featured.title + '</h3>'
     + '<p>' + (featured.excerpt || '') + '</p>'
     + '<div class="blog-featured-meta"><span>' + (featured.author || 'RST Contributor') + '</span><span>&bull;</span><span>' + readTime(featured.body) + '</span><span>&bull;</span><span>' + fmtDate(featured.publishedAt) + '</span></div>'
-    + '<div style="margin-top:1rem;"><span class="blog-read-link">Read Full Article →</span></div>'
-    + '</div></div>';
+    + '<div style="margin-top:1rem;"><span class="blog-read-link">Read Full Article \u2192</span></div>'
+    + '</div></a>';
   let sideHTML = '';
-  rest.slice(0, 3).forEach(function(a, i) {
-    sideHTML += '<div class="blog-card" onclick="openBlogArticle(' + (i + 1) + ')">'
+  rest.slice(0, 3).forEach(function(a) {
+    const slug = articleSlug(a);
+    sideHTML += '<a class="blog-card" href="article.html?slug=' + slug + '" style="text-decoration:none;color:inherit;">'
       + '<span class="blog-card-cat">' + (a.category || 'Opinion') + '</span>'
       + '<h3>' + a.title + '</h3>'
       + '<div class="blog-card-meta">' + (a.author || 'RST Contributor') + ' &bull; ' + readTime(a.body) + ' &bull; ' + fmtDate(a.publishedAt) + '</div>'
-      + '<span class="blog-read-link">Read More →</span></div>';
+      + '<span class="blog-read-link">Read More \u2192</span></a>';
   });
   grid.innerHTML = featuredHTML + (rest.length ? '<div class="blog-list">' + sideHTML + '</div>' : '');
 }
