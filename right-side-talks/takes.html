@@ -289,19 +289,19 @@ function renderGrid(articles) {
     grid.innerHTML = '<div class="takes-loading">No articles in this category yet. Check back soon!</div>';
     return;
   }
+  window._filteredArticles = filtered;
   grid.innerHTML = filtered.map(function(a, i) {
-    return '<div class="takes-card" onclick="openArticle(' + i + ')">' +
+    var slug = a.slug || a._id;
+    var url = 'article.html?slug=' + encodeURIComponent(slug);
+    return '<div class="takes-card" onclick="window.location.href=\'' + url + '\'" style="cursor:pointer;">' +
       '<div class="takes-card-banner"><span class="takes-card-cat">' + (a.category || 'Opinion') + '</span></div>' +
       '<div class="takes-card-body">' +
       '<h3>' + a.title + '</h3>' +
       '<p>' + (a.excerpt || '') + '</p>' +
-      '<div class="takes-card-meta"><span>' + (a.author || 'RST Contributor') + ' &bull; ' + fmtDate(a.publishedAt) + '</span><span class="takes-read-more">Read →</span></div>' +
+      '<div class="takes-card-meta"><span>' + (a.author || 'RST Contributor') + ' &bull; ' + fmtDate(a.publishedAt) + '</span><span class="takes-read-more">Read &rarr;</span></div>' +
       '</div></div>';
   }).join('');
-  // Store filtered for modal indexing
-  window._filteredArticles = filtered;
 }
-
 window.filterTakes = function(cat, btn) {
   currentFilter = cat;
   document.querySelectorAll('.takes-filter').forEach(function(b) { b.classList.remove('active'); });
