@@ -7,17 +7,47 @@ module.exports = async function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Cache-Control', 'public, max-age=300');
 
-  const query = encodeURIComponent(`*[_type == "article"] | order(publishedAt desc) {
-    _id,
-    "slug": slug.current,
-    title,
-    "author": author->name,
-    "authorRole": author->role,
-    category,
-    publishedAt,
-    excerpt,
-    "body": pt::text(body)
-  }`);
+  // If a slug is passed, return single article
+  const { slug, id } = req.query;
+
+  let query;
+  if (id) {
+    query = encodeURIComponent(`*[_type == "article" && _id == "${id}"][0] {
+      _id,
+      title,
+      "slug": slug.current,
+      "author": author->name,
+      "authorRole": author->role,
+      category,
+      publishedAt,
+      excerpt,
+      "body": pt::text(body)
+    }`);
+  } else if (slug) {
+    query = encodeURIComponent(`*[_type == "article" && slug.current == "${slug}"][0] {
+      _id,
+      title,
+      "slug": slug.current,
+      "author": author->name,
+      "authorRole": author->role,
+      category,
+      publishedAt,
+      excerpt,
+      "body": pt::text(body)
+    }`);
+  } else {
+    query = encodeURIComponent(`*[_type == "article"] | order(publishedAt desc) {
+      _id,
+      title,
+      "slug": slug.current,
+      "author": author->name,
+      "authorRole": author->role,
+      category,
+      publishedAt,
+      excerpt,
+      "body": pt::text(body)
+    }`);
+  }
 
   const url = `https://${PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${DATASET}?query=${query}`;
 
@@ -33,6 +63,10 @@ module.exports = async function(req, res) {
     }
 
     const data = await r.json();
+
+    if (slug || id) {
+      return res.status(200).json({ item: data.result || null });
+    }
     return res.status(200).json({ items: data.result || [] });
 
   } catch(e) {
