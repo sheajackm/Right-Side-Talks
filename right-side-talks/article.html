@@ -635,22 +635,15 @@ function getSlugFromUrl() {
   return params.get('slug') || params.get('id');
 }
 
-function setShareLinks(title, url, slug) {
-  const shareUrl = slug
-    ? 'https://rightsidetalks.com/api/og?slug=' + encodeURIComponent(slug)
-    : url;
-  const encoded = encodeURIComponent(shareUrl);
+function setShareLinks(title, url) {
+  const encoded = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title + ' — Right Side Talks');
   document.getElementById('share-x').href = `https://x.com/intent/tweet?text=${encodedTitle}&url=${encoded}&via=rightsidetalks`;
   document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${encoded}`;
 }
 
 window.copyLink = function() {
-  const params = new URLSearchParams(window.location.search);
-  const slug = params.get('slug') || params.get('id');
-  const url = slug
-    ? 'https://rightsidetalks.com/api/og?slug=' + encodeURIComponent(slug)
-    : window.location.href;
+  const url = window.location.href;
   navigator.clipboard.writeText(url).then(() => {
     const btn = document.getElementById('share-copy');
     btn.classList.add('copied');
@@ -777,8 +770,7 @@ function renderArticle(article) {
   document.getElementById('article-sidebar').style.display = 'block';
 
   // Share links
-  const articleSlug = article.slug || article._id || (article.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  setShareLinks(article.title, window.location.href, articleSlug);
+  setShareLinks(article.title, window.location.href);
 }
 
 async function loadArticle() {
