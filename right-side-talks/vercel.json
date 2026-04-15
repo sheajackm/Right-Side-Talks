@@ -2,7 +2,7 @@
   "version": 2,
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1.js" },
-    { "src": "/article.html", "dest": "/api/og.js" },
+    { "src": "/article.html(\\?.*)?", "dest": "/api/og.js" },
     { "src": "/support", "dest": "/support.html" },
     { "src": "/episodes", "dest": "/episodes.html" },
     { "src": "/takes", "dest": "/takes.html" },
