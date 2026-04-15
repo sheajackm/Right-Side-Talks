@@ -2,7 +2,7 @@ const PROJECT_ID = 'qy9hgtdq';
 const DATASET = 'production';
 const TOKEN = 'skdqbW5W2rA9HnPRTTMq6R0bzkPwFVGkCbbd4hSdp64BgrEedxFlLBKAbDvluFppjH327PoOIPoX56uP5xIncTIyZimvJfz3ADJ2xKnDzi3l0VqqnuOWivY3Gk5di5KEfKbkAmsTOPyDqtssloEb8ruVCaYi1DDztxjSObYL1TWaw9QRkwUF';
 
-const BASE_URL = 'https://www.rightsidetalksmedia.com';
+const BASE_URL = 'https://www.rightsidetalks.com';
 
 // Author headshot mapping
 const AUTHOR_IMAGES = {
