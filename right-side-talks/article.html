@@ -365,11 +365,13 @@ nav {
 
 /* TICKER BAR */
 #ticker-bar {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
   background: linear-gradient(90deg, #050D20 0%, #0A1535 100%);
   border-top: 2px solid var(--red); height: 52px;
   display: flex; align-items: center; overflow: hidden;
   box-shadow: 0 -4px 24px rgba(0,5,20,0.55);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 .ticker-label {
   background: var(--grad-red); color: var(--white);
@@ -390,7 +392,8 @@ nav {
   padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1);
   font-family: var(--font-cond); font-size: 15px; font-weight: 700; color: #fff;
 }
-.ticker-sym { font-weight: 900; letter-spacing: 0.08em; }
+.ticker-sym { font-weight: 900; letter-spacing: 0.08em; color: #ffffff; }
+@media (max-width: 700px) { .ticker-track { animation-duration: 120s !important; } }
 .ticker-change.up { color: #2ECC71; }
 .ticker-change.down { color: #FF4D6D; }
 
