@@ -9,8 +9,12 @@
 <meta property="og:site_name" content="Right Side Talks" />
 <meta property="og:title" id="og-title" content="Right Side Talks" />
 <meta property="og:description" id="og-desc" content="Read the latest conservative opinion and commentary from Right Side Talks." />
+<meta property="og:image" id="og-image" content="https://www.rightsidetalksmedia.com/images/og-image.jpg" />
+<meta property="og:url" id="og-url" content="https://www.rightsidetalksmedia.com/" />
+<link rel="canonical" id="canonical-url" href="https://www.rightsidetalksmedia.com/" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@rightsidetalks" />
+<meta name="twitter:image" id="twitter-image" content="https://www.rightsidetalksmedia.com/images/og-image.jpg" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzAwMUY1QiIvPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIzMiIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0iI0Q5MUUzQyIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyNCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5SPC90ZXh0Pgo8L3N2Zz4=" />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
 <!-- Google Analytics -->
@@ -714,6 +718,19 @@ function renderArticle(article) {
   document.getElementById('page-desc').content = article.excerpt || article.title;
   document.getElementById('og-title').content = article.title;
   document.getElementById('og-desc').content = article.excerpt || article.title;
+
+  // Set author headshot as share image
+  const member = TEAM[article.author];
+  if (member && member.img) {
+    const imgUrl = 'https://www.rightsidetalksmedia.com/' + member.img;
+    document.getElementById('og-image').content = imgUrl;
+    document.getElementById('twitter-image').content = imgUrl;
+  }
+
+  // Set canonical URL for this article
+  const articleUrl = 'https://www.rightsidetalksmedia.com/article.html?slug=' + (article.slug || article._id);
+  document.getElementById('og-url').content = articleUrl;
+  document.getElementById('canonical-url').href = articleUrl;
 
   // Breadcrumb category
   const cat = article.category || 'Opinion';
