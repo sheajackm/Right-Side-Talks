@@ -7,7 +7,6 @@
 <meta name="description" content="Read bold conservative opinion pieces and political commentary from the Right Side Talks team. Covering politics, culture, campus life, national defense, and more." />
 <meta name="keywords" content="conservative opinion, political commentary, right side takes, conservative columnists, youth conservative writing" />
 <link rel="canonical" href="https://rightsidetalks.com/takes.html" />
-<meta name="description" content="Bold opinion pieces and commentary from the Right Side Talks team. Conservative perspectives on politics, culture, campus life, and more." />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -77,7 +76,7 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: line
 
 /* ARTICLES GRID */
 .takes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-.takes-card { background: var(--grad-card); border: 1px solid rgba(0,31,91,0.08); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); transition: box-shadow 0.25s, transform 0.2s; cursor: pointer; display: flex; flex-direction: column; }
+.takes-card { background: var(--grad-card); border: 1px solid rgba(0,31,91,0.08); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); transition: box-shadow 0.25s, transform 0.2s; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
 .takes-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
 .takes-card-banner { background: var(--grad-blue); height: 90px; display: flex; align-items: flex-end; padding: 1rem 1.25rem; position: relative; overflow: hidden; }
 .takes-card-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 100% at 0% 50%, rgba(10,48,128,0.6) 0%, transparent 70%); }
@@ -91,19 +90,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: line
 /* LOADING / EMPTY */
 .takes-loading { text-align: center; padding: 5rem 2rem; color: var(--text-muted); font-family: var(--font-cond); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; grid-column: 1/-1; }
 
-/* MODAL */
-.blog-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,8,40,0.75); z-index: 500; align-items: center; justify-content: center; padding: 2rem; }
-.blog-modal-overlay.open { display: flex; }
-.blog-modal { background: var(--white); border-radius: 14px; max-width: 700px; width: 100%; max-height: 85vh; overflow-y: auto; box-shadow: 0 40px 100px rgba(0,8,40,0.4); }
-.blog-modal-header { background: var(--grad-blue); padding: 2rem 2rem 1.5rem; position: relative; }
-.blog-modal-cat { font-family: var(--font-cond); font-size: 11px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; background: var(--grad-red); color: white; padding: 3px 10px; border-radius: 3px; display: inline-block; margin-bottom: 0.75rem; }
-.blog-modal-header h2 { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--white); line-height: 1.25; }
-.blog-modal-meta { font-family: var(--font-cond); font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 0.5rem; }
-.blog-modal-close { position: absolute; top: 1rem; right: 1rem; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.1); border: none; cursor: pointer; color: white; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-.blog-modal-close:hover { background: rgba(255,255,255,0.2); }
-.blog-modal-body { padding: 2rem; font-size: 16px; color: var(--text-dark); line-height: 1.8; }
-.blog-modal-body p { margin-bottom: 1.2rem; }
-
 /* TICKER */
 #ticker-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg,#050D20 0%,#0A1535 100%); border-top: 2px solid var(--red); height: 52px; display: flex; align-items: center; overflow: hidden; box-shadow: 0 -4px 24px rgba(0,5,20,0.55); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .ticker-label { background: var(--grad-red); color: var(--white); font-family: var(--font-cond); font-size: 14px; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; padding: 0 20px; height: 100%; display: flex; align-items: center; white-space: nowrap; flex-shrink: 0; }
@@ -111,8 +97,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: line
 .ticker-track-wrap { flex: 1; overflow: hidden; height: 100%; display: flex; align-items: center; }
 .ticker-track { display: flex; align-items: center; white-space: nowrap; animation: tickerScroll 240s linear infinite; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 .ticker-track:hover { animation-play-state: paused; }
-@keyframes tickerScroll { 0%{transform:translateX(0)}
-@media (max-width: 700px) { .ticker-track { animation-duration: 160s !important; } }100%{transform:translateX(-50%)} }
+@keyframes tickerScroll { 0%{transform:translateX(0)}100%{transform:translateX(-50%)} }
+@media (max-width: 700px) { .ticker-track { animation-duration: 160s !important; } }
 .ticker-item { display: inline-flex; align-items: center; gap: 8px; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1); font-family: var(--font-cond); font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.03em; }
 .ticker-sep { display: inline-block; padding: 0 16px; color: var(--red); font-size: 14px; opacity: 0.6; }
 .ticker-news-item { display: inline-flex; align-items: center; gap: 10px; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1); font-family: var(--font-cond); font-size: 15px; font-weight: 700; color: #FFFFFF; }
@@ -130,8 +116,8 @@ footer { background: linear-gradient(135deg,#040A18 0%,#070F22 100%); padding: 2
 footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
 
 @media (max-width: 900px) { .nav-links { display: none; } .hamburger { display: flex; } }
-@media (max-width: 700px) { .takes-grid { grid-template-columns: 1fr; } }
 @media (max-width: 1000px) { .takes-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 700px) { .takes-grid { grid-template-columns: 1fr; } }
 
 @keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
 .hero-eyebrow { animation: fadeUp 0.6s ease both; }
@@ -230,19 +216,6 @@ function closeMenu() {
 
 </div>
 
-<!-- MODAL -->
-<div class="blog-modal-overlay" id="blog-modal" onclick="closeBlogIfOverlay(event)">
-  <div class="blog-modal">
-    <div class="blog-modal-header">
-      <span class="blog-modal-cat" id="modal-cat">Opinion</span>
-      <h2 id="modal-title">Article Title</h2>
-      <div class="blog-modal-meta" id="modal-meta"></div>
-      <button class="blog-modal-close" onclick="closeBlog()">&#x2715;</button>
-    </div>
-    <div class="blog-modal-body" id="modal-body"></div>
-  </div>
-</div>
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Right <span>Side</span> Talks</div>
@@ -282,6 +255,10 @@ function readTime(body) {
   return Math.max(1, Math.round(body.trim().split(' ').length / 200)) + ' min read';
 }
 
+function articleSlug(a) {
+  return a.slug || a._id || (a.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
 function renderGrid(articles) {
   var grid = document.getElementById('takes-grid');
   var filtered = currentFilter === 'all' ? articles : articles.filter(function(a) { return a.author === currentFilter; });
@@ -289,19 +266,19 @@ function renderGrid(articles) {
     grid.innerHTML = '<div class="takes-loading">No articles in this category yet. Check back soon!</div>';
     return;
   }
-  window._filteredArticles = filtered;
-  grid.innerHTML = filtered.map(function(a, i) {
-    var slug = a.slug || a._id;
-    var url = 'article.html?slug=' + encodeURIComponent(slug);
-    return '<div class="takes-card" onclick="window.location.href=\'' + url + '\'" style="cursor:pointer;">' +
+  grid.innerHTML = filtered.map(function(a) {
+    var slug = articleSlug(a);
+    var url = '/article.html?slug=' + encodeURIComponent(slug);
+    return '<a class="takes-card" href="' + url + '">' +
       '<div class="takes-card-banner"><span class="takes-card-cat">' + (a.category || 'Opinion') + '</span></div>' +
       '<div class="takes-card-body">' +
       '<h3>' + a.title + '</h3>' +
       '<p>' + (a.excerpt || '') + '</p>' +
       '<div class="takes-card-meta"><span>' + (a.author || 'RST Contributor') + ' &bull; ' + fmtDate(a.publishedAt) + '</span><span class="takes-read-more">Read &rarr;</span></div>' +
-      '</div></div>';
+      '</div></a>';
   }).join('');
 }
+
 window.filterTakes = function(cat, btn) {
   currentFilter = cat;
   document.querySelectorAll('.takes-filter').forEach(function(b) { b.classList.remove('active'); });
@@ -309,29 +286,6 @@ window.filterTakes = function(cat, btn) {
   renderGrid(allArticles);
 };
 
-window.openArticle = function(idx) {
-  var articles = window._filteredArticles || allArticles;
-  var a = articles[idx];
-  if (!a) return;
-  document.getElementById('modal-cat').textContent = a.category || 'Opinion';
-  document.getElementById('modal-title').textContent = a.title;
-  document.getElementById('modal-meta').innerHTML = (a.author || 'RST Contributor') + ' &bull; ' + readTime(a.body) + ' &bull; ' + fmtDate(a.publishedAt);
-  var bodyHTML = (a.body || 'Full article coming soon.').split('\n').filter(function(p) { return p.trim(); }).map(function(p) { return '<p>' + p + '</p>'; }).join('');
-  document.getElementById('modal-body').innerHTML = bodyHTML;
-  document.getElementById('blog-modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-};
-
-window.closeBlog = function() {
-  document.getElementById('blog-modal').classList.remove('open');
-  document.body.style.overflow = '';
-};
-
-window.closeBlogIfOverlay = function(e) {
-  if (e.target === document.getElementById('blog-modal')) closeBlog();
-};
-
-// Load articles from Sanity
 async function loadArticles() {
   try {
     var r = await fetch('/api/articles', { signal: AbortSignal.timeout(8000) });
@@ -344,7 +298,6 @@ async function loadArticles() {
   }
 }
 
-// Load ticker - matches index.html exactly
 async function loadTicker() {
   try {
     var symbols = [
@@ -371,15 +324,13 @@ async function loadTicker() {
       return '<span class="ticker-item"><span class="ticker-sym">' + q.sym + '</span>&nbsp;' + price + '&nbsp;<span class="ticker-change ' + (up?'up':'down') + '">' + (up?'&#9650;':'&#9660;') + ' ' + Math.abs(q.pct).toFixed(2) + '%</span></span>';
     }).join('');
 
-    // Fetch news too
     var newsHtml = '';
     try {
       var nr = await fetch('/api/news', {signal: AbortSignal.timeout(10000)});
       if (nr.ok) {
         var nd = await nr.json();
-        var items = (nd.items || []).slice(0, 10);
-        newsHtml = items.map(function(a) {
-          return '<span class="ticker-news-item"><span class="ticker-news-src">' + a.label + '</span><a href="' + a.link + '" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.75);text-decoration:none;">' + a.title + '</a></span>';
+        newsHtml = (nd.items || []).slice(0, 10).map(function(a) {
+          return '<span class="ticker-news-item"><span class="ticker-news-src">' + a.label + '</span><a href="' + a.link + '" target="_blank" rel="noopener">' + a.title + '</a></span>';
         }).join('');
       }
     } catch(e) {}
@@ -387,9 +338,9 @@ async function loadTicker() {
     var combined = marketHtml + '<span class="ticker-sep">&#9733;</span>' + newsHtml;
     var track = document.getElementById('ticker-track');
     track.innerHTML = combined + combined;
-    track.style.animation = "none";
+    track.style.animation = 'none';
     track.offsetHeight;
-    track.style.animation = "";
+    track.style.animation = '';
   } catch(e) {}
 }
 
