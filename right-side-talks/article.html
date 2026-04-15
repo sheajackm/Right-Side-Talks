@@ -808,10 +808,13 @@ function renderArticle(article) {
   const bodyText = article.body || 'Full article coming soon.';
   const paragraphs = bodyText.split('\n').filter(p => p.trim());
   const bodyHTML = paragraphs.map((p, i) => {
-    // Detect headings (lines that are short and end without period, or start with ##)
     if (p.startsWith('## ')) return '<h2>' + p.slice(3) + '</h2>';
     if (p.startsWith('### ')) return '<h3>' + p.slice(4) + '</h3>';
     if (p.startsWith('> ')) return '<blockquote>' + p.slice(2) + '</blockquote>';
+    // Short lines with no period at end = treat as subheading
+    if (p.length < 80 && !p.endsWith('.') && !p.endsWith(',') && !p.endsWith(':') && i > 0) {
+      return '<h3>' + p + '</h3>';
+    }
     return '<p>' + p + '</p>';
   }).join('');
 
