@@ -19,10 +19,24 @@ const AUTHOR_IMAGES = {
 const DEFAULT_IMAGE = BASE_URL + '/images/og-image.jpg';
 
 module.exports = async function(req, res) {
-  const { slug } = req.query;
+  // Parse slug from query string — handles Vercel routing quirks
+  let slug = req.query && req.query.slug;
+  if (!slug && req.url) {
+    const urlParams = new URLSearchParams(req.url.split('?')[1] || '');
+    slug = urlParams.get('slug');
+  }
 
+  // If no slug, serve the actual article.html page
   if (!slug) {
-    return res.redirect(302, BASE_URL);
+    const fs = require('fs');
+    const path = require('path');
+    try {
+      const html = fs.readFileSync(path.join(process.cwd(), 'article.html'), 'utf8');
+      res.setHeader('Content-Type', 'text/html');
+      return res.status(200).send(html);
+    } catch(e) {
+      return res.redirect(302, BASE_URL + '/takes.html');
+    }
   }
 
   // Fetch article from Sanity
