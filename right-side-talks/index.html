@@ -14,12 +14,12 @@
 <meta name="keywords" content="conservative media, youth conservative, conservative podcast, right side talks, conservative commentary, campus conservative, America first, conservative news, young conservatives" />
 <meta name="author" content="Right Side Talks LLC" />
 <meta name="robots" content="index, follow" />
-<link rel="canonical" href="https://www.rightsidetalks.com/" />
+<link rel="canonical" href="https://www.rightsidetalksmedia.com/" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzAwMUY1QiIvPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIzMiIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0iI0Q5MUUzQyIvPgogIDx0ZXh0IHg9IjE2IiB5PSIyNCIgZm9udC1mYW1pbHk9Ikdlb3JnaWEsc2VyaWYiIGZvbnQtc2l6ZT0iMjAiIGZvbnQtd2VpZ2h0PSI5MDAiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5SPC90ZXh0Pgo8L3N2Zz4=" />
 
 <!-- OPEN GRAPH (Facebook, Instagram, LinkedIn previews) -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.rightsidetalks.com/" />
+<meta property="og:url" content="https://www.rightsidetalksmedia.com/" />
 <meta property="og:title" content="Right Side Talks — National Youth Conservative Media" />
 <meta property="og:description" content="Bold. Unapologetic. Conservative. Right Side Talks is the home of the next generation of American conservative voices. Watch, listen, and join the movement." />
 <meta property="og:image" content="https://rightsidetalks.com/images/og-image.jpg" />
@@ -41,7 +41,7 @@
   "@type": "Organization",
   "name": "Right Side Talks",
   "alternateName": "Right Side Talks LLC",
-  "url": "https://www.rightsidetalks.com",
+  "url": "https://www.rightsidetalksmedia.com",
   "logo": "https://rightsidetalks.com/images/og-image.jpg",
   "description": "National youth conservative media organization producing bold political commentary, news analysis, and campus coverage.",
   "foundingLocation": "United States",
@@ -1298,10 +1298,6 @@ function readTime(body) {
   return Math.max(1, Math.round(words / 200)) + ' min read';
 }
 
-function articleSlug(a) {
-  return a.slug || a._id || (a.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-}
-
 function renderBlogGrid(articles) {
   const grid = document.getElementById('blog-grid');
   const loading = document.getElementById('blog-loading');
@@ -1312,25 +1308,25 @@ function renderBlogGrid(articles) {
   }
   const featured = articles[0];
   const rest = articles.slice(1);
-  const featuredSlug = articleSlug(featured);
-  const featuredHTML = '<a class="blog-featured" href="/article.html?slug=' + featuredSlug + '" style="text-decoration:none;display:block;color:inherit;">'
+  var featSlug = featured.slug ? featured.slug : featured._id;
+  const featuredHTML = '<a class="blog-featured" href="article.html?slug=' + featSlug + '" style="display:block;text-decoration:none;">'
     + '<div class="blog-featured-banner"><span class="blog-featured-cat">' + (featured.category || 'Featured') + '</span></div>'
     + '<div class="blog-featured-body">'
     + '<h3>' + featured.title + '</h3>'
     + '<p>' + (featured.excerpt || '') + '</p>'
     + '<div class="blog-featured-meta"><span>' + (featured.author || 'RST Contributor') + '</span><span>&bull;</span><span>' + readTime(featured.body) + '</span><span>&bull;</span><span>' + fmtDate(featured.publishedAt) + '</span></div>'
     + '<div style="margin-top:1rem;"><span class="blog-read-link">Read Full Article →</span></div>'
-    + '</div></a>';
+    + '</div></div>';
   let sideHTML = '';
-  rest.slice(0, 3).forEach(function(a) {
-    const slug = articleSlug(a);
-    sideHTML += '<a class="blog-card" href="/article.html?slug=' + slug + '" style="text-decoration:none;color:inherit;">'
+  rest.slice(0, 3).forEach(function(a, i) {
+    var cardSlug = a.slug ? a.slug : a._id;
+    sideHTML += '<a class="blog-card" href="article.html?slug=' + cardSlug + '" style="text-decoration:none;">'
       + '<span class="blog-card-cat">' + (a.category || 'Opinion') + '</span>'
       + '<h3>' + a.title + '</h3>'
       + '<div class="blog-card-meta">' + (a.author || 'RST Contributor') + ' &bull; ' + readTime(a.body) + ' &bull; ' + fmtDate(a.publishedAt) + '</div>'
-      + '<span class="blog-read-link">Read More →</span></a>';
+      + '<span class="blog-read-link">Read More →</span></div>';
   });
-  grid.innerHTML = featuredHTML + (rest.length ? '<div class="blog-list">' + sideHTML + '</div>' : '');
+  grid.innerHTML = featuredHTML + (rest.length ? '<div class="blog-list">' + sideHTML + '</a>' : '');
 }
 
 window.openBlogArticle = function(idx) {
