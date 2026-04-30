@@ -334,9 +334,17 @@ async function loadArticle() {
 
     var avatarWrap = document.getElementById('author-avatar-wrap');
     if (photoFile) {
-      avatarWrap.innerHTML = '<img class="author-avatar" src="/images/' + photoFile + '" alt="' + authorName + '" onerror="this.parentNode.innerHTML='<div class=\"author-avatar-placeholder\">' + authorName.charAt(0) + '</div>'">';
+      var img = document.createElement('img');
+      img.className = 'author-avatar';
+      img.src = '/images/' + photoFile;
+      img.alt = authorName;
+      img.onerror = function() { this.parentNode.innerHTML = '<div class="author-avatar-placeholder">' + (authorName.charAt(0) || 'R') + '</div>'; };
+      avatarWrap.appendChild(img);
     } else {
-      avatarWrap.innerHTML = '<div class="author-avatar-placeholder">' + (authorName.charAt(0) || 'R') + '</div>';
+      var placeholder = document.createElement('div');
+      placeholder.className = 'author-avatar-placeholder';
+      placeholder.textContent = authorName.charAt(0) || 'R';
+      avatarWrap.appendChild(placeholder);
     }
     document.getElementById('author-card-name').textContent = authorName;
     document.getElementById('author-card-role').textContent = role;
@@ -349,6 +357,7 @@ async function loadArticle() {
     document.getElementById('article-wrap').style.display = 'block';
 
   } catch(e) {
+    console.error('Article load error:', e);
     document.getElementById('article-loading').textContent = 'Could not load article. Please try again.';
   }
 }
