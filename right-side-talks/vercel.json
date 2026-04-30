@@ -1,10 +1,29 @@
 {
   "version": 2,
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1.js" },
-    { "src": "/support", "dest": "/support.html" },
-    { "src": "/episodes", "dest": "/episodes.html" },
-    { "src": "/takes", "dest": "/takes.html" },
-    { "src": "/", "dest": "/index.html" }
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1.js"
+    },
+    {
+      "src": "/support",
+      "dest": "/support.html"
+    },
+    {
+      "src": "/episodes",
+      "dest": "/episodes.html"
+    },
+    {
+      "src": "/takes",
+      "dest": "/takes.html"
+    },
+    {
+      "src": "/article",
+      "dest": "/article.html"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    }
   ]
 }
