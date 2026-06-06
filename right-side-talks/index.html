@@ -643,6 +643,18 @@ document.addEventListener('click', function(e) {
           <span class="team-role">Columnist</span>
           <p class="team-bio">Austin is a Political Science major and Journalism minor at the University of Rochester. He has served as an opinion columnist for the university's Campus Times, covering political polarization, international affairs, and community politics. Austin has also made appearances on Rochester news radio discussing youth political engagement within the Republican Party.</p>
         </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="images/Nick_Bausch.jpg" alt="Nicholas Bausch" /></div>
+          <div class="team-name">Nicholas Bausch</div>
+          <span class="team-role">Columnist</span>
+          <p class="team-bio">Nicholas is from Syracuse, New York, and graduated from the University at Buffalo in 2024 with a degree in Political Science. He has worked for a variety of non-profits and campaigns across the country, and has collaborated closely with Turning Point USA. Nicholas has been actively involved in the conservative movement since 2020.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="images/Owen_Tuori.jpg" alt="Owen Tuori" /></div>
+          <div class="team-name">Owen Tuori</div>
+          <span class="team-role">Columnist</span>
+          <p class="team-bio">Owen is an Accounting major and Legal Studies minor at St. John Fisher University in his hometown of Rochester, New York, where he is active in student government and business school leadership. A proud member of the Conservative Party, he blends libertarian leanings with a traditional conservative outlook&mdash;championing free markets, personal liberty, limited government, and a strong national defense. With a deep interest in how economics, politics, and philosophy intersect to shape American society, his focus runs to the internal workings of parties and how polling and finances move races. As a columnist, Owen looks forward to writing essays exploring the philosophical underpinnings of conservative political thought.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1324,9 +1336,9 @@ function renderBlogGrid(articles) {
       + '<span class="blog-card-cat">' + (a.category || 'Opinion') + '</span>'
       + '<h3>' + a.title + '</h3>'
       + '<div class="blog-card-meta">' + (a.author || 'RST Contributor') + ' &bull; ' + readTime(a.body) + ' &bull; ' + fmtDate(a.publishedAt) + '</div>'
-      + '<span class="blog-read-link">Read More →</span></div>';
+      + '<span class="blog-read-link">Read More →</span></a>';
   });
-  grid.innerHTML = featuredHTML + (rest.length ? '<div class="blog-list">' + sideHTML + '</a>' : '');
+  grid.innerHTML = featuredHTML + (rest.length ? '<div class="blog-list">' + sideHTML + '</div>' : '');
 }
 
 window.openBlogArticle = function(idx) {
