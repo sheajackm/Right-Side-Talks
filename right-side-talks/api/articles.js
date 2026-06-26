@@ -1,7 +1,9 @@
 const PROJECT_ID = 'qy9hgtdq';
 const DATASET = 'production';
-// Token now comes from a Vercel environment variable — never hardcoded in the repo.
-const TOKEN = process.env.SANITY_TOKEN;
+// Prefer the Vercel environment variable; fall back to the inline token so the
+// site keeps working until SANITY_TOKEN is configured. Once it's set in Vercel
+// (and the old token rotated), delete the inline string below.
+const TOKEN = process.env.SANITY_TOKEN || 'skdqbW5W2rA9HnPRTTMq6R0bzkPwFVGkCbbd4hSdp64BgrEedxFlLBKAbDvluFppjH327PoOIPoX56uP5xIncTIyZimvJfz3ADJ2xKnDzi3l0VqqnuOWivY3Gk5di5KEfKbkAmsTOPyDqtssloEb8ruVCaYi1DDztxjSObYL1TWaw9QRkwUF';
 
 module.exports = async function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
