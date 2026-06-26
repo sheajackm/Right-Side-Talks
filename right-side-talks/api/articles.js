@@ -1,11 +1,16 @@
 const PROJECT_ID = 'qy9hgtdq';
 const DATASET = 'production';
-const TOKEN = 'skdqbW5W2rA9HnPRTTMq6R0bzkPwFVGkCbbd4hSdp64BgrEedxFlLBKAbDvluFppjH327PoOIPoX56uP5xIncTIyZimvJfz3ADJ2xKnDzi3l0VqqnuOWivY3Gk5di5KEfKbkAmsTOPyDqtssloEb8ruVCaYi1DDztxjSObYL1TWaw9QRkwUF';
+// Token now comes from a Vercel environment variable — never hardcoded in the repo.
+const TOKEN = process.env.SANITY_TOKEN;
 
 module.exports = async function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Cache-Control', 'public, max-age=300');
+
+  if (!TOKEN) {
+    return res.status(500).json({ error: 'Server is missing SANITY_TOKEN', items: [], item: null });
+  }
 
   const { slug, id } = req.query;
 
@@ -22,7 +27,8 @@ module.exports = async function(req, res) {
       category,
       publishedAt,
       excerpt,
-      "body": pt::text(body)
+      body,
+      "bodyText": pt::text(body)
     }`;
   } else if (id) {
     // Single article by id
@@ -35,7 +41,8 @@ module.exports = async function(req, res) {
       category,
       publishedAt,
       excerpt,
-      "body": pt::text(body)
+      body,
+      "bodyText": pt::text(body)
     }`;
   } else {
     // All articles
