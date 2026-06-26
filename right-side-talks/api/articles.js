@@ -8,14 +8,16 @@ const TOKEN = process.env.SANITY_TOKEN || 'skdqbW5W2rA9HnPRTTMq6R0bzkPwFVGkCbbd4
 module.exports = async function(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Content-Type', 'application/json');
-  res.setHeader('Cache-Control', 'public, max-age=300');
+  // Default: never cache. We only opt-in to caching below for a successful,
+  // non-empty result, so a temporary error or empty list can't get "stuck" at
+  // the CDN/edge for minutes.
+  res.setHeader('Cache-Control', 'no-store, max-age=0');
 
   if (!TOKEN) {
     return res.status(500).json({ error: 'Server is missing SANITY_TOKEN', items: [], item: null });
   }
 
   const { slug, id } = req.query;
-
   let groqQuery;
 
   if (slug) {
@@ -71,17 +73,30 @@ module.exports = async function(req, res) {
 
     if (!r.ok) {
       const err = await r.text();
+      // leave Cache-Control as no-store
       return res.status(502).json({ error: 'Sanity API error', detail: err, items: [], item: null });
     }
 
     const data = await r.json();
 
     if (slug || id) {
-      return res.status(200).json({ item: data.result || null });
+      const item = data.result || null;
+      // Only cache a real, found article — never a "not found" miss.
+      if (item) {
+        res.setHeader('Cache-Control', 'public, max-age=300');
+      }
+      return res.status(200).json({ item });
     }
-    return res.status(200).json({ items: data.result || [] });
+
+    const items = data.result || [];
+    // Only cache a non-empty list, so an empty result can't linger at the edge.
+    if (items.length) {
+      res.setHeader('Cache-Control', 'public, max-age=300');
+    }
+    return res.status(200).json({ items });
 
   } catch(e) {
+    // leave Cache-Control as no-store
     return res.status(500).json({ error: e.message, items: [], item: null });
   }
 };
