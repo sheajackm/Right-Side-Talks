@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Episode Archive — Right Side Talks</title>
-<meta name="description" content="Browse every episode from Right Side Talks, The Brief, and Campus Front. Conservative commentary, news analysis, and campus coverage from the next generation." />
+<meta name="description" content="Browse every episode from Right Side Talks, The Bottomline, and Cecelia Talks Show. Conservative commentary, news analysis, and campus coverage from the next generation." />
 <link rel="canonical" href="https://www.rightsidetalksmedia.com/episodes" />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
 <style>
@@ -69,8 +69,8 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: line
 .archive-play-btn svg { width: 18px; height: 18px; fill: white; margin-left: 3px; }
 .archive-show-tag { position: absolute; top: 10px; left: 10px; font-family: var(--font-cond); font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; }
 .archive-show-tag.rst { background: linear-gradient(135deg,#E8253F,#A8152D); color: white; }
-.archive-show-tag.brief { background: linear-gradient(135deg,#0A3080,#000E35); color: white; }
-.archive-show-tag.campus { background: linear-gradient(135deg,#1A2744,#060E26); color: white; }
+.archive-show-tag.bottomline { background: linear-gradient(135deg,#0A3080,#000E35); color: white; }
+.archive-show-tag.cecelia { background: linear-gradient(135deg,#1A2744,#060E26); color: white; }
 .archive-info { padding: 1rem 1.25rem 1.25rem; flex: 1; }
 .archive-info h3 { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text-dark); line-height: 1.35; margin-bottom: 0.35rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .archive-meta { font-family: var(--font-cond); font-size: 11px; color: var(--text-muted); letter-spacing: 0.06em; }
@@ -114,7 +114,7 @@ footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
   <div class="page-hero-inner">
     <p class="label">All Content</p>
     <h1>Episode <span>Archive</span></h1>
-    <p class="desc">Every episode from Right Side Talks, The Brief, and Campus Front — all in one place. Filter by show and watch on YouTube.</p>
+    <p class="desc">Every episode from Right Side Talks, The Bottomline, and Cecelia Talks Show — all in one place. Filter by show and watch on YouTube.</p>
   </div>
 </div>
 
@@ -124,8 +124,8 @@ footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
     <span class="filter-label">Filter:</span>
     <button class="filter-btn active" onclick="filterArchive('all',this)">All Shows</button>
     <button class="filter-btn" onclick="filterArchive('rst',this)">Right Side Talks</button>
-    <button class="filter-btn" onclick="filterArchive('brief',this)">The Brief</button>
-    <button class="filter-btn" onclick="filterArchive('campus',this)">Campus Front</button>
+    <button class="filter-btn" onclick="filterArchive('bottomline',this)">The Bottomline w/ Ryan McCombs</button>
+    <button class="filter-btn" onclick="filterArchive('cecelia',this)">Cecelia Talks Show</button>
     <span class="filter-count" id="episode-count"></span>
   </div>
 </div>
@@ -154,18 +154,22 @@ let allArchiveVideos = [];
 let archiveVisible = 9;
 let archiveFilter = 'all';
 
-const SHOW_TAGS = [
-  { key: 'rst',    keywords: ['right side talks','rst','politics','conservative','episode','special','guests','maga','america first'] },
-  { key: 'brief',  keywords: ['brief','news','update','daily'] },
-  { key: 'campus', keywords: ['campus','college','university','student'] },
-];
+// Map each video to its show using the real channel it came from (from /api/youtube),
+// so tagging is exact instead of guessed from the title.
+const CHANNEL_MAP = {
+  'Right Side Talks': { key: 'rst', label: 'Right Side Talks' },
+  'The Bottomline w/ Ryan McCombs': { key: 'bottomline', label: 'The Bottomline' },
+  'Cecelia Talks Show': { key: 'cecelia', label: 'Cecelia Talks' }
+};
 
-function detectShow(title) {
-  const t = (title || '').toLowerCase();
-  for(const s of SHOW_TAGS) {
-    if(s.keywords.some(k => t.includes(k))) return s.key;
-  }
-  return 'rst';
+function showKey(item) {
+  const m = CHANNEL_MAP[item && item.channel];
+  return m ? m.key : 'rst';
+}
+
+function showLabel(item) {
+  const m = CHANNEL_MAP[item && item.channel];
+  return m ? m.label : 'Right Side Talks';
 }
 
 function ytVideoId(link) {
@@ -186,13 +190,13 @@ function fmtAgo(dateStr) {
 function renderArchiveCard(item) {
   const vid = item.videoId || ytVideoId(item.link);
   const thumb = vid ? `https://i.ytimg.com/vi/${vid}/hqdefault.jpg` : '';
-  const show = detectShow(item.title);
-  const tagLabels = {rst:'Right Side Talks', brief:'The Brief', campus:'Campus Front'};
+  const show = showKey(item);
+  const label = showLabel(item);
   return `<a class="archive-card" href="${item.link}" target="_blank" rel="noopener" data-show="${show}">
     <div class="archive-thumb">
       <img src="${thumb}" alt="${item.title}" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/default/hqdefault.jpg'"/>
       <div class="archive-play"><div class="archive-play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
-      <span class="archive-show-tag ${show}">${tagLabels[show]}</span>
+      <span class="archive-show-tag ${show}">${label}</span>
     </div>
     <div class="archive-info">
       <h3>${item.title}</h3>
@@ -205,7 +209,7 @@ function renderArchive() {
   const grid = document.getElementById('archive-grid');
   const moreBtn = document.getElementById('archive-more');
   const countEl = document.getElementById('episode-count');
-  const filtered = archiveFilter === 'all' ? allArchiveVideos : allArchiveVideos.filter(v => detectShow(v.title) === archiveFilter);
+  const filtered = archiveFilter === 'all' ? allArchiveVideos : allArchiveVideos.filter(v => showKey(v) === archiveFilter);
   if(!filtered.length) {
     grid.innerHTML = '<div class="archive-loading">No episodes found.</div>';
     moreBtn.style.display = 'none';
