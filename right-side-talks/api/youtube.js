@@ -10,11 +10,13 @@
 
 const CHANNELS = [
   { id: 'UCpbgusSKZhNJphR0HOHPJ0Q', name: 'Right Side Talks' },
-  { id: 'UCDx4aqBxdjpbjbZTJz9Wmvg', name: 'The Bottomline w/ Ryan McCombs' }
+  { id: 'UCDx4aqBxdjpbjbZTJz9Wmvg', name: 'The Bottomline w/ Ryan McCombs' },
+  { id: 'UCYxag04icPWcJNGHIw_bhaQ', name: 'Cecelia Talks Show' }
 ];
 
-// Prefer an environment variable (set YOUTUBE_API_KEY in Vercel project settings),
-// fall back to the inline key so the existing deploy keeps working.
+// Prefer the Vercel environment variable; fall back to the inline key so the
+// feed keeps working until YOUTUBE_API_KEY is configured. Once it's set in Vercel
+// (and the old key rotated/restricted), delete the inline string below.
 const API_KEY = process.env.YOUTUBE_API_KEY || 'AIzaSyCI_k6-RXSJEs9pGVWeTxVrc_Ec_qF6ix4';
 
 const PER_CHANNEL = 15; // how many recent uploads to pull from each channel
