@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Right Side Talks</title>
+<meta name="description" content="Read the latest opinion and commentary from Right Side Talks." />
+<meta property="og:site_name" content="Right Side Talks" />
+<meta property="og:type" content="article" />
+<meta property="og:title" id="og-title" content="Right Side Talks" />
+<meta property="og:description" id="og-description" content="Read the latest opinion and commentary from Right Side Talks." />
+<meta property="og:image" id="og-image" content="https://rightsidetalks.com/images/og-image.jpg" />
+<meta property="og:url" id="og-url" content="https://rightsidetalks.com/article.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@rightsidetalks" />
+<meta name="twitter:title" id="tw-title" content="Right Side Talks" />
+<meta name="twitter:description" id="tw-description" content="Read the latest opinion and commentary from Right Side Talks." />
+<meta name="twitter:image" id="tw-image" content="https://rightsidetalks.com/images/og-image.jpg" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@700;800&display=swap" rel="stylesheet" />
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CVRNNMZY53"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CVRNNMZY53');
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red: #D91E3C; --red-dark: #A8152D; --red-light: #FDF0F2;
+  --blue: #001F5B; --blue-mid: #0A3080; --blue-light: #E6ECF9;
+  --white: #FFFFFF; --off-white: #F4F6FB; --gold: #D4A843;
+  --text-dark: #080F20; --text-muted: #4A5570; --border: rgba(0,31,91,0.1);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-cond: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+  --grad-red: linear-gradient(135deg, #E8253F 0%, #A8152D 100%);
+  --grad-blue: linear-gradient(135deg, #0A3080 0%, #001040 100%);
+  --grad-dark: linear-gradient(160deg, #0D1B40 0%, #060E26 100%);
+  --shadow-sm: 0 2px 12px rgba(0,20,80,0.08);
+  --shadow-md: 0 8px 32px rgba(0,20,80,0.13);
+  --shadow-red: 0 8px 28px rgba(217,30,60,0.32);
+  --shadow-blue: 0 8px 28px rgba(0,31,91,0.28);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); color: var(--text-dark); background: var(--off-white); line-height: 1.6;  -webkit-font-smoothing: antialiased; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: linear-gradient(90deg, #001040 0%, #001F5B 60%, #0A2870 100%); border-bottom: 2px solid var(--red); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 68px; box-shadow: 0 4px 28px rgba(0,8,40,0.55); }
+.nav-logo { font-family: var(--font-cond); font-size: 23px; font-weight: 800; color: var(--white); letter-spacing: 0.05em; text-decoration: none; text-transform: uppercase; }
+.nav-logo span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.nav-links { display: flex; gap: 1.8rem; list-style: none; align-items: center; }
+.nav-links a { font-family: var(--font-cond); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; position: relative; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta { background: var(--grad-red) !important; color: var(--white) !important; padding: 9px 22px !important; border-radius: 4px !important; }
+.hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 6px; }
+.hamburger span { display: block; width: 100%; height: 2px; background: var(--white); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { position: fixed; top: 68px; left: 0; right: 0; background: linear-gradient(160deg, #001040 0%, #001F5B 100%); z-index: 190; padding: 1.5rem 2rem 2rem; box-shadow: 0 20px 48px rgba(0,8,40,0.65); border-bottom: 2px solid rgba(217,30,60,0.5); pointer-events: none; opacity: 0; transform: translateY(-12px); transition: opacity 0.3s ease, transform 0.3s ease; }
+.mobile-menu.open { pointer-events: all; opacity: 1; transform: translateY(0); }
+.mobile-menu ul { list-style: none; }
+.mobile-menu ul li { border-bottom: 1px solid rgba(255,255,255,0.07); }
+.mobile-menu ul li a { display: block; font-family: var(--font-cond); font-size: 19px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 0; }
+.mobile-menu-cta { display: block; margin-top: 1.5rem; background: var(--grad-red); color: var(--white) !important; font-family: var(--font-cond); font-size: 16px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; text-align: center; padding: 14px; border-radius: 6px; text-decoration: none; }
+
+/* ARTICLE HERO */
+.article-hero { background: var(--grad-dark); padding: 110px 2rem 4rem; position: relative; overflow: hidden; margin-top: 68px; }
+.article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(10,48,128,0.5) 0%, transparent 70%); }
+.hero-stars { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 44px 44px; pointer-events: none; }
+.hero-stripe { position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--red) 0%, #FF4D6D 50%, var(--red) 100%); }
+.article-hero-inner { max-width: 800px; margin: 0 auto; position: relative; }
+.article-cat { font-family: var(--font-cond); font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; background: var(--grad-red); color: white; padding: 4px 14px; border-radius: 3px; display: inline-block; margin-bottom: 1.25rem; box-shadow: var(--shadow-red); }
+.article-title { font-family: var(--font-display); font-size: clamp(32px, 5vw, 58px); font-weight: 900; color: var(--white); line-height: 1.1; margin-bottom: 1.5rem; }
+.article-meta { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.article-author { font-family: var(--font-cond); font-size: 15px; font-weight: 700; letter-spacing: 0.05em; color: var(--gold); }
+.article-meta-sep { color: rgba(255,255,255,0.3); }
+.article-date { font-family: var(--font-cond); font-size: 14px; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
+.article-read-time { font-family: var(--font-cond); font-size: 14px; color: rgba(255,255,255,0.5); letter-spacing: 0.04em; }
+
+/* ARTICLE BODY */
+.article-wrap { max-width: 800px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+.article-excerpt { font-size: 20px; color: var(--text-muted); line-height: 1.7; margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); font-style: italic; }
+.article-body { font-size: 18px; color: var(--text-dark); line-height: 1.85; }
+.article-body p { margin-bottom: 1.5rem; }
+.article-body p:first-child::first-letter { font-family: var(--font-display); font-size: 5rem; font-weight: 900; float: left; line-height: 0.75; margin-right: 0.12em; margin-top: 0.08em; color: var(--red); }
+.article-body a { color: var(--red); text-decoration: underline; text-underline-offset: 2px; font-weight: 600; }
+.article-body a:hover { color: var(--blue); }
+.article-body h2 { font-family: var(--font-display); font-size: 1.7rem; font-weight: 800; line-height: 1.25; margin: 2.25rem 0 1rem; color: var(--blue); }
+.article-body h3 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; line-height: 1.3; margin: 2rem 0 0.85rem; color: var(--blue); }
+.article-body h4 { font-family: var(--font-body); font-size: 1.1rem; font-weight: 700; letter-spacing: 0.02em; margin: 1.75rem 0 0.75rem; color: var(--text-dark); }
+.article-body strong { font-weight: 700; }
+.article-body em { font-style: italic; }
+.article-body blockquote { margin: 1.75rem 0; padding: 0.75rem 1.5rem; border-left: 4px solid var(--red); background: rgba(0,0,0,0.02); font-style: italic; color: var(--text-dark); }
+.article-body ul, .article-body ol { margin: 0 0 1.5rem 1.5rem; padding-left: 1rem; }
+.article-body li { margin-bottom: 0.6rem; }
+.article-body code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.92em; background: rgba(0,0,0,0.05); padding: 0.1em 0.4em; border-radius: 4px; }
+.article-body h2:first-child::first-letter, .article-body h3:first-child::first-letter { all: unset; }
+
+/* SHARE BAR */
+.share-bar { display: flex; align-items: center; gap: 1rem; padding: 1.5rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 3rem; flex-wrap: wrap; }
+.share-label { font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+.share-btn { font-family: var(--font-cond); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 18px; border-radius: 4px; text-decoration: none; transition: all 0.2s; border: 1.5px solid; cursor: pointer; }
+.share-btn.x { color: var(--text-dark); border-color: rgba(0,31,91,0.15); background: var(--white); }
+.share-btn.x:hover { background: var(--text-dark); color: var(--white); }
+.share-btn.fb { color: #1877F2; border-color: #1877F2; background: var(--white); }
+.share-btn.fb:hover { background: #1877F2; color: var(--white); }
+.share-btn.copy { color: var(--blue-mid); border-color: var(--blue-mid); background: var(--white); }
+.share-btn.copy:hover { background: var(--blue-mid); color: var(--white); }
+
+/* AUTHOR CARD */
+.author-card { display: flex; align-items: center; gap: 1.5rem; background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 2.5rem; box-shadow: var(--shadow-sm); }
+.author-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--blue-light); flex-shrink: 0; }
+.author-avatar-placeholder { width: 80px; height: 80px; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--blue-mid); }
+.author-info { flex: 1; }
+.author-info-name { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
+.author-info-role { font-family: var(--font-cond); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 0.5rem; display: block; }
+.author-info-bio { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+/* BACK LINK */
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-cond); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; margin-bottom: 2rem; transition: color 0.2s; }
+.back-link:hover { color: var(--red); }
+
+/* LOADING / ERROR */
+.article-loading { text-align: center; padding: 6rem 2rem; color: var(--text-muted); font-family: var(--font-cond); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* FOOTER */
+footer { background: linear-gradient(135deg, #040A18 0%, #070F22 100%); padding: 2.5rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.04); }
+.footer-logo { font-family: var(--font-cond); font-size: 21px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--white); margin-bottom: 0.5rem; }
+.footer-logo span { background: var(--grad-red); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+footer p { font-size: 13px; color: rgba(255,255,255,0.25); }
+
+
+.ticker-item { display: inline-flex; align-items: center; gap: 8px; padding: 0 24px; border-right: 1px solid rgba(255,255,255,0.1); font-family: var(--font-cond); font-size: 15px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.03em; }
+.ticker-sym { color: #FFFFFF; font-size: 15px; font-weight: 900; letter-spacing: 0.1em; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+.ticker-change.up { color: #2ECC71; }
+.ticker-change.down { color: #FF4D6D; }
+.ticker-sep { display: inline-block; padding: 0 16px; color: var(--red); font-size: 14px; opacity: 0.6; }
+
+@media (max-width: 900px) { .nav-links { display: none; } .hamburger { display: flex; } }
+</style>
+</head>
+<body>
+
+<script>
+function toggleMenu() {
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.classList.toggle('open');
+  menu.classList.toggle('open');
+}
+function closeMenu() {
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+  btn.classList.remove('open');
+  menu.classList.remove('open');
+}
+</script>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Right <span>Side</span> Talks</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#shows">Shows</a></li>
+    <li><a href="episodes.html">Episodes</a></li>
+    <li><a href="takes.html">Right Side Takes</a></li>
+    <li><a href="index.html#news">News</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="support.html" class="nav-cta">Support Us</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+    <li><a href="index.html" onclick="closeMenu()">Home</a></li>
+    <li><a href="index.html#about" onclick="closeMenu()">About</a></li>
+    <li><a href="index.html#shows" onclick="closeMenu()">Shows</a></li>
+    <li><a href="episodes.html" onclick="closeMenu()">Episodes</a></li>
+    <li><a href="takes.html" onclick="closeMenu()">Right Side Takes</a></li>
+    <li><a href="index.html#news" onclick="closeMenu()">News</a></li>
+    <li><a href="index.html#contact" onclick="closeMenu()">Contact</a></li>
+  </ul>
+  <a href="support.html" class="mobile-menu-cta">Support Us</a>
+</div>
+
+<!-- HERO (populated by JS) -->
+<div class="article-hero" id="article-hero" style="display:none;">
+  <div class="hero-stars"></div>
+  <div class="article-hero-inner">
+    <span class="article-cat" id="article-cat">Opinion</span>
+    <h1 class="article-title" id="article-title"></h1>
+    <div class="article-meta">
+      <span class="article-author" id="article-author"></span>
+      <span class="article-meta-sep">•</span>
+      <span class="article-read-time" id="article-read-time"></span>
+      <span class="article-meta-sep">•</span>
+      <span class="article-date" id="article-date"></span>
+    </div>
+  </div>
+  <div class="hero-stripe"></div>
+</div>
+
+<!-- LOADING -->
+<div class="article-loading" id="article-loading" style="margin-top:68px;">Loading article&hellip;</div>
+
+<!-- BODY -->
+<div class="article-wrap" id="article-wrap" style="display:none;">
+  <a class="back-link" href="takes.html">← Back to Right Side Takes</a>
+  <div class="author-card" id="author-card" style="display:none;">
+    <div id="author-avatar-wrap"></div>
+    <div class="author-info">
+      <div class="author-info-name" id="author-card-name"></div>
+      <span class="author-info-role" id="author-card-role"></span>
+      <div class="author-info-bio" id="author-card-bio"></div>
+    </div>
+  </div>
+  <div class="article-excerpt" id="article-excerpt"></div>
+  <div class="article-body" id="article-body"></div>
+  <div class="share-bar">
+    <span class="share-label">Share this article:</span>
+    <a class="share-btn x" id="share-x" href="#" target="_blank" rel="noopener">Share on X</a>
+    <a class="share-btn fb" id="share-fb" href="#" target="_blank" rel="noopener">Share on Facebook</a>
+    <button class="share-btn copy" onclick="copyLink()">Copy Link</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Right <span>Side</span> Talks</div>
+  <p style="font-family:var(--font-cond);font-size:13px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;opacity:0.8;">On the Right Side of History</p>
+  <p>Right Side Talks LLC &mdash; A National Youth Conservative Media Organization</p>
+  <p style="margin-top:1rem;">&copy; 2026 Right Side Talks LLC. All rights reserved.</p>
+</footer>
+
+
+
+<script>
+function fmtDate(dateStr) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+function readTime(body) {
+  if (!body) return '3 min read';
+  return Math.max(1, Math.round(body.trim().split(' ').length / 200)) + ' min read';
+}
+
+// ---- Portable Text -> HTML ------------------------------------------------
+function escHtml(s) {
+  return (s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Render one text span, applying its marks (decorators like strong/em and
+// annotation links defined in the block's markDefs).
+function renderSpan(span, markDefs) {
+  var text = escHtml(span.text || '');
+  if (!text) return '';
+  var open = '', close = '';
+  (span.marks || []).forEach(function(m) {
+    var def = markDefs.filter(function(d) { return d._key === m; })[0];
+    if (def && def._type === 'link') {
+      var href = escHtml(def.href || '#');
+      open += '<a href="' + href + '" target="_blank" rel="noopener">';
+      close = '</a>' + close;
+    } else if (m === 'strong') { open += '<strong>'; close = '</strong>' + close; }
+    else if (m === 'em') { open += '<em>'; close = '</em>' + close; }
+    else if (m === 'underline') { open += '<u>'; close = '</u>' + close; }
+    else if (m === 'strike-through') { open += '<s>'; close = '</s>' + close; }
+    else if (m === 'code') { open += '<code>'; close = '</code>' + close; }
+  });
+  return open + text + close;
+}
+
+function renderChildren(block) {
+  var defs = block.markDefs || [];
+  return (block.children || []).map(function(sp) { return renderSpan(sp, defs); }).join('');
+}
+
+function renderBlock(block) {
+  if (!block || block._type !== 'block') return '';
+  var inner = renderChildren(block);
+  var style = block.style || 'normal';
+  if (style === 'blockquote') return '<blockquote>' + inner + '</blockquote>';
+  if (/^h[1-6]$/.test(style)) return '<' + style + '>' + inner + '</' + style + '>';
+  return '<p>' + inner + '</p>';
+}
+
+// Convert an array of Portable Text blocks to HTML, grouping consecutive
+// list items into proper <ul>/<ol> lists.
+function renderPortableText(blocks) {
+  var html = '';
+  var i = 0;
+  while (i < blocks.length) {
+    var b = blocks[i];
+    if (b && b._type === 'block' && b.listItem) {
+      var tag = b.listItem === 'number' ? 'ol' : 'ul';
+      html += '<' + tag + '>';
+      while (i < blocks.length && blocks[i] && blocks[i]._type === 'block' && blocks[i].listItem === b.listItem) {
+        html += '<li>' + renderChildren(blocks[i]) + '</li>';
+        i++;
+      }
+      html += '</' + tag + '>';
+    } else {
+      html += renderBlock(b);
+      i++;
+    }
+  }
+  return html;
+}
+// ---------------------------------------------------------------------------
+
+function copyLink() {
+  navigator.clipboard.writeText(window.__canonicalUrl || window.location.href).then(function() {
+    alert('Link copied!');
+  });
+}
+
+async function loadArticle() {
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get('slug');
+
+  if (!slug) {
+    document.getElementById('article-loading').textContent = 'Article not found.';
+    return;
+  }
+
+  try {
+    // Try slug lookup first
+    // Detect if slug is actually a Sanity _id (UUID format with hyphens and length > 30)
+    var isId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(slug);
+    var endpoint = isId
+      ? '/api/articles?id=' + encodeURIComponent(slug)
+      : '/api/articles?slug=' + encodeURIComponent(slug);
+
+    var r = await fetch(endpoint);
+    if (!r.ok) throw new Error();
+    var data = await r.json();
+    var a = data.item;
+
+    // If not found by slug, try by id as fallback
+    if (!a && !isId) {
+      var r2 = await fetch('/api/articles?id=' + encodeURIComponent(slug));
+      if (r2.ok) {
+        var data2 = await r2.json();
+        a = data2.item;
+      }
+    }
+
+    if (!a) {
+      document.getElementById('article-loading').textContent = 'Article not found.';
+      return;
+    }
+
+    // Update page title and meta
+    document.title = a.title + ' | Right Side Talks';
+
+    // Populate hero
+    document.getElementById('article-cat').textContent = a.category || 'Opinion';
+    document.getElementById('article-title').textContent = a.title;
+    document.getElementById('article-author').textContent = a.author || 'RST Contributor';
+    document.getElementById('article-read-time').textContent = readTime(a.bodyText || (typeof a.body === 'string' ? a.body : ''));
+    document.getElementById('article-date').textContent = fmtDate(a.publishedAt);
+
+    // Populate body
+    if (a.excerpt) {
+      document.getElementById('article-excerpt').textContent = a.excerpt;
+    } else {
+      document.getElementById('article-excerpt').style.display = 'none';
+    }
+
+    // Render the article body. If Sanity returned rich text (Portable Text blocks),
+    // convert it to real HTML so links, headings, bold/italic, and lists come through.
+    // Fall back to plain-text paragraphs for anything that isn't a block array.
+    var bodyEl = document.getElementById('article-body');
+    if (Array.isArray(a.body)) {
+      bodyEl.innerHTML = renderPortableText(a.body);
+    } else {
+      var plain = a.body || a.bodyText || '';
+      bodyEl.innerHTML = plain.split('\n').filter(function(p) { return p.trim(); }).map(function(p) {
+        return '<p>' + escHtml(p) + '</p>';
+      }).join('');
+    }
+
+    // Keep the address bar clean for readers browsing the site.
+    var canonicalPath = a.slug ? ('article.html?slug=' + encodeURIComponent(a.slug)) : null;
+    if (canonicalPath) {
+      try { history.replaceState(null, '', canonicalPath); } catch (e) {}
+    }
+
+    // The article page itself is now served with personalized preview tags
+    // (via /api/article-page), so the clean page URL is the share link — it
+    // renders the right card in iMessage/X/Facebook. Fall back to the article
+    // id for articles without a slug set in Sanity.
+    var shareId = a.slug || a._id;
+    var shareUrl = shareId
+      ? (location.origin + '/article.html?slug=' + encodeURIComponent(shareId))
+      : window.location.href;
+    window.__canonicalUrl = shareUrl;
+    var ogUrlEl = document.getElementById('og-url');
+    if (ogUrlEl) ogUrlEl.setAttribute('content', shareUrl);
+
+    // Share links
+    var url = encodeURIComponent(shareUrl);
+    var title = encodeURIComponent(a.title + ' | Right Side Talks');
+    document.getElementById('share-x').href = 'https://x.com/intent/tweet?url=' + url + '&text=' + title;
+    document.getElementById('share-fb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + url;
+
+    // Author card
+    var authorPhotos = {
+      'Jack Shea': 'jack.jpg',
+      'Nick Cribbet': 'nick.jpg',
+      'Cecelia Brown': 'cecelia.jpg',
+      'Caleb Grubb': 'caleb.jpg',
+      'Ryan McCombs': 'ryan.jpg',
+      'Gavin Krauciunas': 'gavin.jpg',
+      'John DePerno': 'john.jpg',
+      'John R. DePerno': 'john.jpg',
+      'Austin DeLorme': 'austin.jpg',
+      'Nicholas Bausch': 'Nick_Bausch.jpg',
+      'Owen Tuori': 'Owen_Tuori.jpg'
+    };
+    var authorBios = {
+      'Jack Shea': 'Jack is the Owner and Founder of Right Side Talks. A Business Management major at St. Bonaventure University, Jack serves as College Republicans President and Executive Director of the NY State Federation of College Republicans.',
+      'Nick Cribbet': 'Nick is the Vice President of Operations at Right Side Talks. Nick is a St. Bonaventure University student with strong aspirations of becoming an aerospace engineer.',
+      'Cecelia Brown': 'Cecelia is the Creative Director and Executive Producer at Right Side Talks. An undergraduate student at St. Bonaventure University, she brings creativity and vision to everything RST produces.',
+      'Caleb Grubb': 'Caleb is the Director of Talent Acquisition at Right Side Talks. He is dedicated to finding and developing the next generation of conservative voices for the organization.',
+      'Ryan McCombs': 'Ryan is a Columnist at Right Side Talks, covering politics and culture from a conservative perspective.',
+      'Gavin Krauciunas': 'Gavin is a Columnist at Right Side Talks, bringing sharp analysis and commentary to the conservative conversation.',
+      'John DePerno': 'John is from Utica, New York and attends Siena College, where he majors in Political Science and minors in History. A lifelong Republican, he has worked with all three levels of government and plans to attend law school after graduation.',
+      'John R. DePerno': 'John is from Utica, New York and attends Siena College, where he majors in Political Science and minors in History. A lifelong Republican, he has worked with all three levels of government and plans to attend law school after graduation.',
+      'Austin DeLorme': 'Austin is a Political Science major and Journalism minor at the University of Rochester. He has served as an opinion columnist for the Campus Times and has made appearances on Rochester news radio discussing youth political engagement within the Republican Party.',
+      'Nicholas Bausch': 'Nicholas is a Columnist at Right Side Talks. From Syracuse, New York, he graduated from the University at Buffalo in 2024 with a degree in Political Science. He has worked for non-profits and campaigns across the country and has collaborated closely with Turning Point USA, and has been active in the conservative movement since 2020.',
+      'Owen Tuori': 'Owen is a Columnist at Right Side Talks and an Accounting major and Legal Studies minor at St. John Fisher University in Rochester, New York. A proud member of the Conservative Party, he blends libertarian leanings with a traditional conservative outlook and writes on the intersection of economics, politics, and philosophy.'
+    };
+
+    var authorName = a.author || '';
+    var photoFile = authorPhotos[authorName];
+    var bio = a.authorBio || authorBios[authorName] || '';
+    var role = a.authorRole || 'Columnist';
+
+    var avatarWrap = document.getElementById('author-avatar-wrap');
+    if (photoFile) {
+      var img = document.createElement('img');
+      img.className = 'author-avatar';
+      img.src = '/images/' + photoFile;
+      img.alt = authorName;
+      img.onerror = function() { this.parentNode.innerHTML = '<div class="author-avatar-placeholder">' + (authorName.charAt(0) || 'R') + '</div>'; };
+      avatarWrap.appendChild(img);
+    } else {
+      var placeholder = document.createElement('div');
+      placeholder.className = 'author-avatar-placeholder';
+      placeholder.textContent = authorName.charAt(0) || 'R';
+      avatarWrap.appendChild(placeholder);
+    }
+    document.getElementById('author-card-name').textContent = authorName;
+    document.getElementById('author-card-role').textContent = role;
+    document.getElementById('author-card-bio').textContent = bio;
+    document.getElementById('author-card').style.display = 'flex';
+
+    // Update OG meta tags for sharing
+    var articleUrl = 'https://rightsidetalks.com/article.html?slug=' + encodeURIComponent(slug);
+    var authorPhoto = authorPhotos[authorName] ? 'https://rightsidetalks.com/images/' + authorPhotos[authorName] : 'https://rightsidetalks.com/images/og-image.jpg';
+    var shareTitle = a.title + ' | Right Side Talks';
+    var shareDesc = a.excerpt || ('By ' + authorName + ' — Right Side Talks');
+
+    document.title = shareTitle;
+    document.querySelector('meta[name="description"]').setAttribute('content', shareDesc);
+
+    var setMeta = function(id, val) { var el = document.getElementById(id); if (el) el.setAttribute('content', val); };
+    setMeta('og-title', shareTitle);
+    setMeta('og-description', shareDesc);
+    setMeta('og-image', authorPhoto);
+    setMeta('og-url', articleUrl);
+    setMeta('tw-title', shareTitle);
+    setMeta('tw-description', shareDesc);
+    setMeta('tw-image', authorPhoto);
+
+    // Show content
+    document.getElementById('article-loading').style.display = 'none';
+    document.getElementById('article-hero').style.display = 'block';
+    document.getElementById('article-wrap').style.display = 'block';
+
+  } catch(e) {
+    console.error('Article load error:', e);
+    document.getElementById('article-loading').textContent = 'Could not load article. Please try again.';
+  }
+}
+
+
+loadArticle();
+</script>
+</body>
+</html>
