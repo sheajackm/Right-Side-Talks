@@ -21,7 +21,9 @@ const AUTHOR_IMAGES = {
   'John R. DePerno': 'john.jpg',
   'Austin DeLorme': 'austin.jpg',
   'Nicholas Bausch': 'Nick_Bausch.jpg',
-  'Owen Tuori': 'Owen_Tuori.jpg'
+  'Owen Tuori': 'Owen_Tuori.jpg',
+  'Maura London': 'maura.jpg',
+  'Mike Xu': 'Mike_Xu.jpg'
 };
 const DEFAULT_IMAGE = 'images/og-image.jpg';
 
@@ -53,12 +55,17 @@ module.exports = async function(req, res) {
 
   const articleUrl = `${BASE_URL}/article.html?slug=${encodeURIComponent(slug)}`;
 
+  // The identifier may be a clean slug or, for articles without a slug set, a
+  // Sanity _id (UUID). Detect which and query the right field.
+  const isId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(slug);
+  const apiUrl = isId
+    ? `${INTERNAL_BASE}/api/articles?id=${encodeURIComponent(slug)}`
+    : `${INTERNAL_BASE}/api/articles?slug=${encodeURIComponent(slug)}`;
+
   // Fetch the article so the card can show its real title, excerpt, and author photo.
   let a = null;
   try {
-    const r = await fetch(`${INTERNAL_BASE}/api/articles?slug=${encodeURIComponent(slug)}`, {
-      signal: AbortSignal.timeout(8000)
-    });
+    const r = await fetch(apiUrl, { signal: AbortSignal.timeout(8000) });
     if (r.ok) {
       const data = await r.json();
       a = data.item;
