@@ -6,6 +6,14 @@
       "dest": "/api/$1.js"
     },
     {
+      "src": "/article\\.html",
+      "dest": "/api/article-page.js"
+    },
+    {
+      "src": "/article",
+      "dest": "/api/article-page.js"
+    },
+    {
       "src": "/support",
       "dest": "/support.html"
     },
@@ -16,10 +24,6 @@
     {
       "src": "/takes",
       "dest": "/takes.html"
-    },
-    {
-      "src": "/article",
-      "dest": "/article.html"
     },
     {
       "src": "/",
