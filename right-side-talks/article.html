@@ -403,13 +403,13 @@ async function loadArticle() {
       try { history.replaceState(null, '', canonicalPath); } catch (e) {}
     }
 
-    // Share/copy through the OG endpoint so iMessage, X, and Facebook render a
-    // personalized preview card (author headshot, title, excerpt). That page then
-    // redirects real readers straight to this article. If the article has no slug
-    // set in Sanity, fall back to its id so sharing still works.
+    // The article page itself is now served with personalized preview tags
+    // (via /api/article-page), so the clean page URL is the share link — it
+    // renders the right card in iMessage/X/Facebook. Fall back to the article
+    // id for articles without a slug set in Sanity.
     var shareId = a.slug || a._id;
     var shareUrl = shareId
-      ? (location.origin + '/api/og?slug=' + encodeURIComponent(shareId))
+      ? (location.origin + '/article.html?slug=' + encodeURIComponent(shareId))
       : window.location.href;
     window.__canonicalUrl = shareUrl;
     var ogUrlEl = document.getElementById('og-url');
