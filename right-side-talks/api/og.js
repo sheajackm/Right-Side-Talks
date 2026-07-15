@@ -44,8 +44,11 @@ module.exports = async function(req, res) {
   const host = req.headers['x-forwarded-host'] || req.headers.host;
   const BASE_URL = `${proto}://${host}`;
 
-  // Internal origin for fetching our own articles API (bypasses any CDN in front).
-  const INTERNAL_BASE = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : BASE_URL;
+  // Fetch our own articles API via the same public origin this request came in on.
+  // (Do NOT use process.env.VERCEL_URL here: internal deployment URLs are often
+  // behind Vercel Deployment Protection, which blocks the fetch and silently
+  // produced a generic card instead of the personalized one.)
+  const INTERNAL_BASE = BASE_URL;
 
   if (!slug) {
     res.statusCode = 302;
@@ -64,14 +67,33 @@ module.exports = async function(req, res) {
 
   // Fetch the article so the card can show its real title, excerpt, and author photo.
   let a = null;
+  let fetchNote = '';
   try {
     const r = await fetch(apiUrl, { signal: AbortSignal.timeout(8000) });
     if (r.ok) {
       const data = await r.json();
       a = data.item;
+      if (!a) fetchNote = 'lookup ok but no article matched this slug/id';
+    } else {
+      fetchNote = 'articles API responded HTTP ' + r.status;
     }
   } catch (e) {
-    // fall through to generic defaults below
+    fetchNote = 'fetch failed: ' + e.message;
+  }
+
+  // Visit /api/og?slug=...&debug=1 to see exactly what the lookup found.
+  if (req.query && req.query.debug) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 'no-store');
+    return res.end(JSON.stringify({
+      slug, isId, apiUrl,
+      found: !!a,
+      note: fetchNote || 'ok',
+      author: a && a.author,
+      hasHeadshot: !!(a && AUTHOR_IMAGES[a.author]),
+      title: a && a.title
+    }, null, 2));
   }
 
   const title = a && a.title ? a.title : 'Right Side Talks';
