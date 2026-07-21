@@ -22,7 +22,9 @@ const AUTHOR_IMAGES = {
   'Nicholas Bausch': 'Nick_Bausch.jpg',
   'Owen Tuori': 'Owen_Tuori.jpg',
   'Maura London': 'maura.jpg',
-  'Mike Xu': 'Mike_Xu.jpg'
+  'Mike Xu': 'Mike_Xu.jpg',
+  'Kobe Kirschner': 'Kobe_Kirschner.jpg',
+  'Jack Molaison': 'Jack_Molaison.jpg'
 };
 const DEFAULT_IMAGE = 'images/og-image.jpg';
 
