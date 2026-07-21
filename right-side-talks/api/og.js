@@ -16,7 +16,6 @@ const AUTHOR_IMAGES = {
   'Cecelia Brown': 'cecelia.jpg',
   'Caleb Grubb': 'caleb.jpg',
   'Ryan McCombs': 'ryan.jpg',
-  'Gavin Krauciunas': 'gavin.jpg',
   'John DePerno': 'john.jpg',
   'John R. DePerno': 'john.jpg',
   'Austin DeLorme': 'austin.jpg',
