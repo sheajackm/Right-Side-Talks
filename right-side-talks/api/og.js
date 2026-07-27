@@ -16,15 +16,17 @@ const AUTHOR_IMAGES = {
   'Cecelia Brown': 'cecelia.jpg',
   'Caleb Grubb': 'caleb.jpg',
   'Ryan McCombs': 'ryan.jpg',
-  'John DePerno': 'john.jpg',
-  'John R. DePerno': 'john.jpg',
   'Austin DeLorme': 'austin.jpg',
   'Nicholas Bausch': 'Nick_Bausch.jpg',
   'Owen Tuori': 'Owen_Tuori.jpg',
   'Maura London': 'maura.jpg',
   'Mike Xu': 'Mike_Xu.jpg',
   'Kobe Kirschner': 'Kobe_Kirschner.jpg',
-  'Jack Molaison': 'Jack_Molaison.jpg'
+  'Jack Molaison': 'Jack_Molaison.jpg',
+  'Joelle Webb': 'Joelle_Webb.jpg',
+  'Ashley Stuart': 'Ashley_Stuart.jpg',
+  'Jenna Smith': 'Jenna_Smith.jpg',
+  'Halle Janik': 'Halle_Janik.jpg'
 };
 const DEFAULT_IMAGE = 'images/og-image.jpg';
 
