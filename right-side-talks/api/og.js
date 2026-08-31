@@ -23,10 +23,12 @@ const AUTHOR_IMAGES = {
   'Mike Xu': 'Mike_Xu.jpg',
   'Kobe Kirschner': 'Kobe_Kirschner.jpg',
   'Jack Molaison': 'Jack_Molaison.jpg',
-  'Joelle Webb': 'Joelle_Webb.jpg',
   'Ashley Stuart': 'Ashley_Stuart.jpg',
   'Jenna Smith': 'Jenna_Smith.jpg',
-  'Halle Janik': 'Halle_Janik.jpg'
+  'Halle Janik': 'Halle_Janik.jpg',
+  'Kamdyn McClain': 'Kamdyn_McClain.jpg',
+  'Emma Symula': 'Emma_Symula.jpg',
+  'Sarah Prentice': 'Sarah_Prentice.jpg'
 };
 const DEFAULT_IMAGE = 'images/og-image.jpg';
 
