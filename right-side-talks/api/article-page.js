@@ -1,13 +1,15 @@
-// api/article-page.js — serves article.html with personalized Open Graph tags
-// injected server-side, so copying the URL straight from the address bar
-// produces a personalized preview card in iMessage/X/Facebook.
+// api/og.js — server-rendered Open Graph preview cards for shared article links.
 //
-// vercel.json routes /article.html (and /article) here. This function:
-//   1. looks up the article (by slug, or by Sanity _id for slug-less articles)
-//   2. fetches the static template /article-view.html
-//   3. swaps the generic <title> and og:/twitter: tags for the article's own
-//   4. returns the page — the client-side JS then renders the body as usual.
+// Why this exists: article.html fills in its meta tags with JavaScript after the
+// page loads. Social/iMessage link crawlers do NOT run JavaScript, so when an
+// article link is pasted they only see the static placeholder tags. This function
+// fetches the article server-side, returns HTML with the correct OG/Twitter tags
+// already filled in (title, excerpt, and the author's headshot as the image), and
+// then redirects real readers to the actual article page.
+//
+// Share links in article.html point here: /api/og?slug=<article-slug>
 
+// Author name (as stored in Sanity) -> headshot file in /images.
 const AUTHOR_IMAGES = {
   'Jack Shea': 'jack.jpg',
   'Nick Cribbet': 'nick.jpg',
@@ -21,10 +23,12 @@ const AUTHOR_IMAGES = {
   'Mike Xu': 'Mike_Xu.jpg',
   'Kobe Kirschner': 'Kobe_Kirschner.jpg',
   'Jack Molaison': 'Jack_Molaison.jpg',
-  'Joelle Webb': 'Joelle_Webb.jpg',
   'Ashley Stuart': 'Ashley_Stuart.jpg',
   'Jenna Smith': 'Jenna_Smith.jpg',
-  'Halle Janik': 'Halle_Janik.jpg'
+  'Halle Janik': 'Halle_Janik.jpg',
+  'Kamdyn McClain': 'Kamdyn_McClain.jpg',
+  'Emma Symula': 'Emma_Symula.jpg',
+  'Sarah Prentice': 'Sarah_Prentice.jpg'
 };
 const DEFAULT_IMAGE = 'images/og-image.jpg';
 
@@ -36,75 +40,112 @@ function escHtml(str) {
     .replace(/>/g, '&gt;');
 }
 
-// Replace the content="" of a meta tag identified by its id attribute.
-function setMetaById(html, id, value) {
-  const re = new RegExp('(<meta[^>]+id="' + id + '"[^>]+content=")[^"]*(")');
-  return html.replace(re, '$1' + value + '$2');
-}
-
 module.exports = async function(req, res) {
   const slug = req.query && req.query.slug;
 
+  // Public origin the request came in on (e.g. https://rightsidetalks.com) — used
+  // for the image, canonical, and redirect URLs so they always match the live domain.
   const proto = String(req.headers['x-forwarded-proto'] || 'https').split(',')[0];
   const host = req.headers['x-forwarded-host'] || req.headers.host;
   const BASE_URL = `${proto}://${host}`;
 
-  // 1. Look up the article (skip if no slug — the page will show its own error state).
-  let a = null;
-  if (slug) {
-    const isId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(slug);
-    const apiUrl = isId
-      ? `${BASE_URL}/api/articles?id=${encodeURIComponent(slug)}`
-      : `${BASE_URL}/api/articles?slug=${encodeURIComponent(slug)}`;
-    try {
-      const r = await fetch(apiUrl, { signal: AbortSignal.timeout(8000) });
-      if (r.ok) {
-        const data = await r.json();
-        a = data.item;
-      }
-    } catch (e) { /* fall through — generic tags */ }
-  }
+  // Fetch our own articles API via the same public origin this request came in on.
+  // (Do NOT use process.env.VERCEL_URL here: internal deployment URLs are often
+  // behind Vercel Deployment Protection, which blocks the fetch and silently
+  // produced a generic card instead of the personalized one.)
+  const INTERNAL_BASE = BASE_URL;
 
-  // 2. Fetch the static page template.
-  let html = null;
-  try {
-    const t = await fetch(`${BASE_URL}/article-view.html`, { signal: AbortSignal.timeout(8000) });
-    if (t.ok) html = await t.text();
-  } catch (e) { /* handled below */ }
-
-  // If the template is missing for any reason, keep the site usable:
-  // send readers to the raw static page instead of erroring.
-  if (!html) {
+  if (!slug) {
     res.statusCode = 302;
-    res.setHeader('Location', `${BASE_URL}/article-view.html${slug ? ('?slug=' + encodeURIComponent(slug)) : ''}`);
+    res.setHeader('Location', `${BASE_URL}/takes.html`);
     return res.end();
   }
 
-  // 3. Inject the personalized tags.
-  const pageUrl = `${BASE_URL}/article.html${slug ? ('?slug=' + encodeURIComponent(slug)) : ''}`;
-  if (a) {
-    const title = escHtml(a.title || 'Right Side Talks');
-    const desc = escHtml(a.excerpt || ('Opinion & commentary by ' + (a.author || 'Right Side Talks') + '.'));
-    const imageFile = AUTHOR_IMAGES[a.author] ? ('images/' + AUTHOR_IMAGES[a.author]) : DEFAULT_IMAGE;
-    const image = `${BASE_URL}/${imageFile}`;
+  const articleUrl = `${BASE_URL}/article.html?slug=${encodeURIComponent(slug)}`;
 
-    html = html.replace(/<title>[^<]*<\/title>/, '<title>' + title + ' | Right Side Talks</title>');
-    html = setMetaById(html, 'og-title', title);
-    html = setMetaById(html, 'og-description', desc);
-    html = setMetaById(html, 'og-image', image);
-    html = setMetaById(html, 'og-url', escHtml(pageUrl));
+  // The identifier may be a clean slug or, for articles without a slug set, a
+  // Sanity _id (UUID). Detect which and query the right field.
+  const isId = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(slug);
+  const apiUrl = isId
+    ? `${INTERNAL_BASE}/api/articles?id=${encodeURIComponent(slug)}`
+    : `${INTERNAL_BASE}/api/articles?slug=${encodeURIComponent(slug)}`;
 
-    // Authoritative Twitter/X tags (inserted fresh so X shows the right card too).
-    const twitterBlock =
-      '<meta name="twitter:title" content="' + title + '" />\n' +
-      '<meta name="twitter:description" content="' + desc + '" />\n' +
-      '<meta name="twitter:image" content="' + image + '" />\n';
-    html = html.replace('</head>', twitterBlock + '</head>');
+  // Fetch the article so the card can show its real title, excerpt, and author photo.
+  let a = null;
+  let fetchNote = '';
+  try {
+    const r = await fetch(apiUrl, { signal: AbortSignal.timeout(8000) });
+    if (r.ok) {
+      const data = await r.json();
+      a = data.item;
+      if (!a) fetchNote = 'lookup ok but no article matched this slug/id';
+    } else {
+      fetchNote = 'articles API responded HTTP ' + r.status;
+    }
+  } catch (e) {
+    fetchNote = 'fetch failed: ' + e.message;
   }
+
+  // Visit /api/og?slug=...&debug=1 to see exactly what the lookup found.
+  if (req.query && req.query.debug) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Cache-Control', 'no-store');
+    return res.end(JSON.stringify({
+      slug, isId, apiUrl,
+      found: !!a,
+      note: fetchNote || 'ok',
+      author: a && a.author,
+      hasHeadshot: !!(a && AUTHOR_IMAGES[a.author]),
+      title: a && a.title
+    }, null, 2));
+  }
+
+  const title = a && a.title ? a.title : 'Right Side Talks';
+  const description = a
+    ? (a.excerpt || `Opinion & commentary by ${a.author || 'Right Side Talks'}.`)
+    : 'Read the latest opinion and commentary from Right Side Talks.';
+  const imageFile = a && AUTHOR_IMAGES[a.author] ? `images/${AUTHOR_IMAGES[a.author]}` : DEFAULT_IMAGE;
+  const image = `${BASE_URL}/${imageFile}`;
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>${escHtml(title)} | Right Side Talks</title>
+<meta name="description" content="${escHtml(description)}" />
+
+<!-- Open Graph (iMessage, Facebook, LinkedIn, etc.) -->
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Right Side Talks" />
+<meta property="og:title" content="${escHtml(title)}" />
+<meta property="og:description" content="${escHtml(description)}" />
+<meta property="og:image" content="${image}" />
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="400" />
+<meta property="og:url" content="${articleUrl}" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@rightsidetalks" />
+<meta name="twitter:title" content="${escHtml(title)}" />
+<meta name="twitter:description" content="${escHtml(description)}" />
+<meta name="twitter:image" content="${image}" />
+
+<link rel="canonical" href="${articleUrl}" />
+<!-- Real readers are sent straight to the article; crawlers read the tags above first. -->
+<meta http-equiv="refresh" content="0;url=${articleUrl}" />
+</head>
+<body>
+<p>Redirecting to the article&hellip; <a href="${articleUrl}">Click here if you are not redirected.</a></p>
+<script>window.location.replace(${JSON.stringify(articleUrl)});</script>
+</body>
+</html>`;
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  // Cache found articles briefly; never cache misses.
-  res.setHeader('Cache-Control', a ? 'public, max-age=300, s-maxage=300' : 'no-store');
+  // Cache per-URL (each slug is its own URL) so crawlers and the CDN can reuse it.
+  res.setHeader('Cache-Control', 'public, max-age=600, s-maxage=600');
   res.end(html);
 };
